@@ -2,14 +2,22 @@
 
 Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
 {
-    wheel_l = new Object(glm::vec3(0.0f,-10.0f,-10.0f));
-    wheel_r = new Object(glm::vec3(0.0f,10.0f,-10.0f));
+    wheel_l = new Object(glm::vec3(10.0f,-10.0f,-10.0f));
+    wheel_r = new Object(glm::vec3(10.0f,10.0f,-10.0f),1.0f,PI);
     main_part = new Object(glm::vec3(0.0f,0.0f,0.0f), 10.0f);
     back_part = new Object(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
+    wheels[0] = new Object(glm::vec3(-10.0f,-10.0f,-10.0f));
+    wheels[1] = new Object(glm::vec3(-20.0f,-10.0f,-10.0f));
+    wheels[2] = new Object(glm::vec3(-22.0f,-10.0f,-10.0f));
+    wheels[3] = new Object(glm::vec3(-10.0f,10.0f,-10.0f),1.0f,PI);
+    wheels[4] = new Object(glm::vec3(-20.0f,10.0f,-10.0f),1.0f,PI);
+    wheels[5] = new Object(glm::vec3(-22.0f,10.0f,-10.0f),1.0f,PI);
+
     speed = glm::vec3(0.0f);
     acceleration = glm::vec3(0.0f);
     b_acc = false;
     turn_l = turn_r = 0.0f;
+    angle_velocity = angle_acc = 0;
 }
 
 Truck::~Truck()
@@ -18,6 +26,11 @@ Truck::~Truck()
     wheel_r->~Object();
     main_part->~Object();
     back_part->~Object();
+    wheels[0]->~Object();
+    wheels[1]->~Object();
+    wheels[2]->~Object();
+    wheels[3]->~Object();
+    delete[] wheels;
     delete wheel_l;
     delete wheel_r;
     delete main_part;
@@ -27,11 +40,13 @@ Truck::~Truck()
 void Truck::draw_all(glm::mat4 P, glm::mat4 V){
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,0.0f,1.0f));
+    printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
 
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
     main_part->draw(P,V,M);
     back_part->draw(P,V,M);
+    this->wheels_draw(P,V,M);
 }
 
 void Truck::update(double time){
@@ -41,17 +56,49 @@ void Truck::update(double time){
     else if(wheel_l->angle_dr<-angle_max) wheel_l->angle_dr = -angle_max;
     wheel_r->angle_dr=wheel_l->angle_dr;
 
-    acceleration = glm::rotateZ(acceleration,wheel_l->angle_dr);
+    //acc_dr = glm::rotateZ(acceleration,wheel_l->angle_dr);
+    acc_dr = acceleration;
 
-    //TODO jakies ladne tarcie ogrnac
-    translate += speed*float(time) + (acceleration-speed/7.0f)*float(time)*float(time)/2.0f;
-    speed += (acceleration-speed/7.0f)*float(time);
+    angle_acc = -wheel_rozstaw*friction()+2*wheel_odlegl*sin(wheel_l->angle_dr)*glm::length(acceleration);
+    this->angle_dr = angle_acc*time*time/2+angle_velocity*time;
+    angle_velocity += angle_acc*time;
+
+    translate += speed*float(time) + (acc_dr-this->vec_friction())*float(time)*float(time)/2.0f;
+    speed += (acc_dr-this->vec_friction())*float(time);
     //printf("%f, %f\n", glm::length(speed),time);
 
     wheel_l->angle_rot += glm::length(speed)*float(time); //na razie r=1, wiec predkosc katowa=liniowej
+    if(wheel_l->angle_rot>2*PI)
+        wheel_l->angle_rot-=2*PI;
     wheel_r->angle_rot = wheel_l->angle_rot;
-    if(angle_rot>2*PI)
-        angle_rot-=2*PI;
+    this->wheels_round(wheel_l->angle_rot);
 
+}
+
+void Truck::wheels_round(float angle){
+
+    for(i = 0; i < 3; ++i)
+        wheels[i]->angle_rot = angle;
+    for(i = 3; i < 6; ++i)
+        wheels[i]->angle_rot = PI-angle;
+
+}
+
+void Truck::wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+
+    for(i = 0; i < 3; ++i)
+        wheels[i]->draw(P,V,M);
+    for(i = 3; i < 6; ++i)
+        wheels[i]->draw(P,V,M);
+
+}
+
+//TODO jakies ladne tarcie ogrnac
+float Truck::friction(){
+    return glm::length(speed)/7.0f;
+}
+
+glm::vec3 Truck::vec_friction(){
+    return speed/7.0f;
 }
 

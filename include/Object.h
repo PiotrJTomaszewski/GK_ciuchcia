@@ -15,7 +15,7 @@
 class Object
 {
     public:
-        Object(glm::vec3 trans, float scal = 1.0f);
+        Object(glm::vec3 trans, float scal = 1.0f, float direction = 0);
         virtual ~Object();
         void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f));
         float angle_dr, angle_rot;

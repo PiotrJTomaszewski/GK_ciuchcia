@@ -2,6 +2,7 @@
 #define TRUCK_H
 
 #include <Object.h>
+#include <cmath>
 
 
 class Truck : private Object
@@ -19,9 +20,16 @@ class Truck : private Object
 
     private:
         //poszczegolne czesci ciezarowki
-        Object *wheel_l, *wheel_r, *main_part, *back_part;
+        Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[6];
         glm::mat4 M;
         float angle_max = PI/4.0f;
+        glm::vec3 acc_dr;
+        void wheels_round(float angle);
+        void wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M);
+        float wheel_rozstaw=10, wheel_odlegl=10, tgb=1, angle_velocity, angle_acc;
+        float friction();
+        glm::vec3 vec_friction();
+        int i;
 };
 
 #endif // TRUCK_H

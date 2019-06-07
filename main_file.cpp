@@ -38,25 +38,12 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 Models::Cube *mcube;
 glm::mat4 Body::P, Body::M, Body::V;
 float r_r=0, l_r=0, u_r=0, d_r=0;
-ShaderProgram *sp_podloga, *Body::sp, *Object::sp;
+ShaderProgram *Body::sp, *Object::sp;
 glm::vec3 Body::lukat, Body::nose, Body::ob_position;
 glm::vec4 Body::perspective;
 int action;
 Body *body;
 Game *game;
-/*float podloga[] = {
-    1.0f,-1.0f,0.0f,1.0f,
-    -1.0f, 1.0f,0.0f,1.0f,
-	-1.0f,-1.0f,0.0f,1.0f,
-
-	1.0f,-1.0f,0.0f,1.0f,
-	1.0f, 1.0f,0.0f,1.0f,
-	-1.0f, 1.0f,0.0f,1.0f,
-};
-float podloga_norm[] = {
-    0.0f,0.0f,1.0f,1.0f,   0.0f,0.0f,1.0f,1.0f,   0.0f,0.0f,1.0f,1.0f,
-    0.0f,0.0f,-1.0f,1.0f,   0.0f,0.0f,-1.0f,1.0f,   0.0f,0.0f,-1.0f,1.0f
-};*/
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
     body->key_callback(key,scancode,action,mods);
@@ -84,7 +71,6 @@ void initOpenGLProgram(GLFWwindow* window) {
     glfwSetCursorPosCallback(window,cursor_position_callback);
 
     initShaders();
-    //sp_podloga = new ShaderProgram("podlo_v.glsl",NULL,"podlo_f.glsl");
 
     glClearColor(1,0,0,1);
 
@@ -108,7 +94,6 @@ void initOpenGLProgram(GLFWwindow* window) {
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
     freeShaders();
-    //sp_podloga->~ShaderProgram();
     mcube->~Cube();
     game->~Game();
     delete mcube;
@@ -134,34 +119,6 @@ void drawScene(GLFWwindow* window) {
 
     mcube->drawSolid();
 
-    /*glEnableVertexAttribArray(spLambert->a("vertex"));
-    glVertexAttribPointer(spLambert->a("vertex"),4,GL_FLOAT,false,0,podloga);
-
-    glEnableVertexAttribArray(spLambert->a("normal"));
-    glVertexAttribPointer(spLambert->a("normal"),4,GL_FLOAT,false,0,podloga_norm);
-
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    glDisableVertexAttribArray(spLambert->a("vertex"));
-    glDisableVertexAttribArray(spLambert->a("normal"));*/
-
-
-    /*M=glm::mat4(1.0f);
-    M=glm::translate(M,glm::vec3(0.0f,0.0f,-2.0f));
-    /*M=glm::rotate(M,angle_h,glm::vec3(0.0f,1.0f,0.0f));
-    M=glm::rotate(M,angle_v,glm::vec3(1.0f,0.0f,0.0f));*/
-
-    /*spLambert -> use();
-    glUniformMatrix4fv(spLambert->u("P"),1,false,glm::value_ptr(P));
-    glUniformMatrix4fv(spLambert->u("V"),1,false,glm::value_ptr(V));
-    glUniformMatrix4fv(spLambert->u("M"),1,false,glm::value_ptr(M));
-    glUniform4f(spLambert->u("color"),0.0f,1.0f,1.0f,1.0f);
-    glUniform1i(spLambert->u("pod"),0);
-    glUniform4f(spLambert->u("lightPos"),-1.0f,-5.0f,-25.0f,1.0f);
-    glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(ob_position,1.0f)));
-
-    mcube->drawSolid();*/
-
     body->draw();
 
     glfwSwapBuffers(window);
@@ -180,7 +137,7 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 
-	window = glfwCreateWindow(900, 900, "OpenGL", NULL, NULL);  //Utwórz okno 500x500 o tytule "OpenGL" i kontekst OpenGL.
+	window = glfwCreateWindow(1280, 720, "OpenGL", NULL, NULL);  //Utwórz okno 500x500 o tytule "OpenGL" i kontekst OpenGL.
 
 	if (!window) //Jeżeli okna nie udało się utworzyć, to zamknij program
 	{
@@ -203,8 +160,6 @@ int main(void)
 	glfwSetTime(0);
 	while (!glfwWindowShouldClose(window)) //Tak długo jak okno nie powinno zostać zamknięte
 	{
-	    //keybord(window);
-	    //mouse(window);
 
 	    body->update(glfwGetTime());
 
