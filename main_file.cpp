@@ -34,7 +34,7 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 #include <Body.h>
 #include <Game.h>
 #include <Object.h>
-
+#include "LoadObject.h" // TODO: REMOVE
 Models::Cube *mcube;
 glm::mat4 Body::P, Body::M, Body::V;
 float r_r=0, l_r=0, u_r=0, d_r=0;
@@ -172,7 +172,11 @@ void drawScene(GLFWwindow* window) {
 int main(void)
 {
 	GLFWwindow* window; //Wskaźnik na obiekt reprezentujący okno
-
+	// TO OCZYWIŚCIE TYLKO CHWILOWO SIĘ TU ZNAJDUJE :p
+	glm::vec3 *vert;
+	glm::vec2 *tex;
+	glm::vec3 *normals;
+    load_object("objects/test.obj", vert, tex, normals); return 0; //TODO: REMOVE
 	glfwSetErrorCallback(error_callback);//Zarejestruj procedurę obsługi błędów
 
 	if (!glfwInit()) { //Zainicjuj bibliotekę GLFW
