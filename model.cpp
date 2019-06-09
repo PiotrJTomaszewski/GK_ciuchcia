@@ -1,8 +1,9 @@
 #include "model.h"
 
 namespace Models {
-    Model::Model(const char* file_name) {
-        load_object(file_name, vertices, texCoords, normals, &vertexCount);
+    Model::Model(const char* file_name, unsigned texture_id) {
+        ObjectLoader::load_object(file_name, vertices, texCoords, normals, &vertexCount);
+        tex_id = texture_id;
     }
 
     Model::~Model() {
@@ -20,9 +21,9 @@ namespace Models {
         glVertexAttribPointer(1,4,GL_FLOAT,false,0,normals);
         glVertexAttribPointer(2,2,GL_FLOAT,false,0,texCoords);
 
-        // TODO: Przypisac teksture
-
-        glBindTexture(GL_TEXTURE2, 1);
+        glActiveTexture(GL_TEXTURE0 + tex_id);
+        glBindTexture(GL_TEXTURE_2D, Global::tex[tex_id]);
+        glUniform1i(sp->u("tex"), tex_id);
         glDrawArrays(GL_TRIANGLES,0,vertexCount);
 
         glDisableVertexAttribArray(0);

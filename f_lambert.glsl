@@ -1,6 +1,5 @@
 #version 330
 
-
 out vec4 pixelColor; //Zmienna wyjsciowa fragment shadera. Zapisuje sie do niej ostateczny (prawie) kolor piksela
 
 //Zmienne interpolowane
@@ -11,7 +10,7 @@ in vec4 dob;
 in vec4 ds1;
 in vec2 texCoord;
 
-uniform sampler2D myTexture;
+uniform sampler2D tex;
 
 void main(void) {
 
@@ -23,6 +22,6 @@ void main(void) {
     vec4 mr =  reflect(-normalize(ds),normalize(nor));
 
     float nf = pow(clamp(dot(mr,normalize(dob)),0,1),25);
-    pixelColor = texture(myTexture, texCoord);
+    pixelColor = texture(tex, texCoord);
 //	pixelColor=vec4(i_color.rgb*nl+vec3(1,1,1)*nf,i_color.a);
 }

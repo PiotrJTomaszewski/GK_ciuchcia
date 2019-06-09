@@ -22,11 +22,11 @@ void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 }
 
-bool MainObject::initialize_model() {
-    model = new Models::Model("models/test2.obj");
+bool MainObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
+    model = new Models::Model("models/test.obj", 1); // Sciezka modelu, id_tekstury
     return 0;
 }
 
-void MainObject::destroy_model() {
+void MainObject::destroy_model() { // Model trzeba usunac w freeOpenGLProgram
     delete model;
 }

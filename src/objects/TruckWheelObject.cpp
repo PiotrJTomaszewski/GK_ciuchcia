@@ -22,12 +22,11 @@ void WheelObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 }
 
-bool WheelObject::initialize_model() {
-    model = new Models::Model("models/test2.obj");
-    model->sp = sp;
+bool WheelObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
+    model = new Models::Model("models/test2.obj", 0); // Sciezka modelu, id_tekstury
     return 0;
 }
 
-void WheelObject::destroy_model() {
+void WheelObject::destroy_model() { // Model trzeba usunac w freeOpenGLProgram
     delete model;
 }

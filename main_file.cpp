@@ -14,14 +14,17 @@
 #include "Body.h"
 #include "Game.h"
 #include "Object.h"
+#include "globals.h"
 
+// Tekstury
 const unsigned number_of_textures=2; // Ile tekstur jest do zaladowania
 const char *texture_names[] = {"textures/test.png", "textures/test2.png"}; // Nazwy plikow tekstur
-GLuint tex[number_of_textures]; // Uchwyt na tekstury
+GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
+
 
 glm::mat4 Body::P, Body::M, Body::V;
 float r_r=0, l_r=0, u_r=0, d_r=0;
-ShaderProgram *sp_podloga, *Body::sp, *Object::sp;
+ShaderProgram *sp_podloga, *Body::sp, *Object::sp, *Models::Model::sp;
 glm::vec3 Body::lukat, Body::nose, Body::ob_position;
 glm::vec4 Body::perspective;
 int action;
@@ -32,7 +35,7 @@ Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 
 void readTextures() {
-    glGenTextures(number_of_textures, tex); // Zainicjuj uchwyty dla tekstur
+    glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
     for (int i=0; i<number_of_textures; ++i) {
         std::vector<unsigned char> image;
         unsigned width, height;
@@ -43,7 +46,7 @@ void readTextures() {
         exit(EXIT_FAILURE);
         }
         glActiveTexture(GL_TEXTURE0+i); // Zawsze GL_TEXTUREi = GL_TEXTURE0+i
-        glBindTexture(GL_TEXTURE_2D, tex[i]); // Uaktywnij pojedynczy uchwyt
+        glBindTexture(GL_TEXTURE_2D, Global::tex[i]); // Uaktywnij pojedynczy uchwyt
         //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
         glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
         // Parametry tekstury
@@ -72,6 +75,7 @@ void error_callback(int error, const char* description) {
 void initOpenGLProgram(GLFWwindow* window) {
     // Wczytaj modele
     WheelObject::initialize_model();
+    MainObject::initialize_model();
     // Wczytaj tekstury
     readTextures();
 
@@ -95,6 +99,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     Object::sp = spLambert;
     Body::sp = spLambert;
+    Models::Model::sp = spLambert;
     game = new Game();
     body = game;
 }
@@ -103,9 +108,10 @@ void initOpenGLProgram(GLFWwindow* window) {
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
     // Zwolnij tekstury
-    glDeleteTextures(number_of_textures,tex);
+    glDeleteTextures(number_of_textures,Global::tex);
     // Zwolnij modele
     WheelObject::destroy_model();
+    MainObject::destroy_model();
 
     freeShaders();
     //game->~Game();

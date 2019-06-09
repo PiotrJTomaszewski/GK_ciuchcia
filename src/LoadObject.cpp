@@ -1,6 +1,6 @@
 #include "LoadObject.h"
 
-bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, glm::vec4* &normals, unsigned *vertex_count) {
+bool ObjectLoader::load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, glm::vec4* &normals, unsigned *vertex_count) {
     std::vector<glm::vec3> tmp_vertices;
     std::vector<glm::vec2> tmp_tex;
     std::vector<glm::vec3> tmp_normals;

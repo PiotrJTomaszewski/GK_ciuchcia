@@ -52,12 +52,14 @@
 		<Unit filename="constants.h" />
 		<Unit filename="f_constant.glsl" />
 		<Unit filename="f_lambert.glsl" />
+		<Unit filename="globals.h" />
 		<Unit filename="include/Body.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/LoadObject.h" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/Truck.h" />
-		<Unit filename="include/objects/WheelObject.h" />
+		<Unit filename="include/objects/TruckMainObject.h" />
+		<Unit filename="include/objects/TruckWheelObject.h" />
 		<Unit filename="lodepng.cpp" />
 		<Unit filename="lodepng.h" />
 		<Unit filename="main_file.cpp" />
@@ -71,7 +73,8 @@
 		<Unit filename="src/LoadObject.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/Truck.cpp" />
-		<Unit filename="src/objects/WheelObject.cpp" />
+		<Unit filename="src/objects/TruckMainObject.cpp" />
+		<Unit filename="src/objects/TruckWheelObject.cpp" />
 		<Unit filename="v_constant.glsl" />
 		<Unit filename="v_lambert.glsl" />
 		<Extensions>
