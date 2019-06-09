@@ -11,7 +11,7 @@ class Truck : private Object
         Truck();
         virtual ~Truck();
         void draw_all(glm::mat4 P, glm::mat4 V);
-        glm::vec3 speed, acceleration;
+        float speed, acceleration;
         bool b_acc;
         void update(double time);
         float turn_l, turn_r;
@@ -26,9 +26,8 @@ class Truck : private Object
         glm::vec3 acc_dr;
         void wheels_round(float angle);
         void wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-        float wheel_rozstaw=10, wheel_odlegl=10, tgb=1, angle_velocity, angle_acc;
+        float wheel_rozstaw=10, wheel_odlegl=10, ctga, px, py, R, omega, delt, s;
         float friction();
-        glm::vec3 vec_friction();
         int i;
 };
 

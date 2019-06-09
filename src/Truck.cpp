@@ -13,11 +13,10 @@ Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
     wheels[4] = new Object(glm::vec3(-20.0f,10.0f,-10.0f),1.0f,PI);
     wheels[5] = new Object(glm::vec3(-22.0f,10.0f,-10.0f),1.0f,PI);
 
-    speed = glm::vec3(0.0f);
-    acceleration = glm::vec3(0.0f);
+    speed = 0.0f;
+    acceleration = 0.0f;
     b_acc = false;
     turn_l = turn_r = 0.0f;
-    angle_velocity = angle_acc = 0;
 }
 
 Truck::~Truck()
@@ -45,7 +44,7 @@ void Truck::draw_all(glm::mat4 P, glm::mat4 V){
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
     main_part->draw(P,V,M);
-    back_part->draw(P,V,M);
+    //back_part->draw(P,V,M);
     this->wheels_draw(P,V,M);
 }
 
@@ -56,18 +55,32 @@ void Truck::update(double time){
     else if(wheel_l->angle_dr<-angle_max) wheel_l->angle_dr = -angle_max;
     wheel_r->angle_dr=wheel_l->angle_dr;
 
-    //acc_dr = glm::rotateZ(acceleration,wheel_l->angle_dr);
-    acc_dr = acceleration;
+    if(wheel_l->angle_dr!=0){
+        ctga = 1/tan(wheel_l->angle_dr);
+        R = wheel_odlegl * ctga;
+        s = speed*time + (acceleration-this->friction())*time*time/2;
+        omega = s/R;
+        px = R*sin(omega);
+        py = R*(1-cos(omega));
+        delt = omega/2;
 
-    angle_acc = -wheel_rozstaw*friction()+2*wheel_odlegl*sin(wheel_l->angle_dr)*glm::length(acceleration);
-    this->angle_dr = angle_acc*time*time/2+angle_velocity*time;
-    angle_velocity += angle_acc*time;
 
-    translate += speed*float(time) + (acc_dr-this->vec_friction())*float(time)*float(time)/2.0f;
-    speed += (acc_dr-this->vec_friction())*float(time);
-    //printf("%f, %f\n", glm::length(speed),time);
+        translate += glm::rotateZ(glm::vec3(px,py,0.0f),this->angle_dr);
 
-    wheel_l->angle_rot += glm::length(speed)*float(time); //na razie r=1, wiec predkosc katowa=liniowej
+        this->angle_dr += delt;
+        if(this->angle_dr>2*PI)this->angle_dr-=2*PI;
+        else if(this->angle_dr<-2*PI)this->angle_dr+=2*PI;
+    }
+    else{
+        s = speed*time + (acceleration-this->friction())*time*time/2;
+
+        translate.x += s;
+    }
+    speed += (acceleration-this->friction())*float(time);
+
+    //printf("%f, %f\n", speed,time);
+
+    wheel_l->angle_rot += speed*float(time); //na razie r=1, wiec predkosc katowa=liniowej
     if(wheel_l->angle_rot>2*PI)
         wheel_l->angle_rot-=2*PI;
     wheel_r->angle_rot = wheel_l->angle_rot;
@@ -95,10 +108,5 @@ void Truck::wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 //TODO jakies ladne tarcie ogrnac
 float Truck::friction(){
-    return glm::length(speed)/7.0f;
-}
-
-glm::vec3 Truck::vec_friction(){
     return speed/7.0f;
 }
-

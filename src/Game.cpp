@@ -50,7 +50,7 @@ void Game::key_callback(int key, int scancode, int action, int mods){
         if(key==GLFW_KEY_RIGHT)
             r_r=1;
         if(key==GLFW_KEY_W){
-            truck->acceleration = glm::vec3(1.0f,0.0f,0.0f);
+            truck->acceleration = 1.0f;
             truck->b_acc = true;
         }
         if(key==GLFW_KEY_A){
@@ -70,7 +70,7 @@ void Game::key_callback(int key, int scancode, int action, int mods){
         if(key==GLFW_KEY_RIGHT)
             r_r=0;
         if(key==GLFW_KEY_W){
-            truck->acceleration = glm::vec3(0.0f,0.0f,0.0f);
+            truck->acceleration = 0.0f;
             truck->b_acc = false;
         }
         if(key==GLFW_KEY_A){
