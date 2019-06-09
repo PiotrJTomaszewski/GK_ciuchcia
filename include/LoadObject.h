@@ -3,11 +3,12 @@
 
 #include <glm/glm.hpp>
 #include <vector>
+#include <iterator>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-bool load_object(char* file_name, glm::vec3 *vertices, glm::vec2 *tex, glm::vec3 *normals);
+bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, glm::vec4* &normals, unsigned *vertex_count);
 
 
-#endif LOADOBJECT_H
+#endif //LOADOBJECT_H
