@@ -1,11 +1,12 @@
 #include "Truck.h"
 
-Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
+Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
 {
     wheel_l = new WheelObject(glm::vec3(0.0f,-10.0f,-10.0f));
     wheel_r = new WheelObject(glm::vec3(0.0f,10.0f,-10.0f));
-    main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f), 10.0f);
-    back_part = new MainObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
+    main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f));
+    back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma
+//    back_part = new MainObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
     speed = glm::vec3(0.0f);
     acceleration = glm::vec3(0.0f);
     b_acc = false;

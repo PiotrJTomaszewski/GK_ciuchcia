@@ -23,7 +23,7 @@ void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 }
 
 bool MainObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
-    model = new Models::Model("models/test.obj", 1); // Sciezka modelu, id_tekstury
+    model = new Models::Model("models/main.obj", 1); // Sciezka modelu, id_tekstury
     return 0;
 }
 

@@ -23,7 +23,7 @@ void WheelObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 }
 
 bool WheelObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
-    model = new Models::Model("models/test2.obj", 0); // Sciezka modelu, id_tekstury
+    model = new Models::Model("models/wheel.obj", 0); // Sciezka modelu, id_tekstury
     return 0;
 }
 

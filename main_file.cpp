@@ -18,7 +18,7 @@
 
 // Tekstury
 const unsigned number_of_textures=2; // Ile tekstur jest do zaladowania
-const char *texture_names[] = {"textures/test.png", "textures/test2.png"}; // Nazwy plikow tekstur
+const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png"}; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
