@@ -15,8 +15,8 @@
 #include "Game.h"
 #include "Object.h"
 
-const unsigned number_of_textures=1; // Ile tekstur jest do zaladowania
-const char *texture_names[] = {"textures/test.png"}; // Nazwy plikow tekstur
+const unsigned number_of_textures=2; // Ile tekstur jest do zaladowania
+const char *texture_names[] = {"textures/test.png", "textures/test2.png"}; // Nazwy plikow tekstur
 GLuint tex[number_of_textures]; // Uchwyt na tekstury
 
 glm::mat4 Body::P, Body::M, Body::V;
@@ -31,31 +31,26 @@ Game *game;
 Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 
-GLuint readTexture() {
+void readTextures() {
+    glGenTextures(number_of_textures, tex); // Zainicjuj uchwyty dla tekstur
     for (int i=0; i<number_of_textures; ++i) {
-        std::vector<unsigned char> images[number_of_textures];
+        std::vector<unsigned char> image;
+        unsigned width, height;
+        // Wczytaj obrazek
+        unsigned error = lodepng::decode(image, width, height, texture_names[i]);
+        if (error != 0) { // Jesli obrazka nie uda sie wczytac
+        printf("Error while loading texture file %s\n", texture_names[i]);
+        exit(EXIT_FAILURE);
+        }
+        glActiveTexture(GL_TEXTURE0+i); // Zawsze GL_TEXTUREi = GL_TEXTURE0+i
+        glBindTexture(GL_TEXTURE_2D, tex[i]); // Uaktywnij pojedynczy uchwyt
+        //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
+        glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
+        // Parametry tekstury
+        // TODO: Pomyslec jakie sa potrzebne, bo te po prostu skopiowalem z prezentacji i nie chce mi sie myslec co robia xd
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
-
-
-    glActiveTexture(GL_TEXTURE0+id); // Zawsze GL_TEXTUREi = GL_TEXTURE0+i
- // Wczytanie do pamięci komputera
- std::vector<unsigned char> image; // Alokuj wektor do wczytania obrazka
- unsigned width, height; // Zmienne do których wczytamy wymiary obrazka
- // Wczytaj obrazek
- unsigned error = lodepng::decode(image, width, height, filename);
- if (error != 0) { // Jesli obrazka nie uda sie wczytac
-    perror("Error while loading texture file\n");
-    exit(EXIT_FAILURE);
- }
- //Import do pamięci karty graficznej
- glGenTextures(1,&tex); //Zainicjuj jeden uchwyt
- glBindTexture(GL_TEXTURE_2D, tex); //Uaktywnij uchwyt
- //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
- glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
- // Parametry tekstury
- glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
- glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
- return tex;
 }
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){

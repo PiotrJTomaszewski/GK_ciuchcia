@@ -21,6 +21,8 @@ namespace Models {
         glVertexAttribPointer(2,2,GL_FLOAT,false,0,texCoords);
 
         // TODO: Przypisac teksture
+
+        glBindTexture(GL_TEXTURE2, 1);
         glDrawArrays(GL_TRIANGLES,0,vertexCount);
 
         glDisableVertexAttribArray(0);

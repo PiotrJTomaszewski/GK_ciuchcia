@@ -24,6 +24,7 @@ void WheelObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 bool WheelObject::initialize_model() {
     model = new Models::Model("models/test2.obj");
+    model->sp = sp;
     return 0;
 }
 

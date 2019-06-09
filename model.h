@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include "LoadObject.h"
+#include "shaderprogram.h"
 
 
 namespace Models {
@@ -20,6 +21,7 @@ namespace Models {
 			// Blender eksportuje do obj normalne wierzcholkow i scian razem, wiec zeby wylaczyc wygladzanie trzeba by sie dodatkowo napracowac, co nie ma sensu :)
 			void drawSolid();
 			void drawWire();
+			ShaderProgram *sp;
 	};
 }
 
