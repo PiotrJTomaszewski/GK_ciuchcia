@@ -42,7 +42,27 @@ glm::vec4 Body::perspective;
 int action;
 Body *body;
 Game *game;
+GLuint tex;
 Models::Model *WheelObject::model = NULL; // Necessary to make static models work
+
+GLuint readTexture(char* filename) { // TODO: Kod z prezentacji, zamienić na nasz!
+ GLuint tex;
+ glActiveTexture(GL_TEXTURE0);
+ //Wczytanie do pamięci komputera
+ std::vector<unsigned char> image; //Alokuj wektor do wczytania obrazka
+ unsigned width, height; //Zmienne do których wczytamy wymiary obrazka
+ //Wczytaj obrazek
+ unsigned error = lodepng::decode(image, width, height, filename);
+ //Import do pamięci karty graficznej
+ glGenTextures(1,&tex); //Zainicjuj jeden uchwyt
+ glBindTexture(GL_TEXTURE_2D, tex); //Uaktywnij uchwyt
+ //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
+ glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0,
+ GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
+ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+ return tex;
+}
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
     body->key_callback(key,scancode,action,mods);
@@ -61,6 +81,9 @@ void error_callback(int error, const char* description) {
 
 //Procedura inicjująca
 void initOpenGLProgram(GLFWwindow* window) {
+    // Init textures
+    tex=readTexture("textures/test.png");
+
     Body::lukat = glm::vec3(0.0f,0.0f,4.0f);
     Body::nose = glm::vec3(0.0f,0.0f,1.0f);
     Body::ob_position = glm::vec3(0.0f,-15.0f,4.0f);
@@ -91,6 +114,8 @@ void initOpenGLProgram(GLFWwindow* window) {
 
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
+    // Free textures
+    glDeleteTextures(1,&tex);
     freeShaders();
     //sp_podloga->~ShaderProgram();
     game->~Game();

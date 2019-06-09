@@ -39,11 +39,14 @@ namespace Models {
 
 
         glVertexAttribPointer(0,4,GL_FLOAT,false,0,vertices);
-        if (!smooth) glVertexAttribPointer(1,4,GL_FLOAT,false,0,normals);
-        else glVertexAttribPointer(1,4,GL_FLOAT,false,0,vertexNormals);
-        glVertexAttribPointer(2,4,GL_FLOAT,false,0,texCoords);
-        glVertexAttribPointer(3,4,GL_FLOAT,false,0,colors);
+        //if (!smooth) glVertexAttribPointer(1,4,GL_FLOAT,false,0,normals);
+        //else glVertexAttribPointer(1,4,GL_FLOAT,false,0,vertexNormals);
+        glVertexAttribPointer(1,4,GL_FLOAT,false,0,vertexNormals);
+        glVertexAttribPointer(2,2,GL_FLOAT,false,0,texCoords);
+        //glVertexAttribPointer(3,4,GL_FLOAT,false,0,colors);
 
+ //       glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D,tex0);
         glDrawArrays(GL_TRIANGLES,0,vertexCount);
 
         glDisableVertexAttribArray(0);
