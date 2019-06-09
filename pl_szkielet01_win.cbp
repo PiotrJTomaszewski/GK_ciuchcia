@@ -56,6 +56,7 @@
 		<Unit filename="f_lambert.glsl" />
 		<Unit filename="include/Body.h" />
 		<Unit filename="include/Game.h" />
+		<Unit filename="include/LoadObject.h" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/Truck.h" />
 		<Unit filename="lodepng.cpp" />
@@ -70,6 +71,7 @@
 		<Unit filename="sphere.cpp" />
 		<Unit filename="sphere.h" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/LoadObject.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/Truck.cpp" />
 		<Unit filename="teapot.cpp" />
