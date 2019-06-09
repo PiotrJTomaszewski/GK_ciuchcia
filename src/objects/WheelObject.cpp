@@ -19,7 +19,7 @@ void WheelObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
     glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
     glUniform4f(sp->u("color"),0.0f,1.0f,1.0f,1.0f);
-    model->drawSolid(false);
+    model->drawSolid();
 
 }
 

@@ -2,37 +2,17 @@
 
 Game::Game()
 {
-    //model = new Models::Cube();
     truck = new Truck();
 }
 
 Game::~Game()
 {
-    //model->~Cube();
     truck->~Truck();
-    //delete model;
     delete truck;
 }
 
-
 void Game::draw(){
-
-    /*M = glm::mat4(1.0f);
-    M = glm::translate(M,glm::vec3(0.0f,0.0f,-2.0f));
-
-    sp->use();
-    glUniformMatrix4fv(sp->u("P"),1,false,glm::value_ptr(P));
-    glUniformMatrix4fv(sp->u("V"),1,false,glm::value_ptr(V));
-    glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
-    glUniform4f(sp->u("color"),0.0f,1.0f,1.0f,1.0f);
-    glUniform1i(sp->u("pod"),0);
-    glUniform4f(sp->u("lightPos"),-1.0f,-5.0f,-25.0f,1.0f);
-    glUniform4fv(sp->u("lightPos2"),1,glm::value_ptr(glm::vec4(ob_position,1.0f)));
-
-    model->drawSolid();*/
-
     truck->draw_all(P,V);
-
 }
 
 void Game::init(GLFWwindow *window){

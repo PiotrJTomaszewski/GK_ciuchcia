@@ -1,22 +1,3 @@
-/*
-Niniejszy program jest wolnym oprogramowaniem; możesz go
-rozprowadzać dalej i / lub modyfikować na warunkach Powszechnej
-Licencji Publicznej GNU, wydanej przez Fundację Wolnego
-Oprogramowania - według wersji 2 tej Licencji lub(według twojego
-wyboru) którejś z późniejszych wersji.
-
-Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
-użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
-gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
-ZASTOSOWAŃ.W celu uzyskania bliższych informacji sięgnij do
-Powszechnej Licencji Publicznej GNU.
-
-Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
-Powszechnej Licencji Publicznej GNU(GNU General Public License);
-jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
-Place, Fifth Floor, Boston, MA  02110 - 1301  USA
-*/
-
 #define GLM_FORCE_RADIANS
 
 #include <GL/glew.h>
@@ -43,7 +24,7 @@ int action;
 Body *body;
 Game *game;
 GLuint tex;
-Models::Model *WheelObject::model = NULL; // Necessary to make static models work
+Models::Model *WheelObject::model = NULL; // Konieczne do dzialania statycznych modeli
 
 GLuint readTexture(char* filename) { // TODO: Kod z prezentacji, zamienić na nasz!
  GLuint tex;
@@ -81,7 +62,9 @@ void error_callback(int error, const char* description) {
 
 //Procedura inicjująca
 void initOpenGLProgram(GLFWwindow* window) {
-    // Init textures
+    // Wczytaj modele
+    WheelObject::initialize_model();
+    // Wczytaj tekstury
     tex=readTexture("textures/test.png");
 
     Body::lukat = glm::vec3(0.0f,0.0f,4.0f);
@@ -93,7 +76,6 @@ void initOpenGLProgram(GLFWwindow* window) {
     glfwSetCursorPosCallback(window,cursor_position_callback);
 
     initShaders();
-    //sp_podloga = new ShaderProgram("podlo_v.glsl",NULL,"podlo_f.glsl");
 
     glClearColor(1,0,0,1);
 
@@ -107,21 +89,20 @@ void initOpenGLProgram(GLFWwindow* window) {
     Body::sp = spLambert;
     game = new Game();
     body = game;
-    //body->init(window);
-	//************Tutaj umieszczaj kod, który należy wykonać raz, na początku programu************
 }
 
 
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
-    // Free textures
+    // Zwolnij tekstury
     glDeleteTextures(1,&tex);
+    // Zwolnij modele
+    WheelObject::destroy_model();
+
     freeShaders();
-    //sp_podloga->~ShaderProgram();
     game->~Game();
     delete body;
     delete game;
-    //************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************
 }
 
 //Procedura rysująca zawartość sceny
@@ -139,38 +120,9 @@ void drawScene(GLFWwindow* window) {
     glUniform4f(spLambert->u("lightPos"),-1.0f,-5.0f,25.0f,1.0f);
     glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
 
-    /*glEnableVertexAttribArray(spLambert->a("vertex"));
-    glVertexAttribPointer(spLambert->a("vertex"),4,GL_FLOAT,false,0,podloga);
-
-    glEnableVertexAttribArray(spLambert->a("normal"));
-    glVertexAttribPointer(spLambert->a("normal"),4,GL_FLOAT,false,0,podloga_norm);
-
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    glDisableVertexAttribArray(spLambert->a("vertex"));
-    glDisableVertexAttribArray(spLambert->a("normal"));*/
-
-
-    /*M=glm::mat4(1.0f);
-    M=glm::translate(M,glm::vec3(0.0f,0.0f,-2.0f));
-    /*M=glm::rotate(M,angle_h,glm::vec3(0.0f,1.0f,0.0f));
-    M=glm::rotate(M,angle_v,glm::vec3(1.0f,0.0f,0.0f));*/
-
-    /*spLambert -> use();
-    glUniformMatrix4fv(spLambert->u("P"),1,false,glm::value_ptr(P));
-    glUniformMatrix4fv(spLambert->u("V"),1,false,glm::value_ptr(V));
-    glUniformMatrix4fv(spLambert->u("M"),1,false,glm::value_ptr(M));
-    glUniform4f(spLambert->u("color"),0.0f,1.0f,1.0f,1.0f);
-    glUniform1i(spLambert->u("pod"),0);
-    glUniform4f(spLambert->u("lightPos"),-1.0f,-5.0f,-25.0f,1.0f);
-    glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(ob_position,1.0f)));
-
-    mcube->drawSolid();*/
-
     body->draw();
 
     glfwSwapBuffers(window);
-	//************Tutaj umieszczaj kod rysujący obraz******************l
 }
 
 

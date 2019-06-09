@@ -1,12 +1,11 @@
 #include "LoadObject.h"
 
-//TODO: Przerobiæ na wspó³rzêdne homogeniczne
-bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, glm::vec4* &vert_normals, unsigned *vertex_count) {
+bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, glm::vec4* &normals, unsigned *vertex_count) {
     std::vector<glm::vec3> tmp_vertices;
     std::vector<glm::vec2> tmp_tex;
-    std::vector<glm::vec3> tmp_vert_normals;
-    std::vector<unsigned>  vert_id, tex_id, vert_norm_id;
-    int tex_count, vert_norm_count;
+    std::vector<glm::vec3> tmp_normals;
+    std::vector<unsigned>  vert_id, tex_id, norm_id;
+    int tex_count, norm_count;
     std::fstream model_file (file_name, std::ios::in);
     std::string line;
     std::stringstream ss;
@@ -25,15 +24,15 @@ bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, g
 
                 }
                 else if (line[1] == 'n') {
-                    // vn - normal of one vertex
+                    // vn - normals
                     glm::vec3 vert_normal;
                     ss << line;
                     ss >> a >> a >> vert_normal.x >> vert_normal.y >> vert_normal.z;
-                    tmp_vert_normals.push_back(vert_normal);
+                    tmp_normals.push_back(vert_normal);
                     ss.clear();
                 }
                 else {
-                    // v - vertex
+                    // v - vertices
                     glm::vec3 vertex;
                     ss << line;
                     ss >> a >> vertex.x >> vertex.y >> vertex.z;
@@ -43,15 +42,14 @@ bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, g
             }
             else if (line[0] == 'f') {
                 // f - face
-                unsigned tmp_vert_id[3], tmp_tex_id[3], tmp_vert_norm_id[3];
+                unsigned tmp_vert_id[3], tmp_tex_id[3], tmp_norm_id[3];
                 ss << line;
-                ss >> a >> tmp_vert_id[0] >> a >> tmp_tex_id[0] >> a >> tmp_vert_norm_id[0] >> tmp_vert_id[1] >> a >> tmp_tex_id[1] >> a >> tmp_vert_norm_id[1] >> tmp_vert_id[2] >> a >> tmp_tex_id[2] >> a >> tmp_vert_norm_id[2];
-                //for(int i=0; i<3; ++i)std::cout << tmp_vert_id[i] << " " << tmp_tex_id[i] << " " << tmp_norm_id[i] << std::endl;
+                ss >> a >> tmp_vert_id[0] >> a >> tmp_tex_id[0] >> a >> tmp_norm_id[0] >> tmp_vert_id[1] >> a >> tmp_tex_id[1] >> a >> tmp_norm_id[1] >> tmp_vert_id[2] >> a >> tmp_tex_id[2] >> a >> tmp_norm_id[2];
                 ss.clear();
                 for (int i=0; i<3; ++i) {
                     vert_id.push_back(tmp_vert_id[i]-1); // in .obj indexes start from 1
                     tex_id.push_back(tmp_tex_id[i]-1);
-                    vert_norm_id.push_back(tmp_vert_norm_id[i]-1);
+                    norm_id.push_back(tmp_norm_id[i]-1);
                 }
             }
         }
@@ -63,7 +61,6 @@ bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, g
         vertices = new glm::vec4[*vertex_count];
         int j=0;
         for (auto &index : vert_id) {
-            //std::cout << index << " " << tmp_vertices[index].x<< std::endl;
             vertices[j].x = tmp_vertices[index].x;
             vertices[j].y = tmp_vertices[index].y;
             vertices[j].z = tmp_vertices[index].z;
@@ -79,15 +76,15 @@ bool load_object(const char* file_name, glm::vec4* &vertices, glm::vec2* &tex, g
             tex[j].y = tmp_tex[index].y;
             ++j;
         }
-        // Vertex normals
-        vert_norm_count = vert_norm_id.size();
-        vert_normals = new glm::vec4[vert_norm_count];
+        // Normals
+        norm_count = norm_id.size();
+        normals = new glm::vec4[norm_count];
         j=0;
-        for (auto &index : vert_norm_id) {
-            vert_normals[j].x = tmp_vert_normals[index].x;
-            vert_normals[j].y = tmp_vert_normals[index].y;
-            vert_normals[j].z = tmp_vert_normals[index].z;
-            vert_normals[j].w = 0.f;
+        for (auto &index : norm_id) {
+            normals[j].x = tmp_normals[index].x;
+            normals[j].y = tmp_normals[index].y;
+            normals[j].z = tmp_normals[index].z;
+            normals[j].w = 0.f;
         }
     }
     else {

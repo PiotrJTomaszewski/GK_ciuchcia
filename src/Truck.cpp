@@ -2,7 +2,6 @@
 
 Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
 {
-    WheelObject::initialize_model();// TODO: Mo¿e to nie jest najlepsze miejsce ale na razie niech zostanie
     wheel_l = new WheelObject(glm::vec3(0.0f,-10.0f,-10.0f));
     wheel_r = new WheelObject(glm::vec3(0.0f,10.0f,-10.0f));
     main_part = new WheelObject(glm::vec3(0.0f,0.0f,0.0f), 10.0f);
@@ -23,7 +22,6 @@ Truck::~Truck()
     delete wheel_r;
     delete main_part;
     delete back_part;
-    WheelObject::destroy_model();// TODO: Mo¿e to nie jest najlepsze miejsce ale na razie niech zostanie
 }
 
 void Truck::draw_all(glm::mat4 P, glm::mat4 V){
@@ -54,5 +52,4 @@ void Truck::update(double time){
     wheel_r->angle_rot = wheel_l->angle_rot;
     if(angle_rot>2*PI)
         angle_rot-=2*PI;
-
 }
