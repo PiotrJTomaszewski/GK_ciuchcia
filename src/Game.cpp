@@ -2,15 +2,15 @@
 
 Game::Game()
 {
-    model = new Models::Cube();
+    //model = new Models::Cube();
     truck = new Truck();
 }
 
 Game::~Game()
 {
-    model->~Cube();
+    //model->~Cube();
     truck->~Truck();
-    delete model;
+    //delete model;
     delete truck;
 }
 

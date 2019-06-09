@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
@@ -48,10 +49,7 @@
 			<Add directory="glfw/lib" />
 			<Add directory="glew/lib" />
 		</Linker>
-		<Unit filename="allmodels.h" />
 		<Unit filename="constants.h" />
-		<Unit filename="cube.cpp" />
-		<Unit filename="cube.h" />
 		<Unit filename="f_constant.glsl" />
 		<Unit filename="f_lambert.glsl" />
 		<Unit filename="include/Body.h" />
@@ -59,6 +57,7 @@
 		<Unit filename="include/LoadObject.h" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/Truck.h" />
+		<Unit filename="include/objects/WheelObject.h" />
 		<Unit filename="lodepng.cpp" />
 		<Unit filename="lodepng.h" />
 		<Unit filename="main_file.cpp" />
@@ -68,16 +67,11 @@
 		<Unit filename="podlo_v.glsl" />
 		<Unit filename="shaderprogram.cpp" />
 		<Unit filename="shaderprogram.h" />
-		<Unit filename="sphere.cpp" />
-		<Unit filename="sphere.h" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/LoadObject.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/Truck.cpp" />
-		<Unit filename="teapot.cpp" />
-		<Unit filename="teapot.h" />
-		<Unit filename="torus.cpp" />
-		<Unit filename="torus.h" />
+		<Unit filename="src/objects/WheelObject.cpp" />
 		<Unit filename="v_constant.glsl" />
 		<Unit filename="v_lambert.glsl" />
 		<Extensions>

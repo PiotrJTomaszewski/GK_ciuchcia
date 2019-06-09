@@ -1,15 +1,18 @@
 #include "Truck.h"
 
-Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
+Truck::Truck()
 {
-    wheel_l = new Object(glm::vec3(0.0f,-10.0f,-10.0f));
-    wheel_r = new Object(glm::vec3(0.0f,10.0f,-10.0f));
-    main_part = new Object(glm::vec3(0.0f,0.0f,0.0f), 10.0f);
-    back_part = new Object(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
+    WheelObject::initialize_model();// TODO: Mo¿e to nie jest najlepsze miejsce ale na razie niech zostanie
+    wheel_l = new WheelObject(glm::vec3(0.0f,-10.0f,-10.0f));
+    wheel_r = new WheelObject(glm::vec3(0.0f,10.0f,-10.0f));
+    main_part = new WheelObject(glm::vec3(0.0f,0.0f,0.0f), 10.0f);
+    back_part = new WheelObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
     speed = glm::vec3(0.0f);
     acceleration = glm::vec3(0.0f);
     b_acc = false;
     turn_l = turn_r = 0.0f;
+    angle_dr = angle_rot = 0;
+    translate = glm::vec3(0.f, 0.f, 11.f);
 }
 
 Truck::~Truck()
@@ -22,6 +25,7 @@ Truck::~Truck()
     delete wheel_r;
     delete main_part;
     delete back_part;
+    WheelObject::destroy_model();// TODO: Mo¿e to nie jest najlepsze miejsce ale na razie niech zostanie
 }
 
 void Truck::draw_all(glm::mat4 P, glm::mat4 V){

@@ -2,16 +2,9 @@
 
 Object::Object(glm::vec3 trans, float scal)
 {
-    cube = new Models::Cube();
     angle_dr = angle_rot = 0;
     translate = glm::vec3(trans);
     scale = scal;
-}
-
-Object::~Object()
-{
-    cube->~Cube();
-    delete cube;
 }
 
 void Object::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
@@ -32,5 +25,4 @@ void Object::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     //glUniform4fv(sp->u("lightPos2"),1,glm::value_ptr(glm::vec4(M[3][0]-translate.x, M[3][1]-translate.y,
      //                                                          M[3][2]-translate.z, 1.0f)));
 
-    cube->drawSolid();
 }

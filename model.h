@@ -25,20 +25,24 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include "constants.h"
+#include "LoadObject.h"
+
 
 namespace Models {
 
 	class Model {
 		public:
-			int vertexCount;
-			float *vertices;
-			float *normals;
-			float *vertexNormals;
-			float *texCoords;
-			float *colors;
-
-			virtual void drawSolid(bool smooth)=0;
-			virtual void drawWire(bool smooth=false);
+		    Model(const char* file_name);
+		    ~Model();
+            unsigned vertexCount;
+			glm::vec4 *vertices;
+			glm::vec4 *vertexNormals;
+			glm::vec2 *texCoords;
+			// TODO: Zamienic na wektory i wczytywac z pliku
+			static float normals[];
+			static float colors[];
+			void drawSolid(bool smooth);
+			void drawWire(bool smooth=false);
 	};
 }
 

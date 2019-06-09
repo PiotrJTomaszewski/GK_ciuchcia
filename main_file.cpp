@@ -28,14 +28,12 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 #include <stdio.h>
 #include <cmath>
 #include "constants.h"
-#include "allmodels.h"
 #include "lodepng.h"
 #include "shaderprogram.h"
-#include <Body.h>
-#include <Game.h>
-#include <Object.h>
-#include "LoadObject.h" // TODO: REMOVE
-Models::Cube *mcube;
+#include "Body.h"
+#include "Game.h"
+#include "Object.h"
+
 glm::mat4 Body::P, Body::M, Body::V;
 float r_r=0, l_r=0, u_r=0, d_r=0;
 ShaderProgram *sp_podloga, *Body::sp, *Object::sp;
@@ -44,19 +42,7 @@ glm::vec4 Body::perspective;
 int action;
 Body *body;
 Game *game;
-/*float podloga[] = {
-    1.0f,-1.0f,0.0f,1.0f,
-    -1.0f, 1.0f,0.0f,1.0f,
-	-1.0f,-1.0f,0.0f,1.0f,
-
-	1.0f,-1.0f,0.0f,1.0f,
-	1.0f, 1.0f,0.0f,1.0f,
-	-1.0f, 1.0f,0.0f,1.0f,
-};
-float podloga_norm[] = {
-    0.0f,0.0f,1.0f,1.0f,   0.0f,0.0f,1.0f,1.0f,   0.0f,0.0f,1.0f,1.0f,
-    0.0f,0.0f,-1.0f,1.0f,   0.0f,0.0f,-1.0f,1.0f,   0.0f,0.0f,-1.0f,1.0f
-};*/
+Models::Model *WheelObject::model = NULL; // Necessary to make static models work
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
     body->key_callback(key,scancode,action,mods);
@@ -92,8 +78,6 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     Body::P = glm::perspective(PI/3,1.0f,0.5f,140.0f);
 
-    mcube = new Models::Cube();
-
     glfwSetKeyCallback(window, key_callback);
 
     Object::sp = spLambert;
@@ -109,9 +93,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 void freeOpenGLProgram(GLFWwindow* window) {
     freeShaders();
     //sp_podloga->~ShaderProgram();
-    mcube->~Cube();
     game->~Game();
-    delete mcube;
     delete body;
     delete game;
     //************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************
@@ -131,8 +113,6 @@ void drawScene(GLFWwindow* window) {
     glUniform1i(spLambert->u("pod"),0);
     glUniform4f(spLambert->u("lightPos"),-1.0f,-5.0f,25.0f,1.0f);
     glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
-
-    mcube->drawSolid();
 
     /*glEnableVertexAttribArray(spLambert->a("vertex"));
     glVertexAttribPointer(spLambert->a("vertex"),4,GL_FLOAT,false,0,podloga);
@@ -172,11 +152,7 @@ void drawScene(GLFWwindow* window) {
 int main(void)
 {
 	GLFWwindow* window; //Wskaźnik na obiekt reprezentujący okno
-	// TO OCZYWIŚCIE TYLKO CHWILOWO SIĘ TU ZNAJDUJE :p
-	glm::vec3 *vert;
-	glm::vec2 *tex;
-	glm::vec3 *normals;
-    load_object("objects/test.obj", vert, tex, normals); return 0; //TODO: REMOVE
+
 	glfwSetErrorCallback(error_callback);//Zarejestruj procedurę obsługi błędów
 
 	if (!glfwInit()) { //Zainicjuj bibliotekę GLFW
