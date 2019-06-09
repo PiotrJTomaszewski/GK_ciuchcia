@@ -7,7 +7,7 @@ Game::Game()
 
 Game::~Game()
 {
-    truck->~Truck();
+    //truck->~Truck();
     delete truck;
 }
 

@@ -1,7 +1,8 @@
 #ifndef TRUCK_H
 #define TRUCK_H
 
-#include <objects/WheelObject.h>
+#include <objects/TruckWheelObject.h>
+#include <objects/TruckMainObject.h>
 
 
 class Truck : private Object

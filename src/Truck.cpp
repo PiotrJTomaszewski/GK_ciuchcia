@@ -14,10 +14,11 @@ Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
 
 Truck::~Truck()
 {
-    wheel_l->~Object();
-    wheel_r->~Object();
-    main_part->~Object();
-    back_part->~Object();
+    // Wywolanie najpierw destruktora explicite powoduje blad naruszenia pamieci przy uzyciu delete. Takze moze zostac albo jedno, albo drugie
+    //wheel_l->~Object();
+    //wheel_r->~Object();
+    //main_part->~Object();
+    //back_part->~Object();
     delete wheel_l;
     delete wheel_r;
     delete main_part;

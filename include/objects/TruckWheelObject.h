@@ -1,5 +1,5 @@
-#ifndef WHEELOBJECT_H
-#define WHEELOBJECT_H
+#ifndef TRUCKWHEELOBJECT_H
+#define TRUCKWHEELOBJECT_H
 #include "Object.h"
 
 class WheelObject : public Object {
@@ -14,4 +14,4 @@ class WheelObject : public Object {
         static Models::Model *model;
 };
 
-#endif //WHEELOBJECT_H
+#endif //TRUCKWHEELOBJECT_H

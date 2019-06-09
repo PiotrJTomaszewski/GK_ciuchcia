@@ -15,6 +15,10 @@
 #include "Game.h"
 #include "Object.h"
 
+const unsigned number_of_textures=1; // Ile tekstur jest do zaladowania
+const char *texture_names[] = {"textures/test.png"}; // Nazwy plikow tekstur
+GLuint tex[number_of_textures]; // Uchwyt na tekstury
+
 glm::mat4 Body::P, Body::M, Body::V;
 float r_r=0, l_r=0, u_r=0, d_r=0;
 ShaderProgram *sp_podloga, *Body::sp, *Object::sp;
@@ -23,23 +27,32 @@ glm::vec4 Body::perspective;
 int action;
 Body *body;
 Game *game;
-GLuint tex;
-Models::Model *WheelObject::model = NULL; // Konieczne do dzialania statycznych modeli
+// Konieczne do dzialania statycznych modeli
+Models::Model *WheelObject::model = NULL;
+Models::Model *MainObject::model  = NULL;
 
-GLuint readTexture(char* filename) { // TODO: Kod z prezentacji, zamienić na nasz!
- GLuint tex;
- glActiveTexture(GL_TEXTURE0);
- //Wczytanie do pamięci komputera
- std::vector<unsigned char> image; //Alokuj wektor do wczytania obrazka
- unsigned width, height; //Zmienne do których wczytamy wymiary obrazka
- //Wczytaj obrazek
+GLuint readTexture() {
+    for (int i=0; i<number_of_textures; ++i) {
+        std::vector<unsigned char> images[number_of_textures];
+    }
+
+
+    glActiveTexture(GL_TEXTURE0+id); // Zawsze GL_TEXTUREi = GL_TEXTURE0+i
+ // Wczytanie do pamięci komputera
+ std::vector<unsigned char> image; // Alokuj wektor do wczytania obrazka
+ unsigned width, height; // Zmienne do których wczytamy wymiary obrazka
+ // Wczytaj obrazek
  unsigned error = lodepng::decode(image, width, height, filename);
+ if (error != 0) { // Jesli obrazka nie uda sie wczytac
+    perror("Error while loading texture file\n");
+    exit(EXIT_FAILURE);
+ }
  //Import do pamięci karty graficznej
  glGenTextures(1,&tex); //Zainicjuj jeden uchwyt
  glBindTexture(GL_TEXTURE_2D, tex); //Uaktywnij uchwyt
  //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
- glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0,
- GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
+ glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
+ // Parametry tekstury
  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
  return tex;
@@ -65,7 +78,7 @@ void initOpenGLProgram(GLFWwindow* window) {
     // Wczytaj modele
     WheelObject::initialize_model();
     // Wczytaj tekstury
-    tex=readTexture("textures/test.png");
+    readTextures();
 
     Body::lukat = glm::vec3(0.0f,0.0f,4.0f);
     Body::nose = glm::vec3(0.0f,0.0f,1.0f);
@@ -95,14 +108,14 @@ void initOpenGLProgram(GLFWwindow* window) {
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
     // Zwolnij tekstury
-    glDeleteTextures(1,&tex);
+    glDeleteTextures(number_of_textures,tex);
     // Zwolnij modele
     WheelObject::destroy_model();
 
     freeShaders();
-    game->~Game();
+    //game->~Game();
     delete body;
-    delete game;
+    //delete game; // Usuniecie body juz usuwa game, ta linia powoduje naruszenie pamieci
 }
 
 //Procedura rysująca zawartość sceny

@@ -1,4 +1,4 @@
-#include "objects/WheelObject.h"
+#include "objects/TruckWheelObject.h"
 
 WheelObject::WheelObject(glm::vec3 trans, float scal)
     : Object(trans, scal) {
@@ -10,7 +10,6 @@ WheelObject::~WheelObject() {
 }
 
 void WheelObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-
     M = glm::translate(M,translate);
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,0.0f,1.0f));
     if(angle_rot!=0)
