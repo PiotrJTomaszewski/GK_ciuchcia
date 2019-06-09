@@ -4,7 +4,7 @@
 #include <objects/WheelObject.h>
 
 
-class Truck
+class Truck : private Object
 {
     public:
         Truck();
@@ -14,8 +14,7 @@ class Truck
         bool b_acc;
         void update(double time);
         float turn_l, turn_r;
-        float angle_dr, angle_rot;
-        glm::vec3 translate;
+
     protected:
 
     private:
@@ -23,6 +22,8 @@ class Truck
         Object *wheel_l, *wheel_r, *main_part, *back_part;
         glm::mat4 M;
         float angle_max = PI/4.0f;
+        // metoda draw w object jest wirtualna, wiec trzeba tu dac deklaracje, mimo ze funkcja nie jest potrzebna
+        void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f)){};
 };
 
 #endif // TRUCK_H

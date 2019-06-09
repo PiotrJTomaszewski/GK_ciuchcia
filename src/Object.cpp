@@ -7,6 +7,7 @@ Object::Object(glm::vec3 trans, float scal)
     scale = scal;
 }
 
+/*
 void Object::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
     M = glm::translate(M,translate);
@@ -26,3 +27,4 @@ void Object::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
      //                                                          M[3][2]-translate.z, 1.0f)));
 
 }
+*/

@@ -1,6 +1,6 @@
 #include "Truck.h"
 
-Truck::Truck()
+Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
 {
     WheelObject::initialize_model();// TODO: Mo¿e to nie jest najlepsze miejsce ale na razie niech zostanie
     wheel_l = new WheelObject(glm::vec3(0.0f,-10.0f,-10.0f));
@@ -11,8 +11,6 @@ Truck::Truck()
     acceleration = glm::vec3(0.0f);
     b_acc = false;
     turn_l = turn_r = 0.0f;
-    angle_dr = angle_rot = 0;
-    translate = glm::vec3(0.f, 0.f, 11.f);
 }
 
 Truck::~Truck()
@@ -58,4 +56,3 @@ void Truck::update(double time){
         angle_rot-=2*PI;
 
 }
-
