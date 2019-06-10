@@ -20,7 +20,7 @@ class Truck : private Object
 
     private:
         //poszczegolne czesci ciezarowki
-        Object *wheel_l, *wheel_r, *main_part, *back_part;
+        Object *wheel_l, *wheel_r, *wheel_back_l, *wheel_back_r, *main_part, *back_part;
         glm::mat4 M;
         float angle_max = PI/4.0f;
         // metoda draw w object jest wirtualna, wiec trzeba tu dac deklaracje, mimo ze funkcja nie jest potrzebna

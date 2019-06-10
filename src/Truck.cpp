@@ -2,10 +2,12 @@
 
 Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
 {
-    wheel_l = new WheelObject(glm::vec3(0.0f,-10.0f,-10.0f));
-    wheel_r = new WheelObject(glm::vec3(0.0f,10.0f,-10.0f));
+    wheel_l = new WheelObject(glm::vec3(1.45f,1.1f,-1.1f),-1); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
+    wheel_r = new WheelObject(glm::vec3(1.45f,-1.1f,-1.1f));
+    wheel_back_l = new WheelObject(glm::vec3(-3.55f,1.1f,-1.1f),-1);
+    wheel_back_r = new WheelObject(glm::vec3(-3.55f,-1.1f,-1.1f));
     main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f));
-    back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma
+    back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma, potem mozna dodac np. jakis model przyczepy
 //    back_part = new MainObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
     speed = glm::vec3(0.0f);
     acceleration = glm::vec3(0.0f);
@@ -22,6 +24,8 @@ Truck::~Truck()
     //back_part->~Object();
     delete wheel_l;
     delete wheel_r;
+    delete wheel_back_l;
+    delete wheel_back_r;
     delete main_part;
     delete back_part;
 }
@@ -32,8 +36,11 @@ void Truck::draw_all(glm::mat4 P, glm::mat4 V){
 
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
+    wheel_back_l->draw(P,V,M);
+    wheel_back_r->draw(P,V,M);
     main_part->draw(P,V,M);
     back_part->draw(P,V,M);
+
 }
 
 void Truck::update(double time){
@@ -51,7 +58,7 @@ void Truck::update(double time){
     //printf("%f, %f\n", glm::length(speed),time);
 
     wheel_l->angle_rot += glm::length(speed)*float(time); //na razie r=1, wiec predkosc katowa=liniowej
-    wheel_r->angle_rot = wheel_l->angle_rot;
+    wheel_r->angle_rot = wheel_back_l->angle_rot = wheel_back_r->angle_rot = wheel_l->angle_rot;
     if(angle_rot>2*PI)
         angle_rot-=2*PI;
 }
