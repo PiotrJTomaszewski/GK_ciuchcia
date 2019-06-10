@@ -1,8 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <Body.h>
-#include <Truck.h>
+#include "Body.h"
+#include "Truck.h"
+#include "objects/Floor.h"
 #include "shaderprogram.h"
 
 
@@ -25,6 +26,7 @@ class Game : public Body
         glm::vec3 pom_sum;
         float angle_h = 0, angle_v = 0;
         Truck *truck;
+        FloorObject *floor;
 };
 
 #endif // GAME_H

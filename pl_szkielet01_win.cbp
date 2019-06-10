@@ -58,6 +58,7 @@
 		<Unit filename="include/LoadObject.h" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/Truck.h" />
+		<Unit filename="include/objects/Floor.h" />
 		<Unit filename="include/objects/TruckMainObject.h" />
 		<Unit filename="include/objects/TruckWheelObject.h" />
 		<Unit filename="lodepng.cpp" />
@@ -73,6 +74,7 @@
 		<Unit filename="src/LoadObject.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/Truck.cpp" />
+		<Unit filename="src/objects/Floor.cpp" />
 		<Unit filename="src/objects/TruckMainObject.cpp" />
 		<Unit filename="src/objects/TruckWheelObject.cpp" />
 		<Unit filename="v_constant.glsl" />

@@ -3,16 +3,19 @@
 Game::Game()
 {
     truck = new Truck();
+    floor = new FloorObject(glm::vec3(0.0f,0.0,-2.0f));
 }
 
 Game::~Game()
 {
     //truck->~Truck();
     delete truck;
+    delete floor;
 }
 
 void Game::draw(){
     truck->draw_all(P,V);
+    floor->draw(P,V);
 }
 
 void Game::init(GLFWwindow *window){
