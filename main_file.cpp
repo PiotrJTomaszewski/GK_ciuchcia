@@ -83,7 +83,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     Body::lukat = glm::vec3(0.0f,0.0f,4.0f);
     Body::nose = glm::vec3(0.0f,0.0f,1.0f);
-    Body::ob_position = glm::vec3(0.0f,-15.0f,4.0f);
+    Body::ob_position = glm::vec3(0.0f,-50.0f,4.0f);
     Body::V = glm::lookAt(Body::ob_position,Body::lukat,Body::nose);
     glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_DISABLED);
     glfwGetCursorPos(window,&Body::xcur,&Body::ycur);
@@ -95,7 +95,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     glEnable(GL_DEPTH_TEST);
 
-    Body::P = glm::perspective(PI/3,1.0f,0.5f,140.0f);
+    Body::P = glm::perspective(PI/3,128.0f/72.0f,0.5f,140.0f);
 
     glfwSetKeyCallback(window, key_callback);
 

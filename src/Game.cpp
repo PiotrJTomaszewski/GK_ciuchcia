@@ -36,6 +36,10 @@ void Game::key_callback(int key, int scancode, int action, int mods){
             truck->acceleration = 1.0f;
             truck->b_acc = true;
         }
+        if(key==GLFW_KEY_S){
+            truck->acceleration = -1.0f;
+            truck->b_acc = false;
+        }
         if(key==GLFW_KEY_A){
             truck->turn_l = 1;
         }
@@ -53,6 +57,10 @@ void Game::key_callback(int key, int scancode, int action, int mods){
         if(key==GLFW_KEY_RIGHT)
             r_r=0;
         if(key==GLFW_KEY_W){
+            truck->acceleration = 0.0f;
+            truck->b_acc = false;
+        }
+        if(key==GLFW_KEY_S){
             truck->acceleration = 0.0f;
             truck->b_acc = false;
         }

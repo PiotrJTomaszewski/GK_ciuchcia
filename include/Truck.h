@@ -21,13 +21,14 @@ class Truck : private Object
 
     private:
         //poszczegolne czesci ciezarowki
-        Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[2];
+        Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[6];
         glm::mat4 M;
         float angle_max = PI/4.0f;
-        glm::vec3 acc_dr;
         void wheels_round(float angle);
+        void wheels_round(float angle, float op_angle);
         void wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M);
         float wheel_rozstaw=10, wheel_odlegl=10, ctga, px, py, R, omega, delt, s;
+        float back_length = 10, back_odlegl=5, back_ang;
         float friction();
         int i;
         // metoda draw w object jest wirtualna, wiec trzeba tu dac deklaracje, mimo ze funkcja nie jest potrzebna
