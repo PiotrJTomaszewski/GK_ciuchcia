@@ -30,7 +30,7 @@ Truck::~Truck()
 
 void Truck::draw_all(glm::mat4 P, glm::mat4 V){
     M = glm::translate(glm::mat4(1.0f),translate
-                       /*+glm::vec3(wheel_odlegl/2*(cos(angle_dr)-1),wheel_odlegl/2*sin(angle_dr),0.0f)*/);
+                       +glm::vec3(wheel_odlegl/2*(cos(angle_dr)-1),wheel_odlegl/2*sin(angle_dr),0.0f));
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,0.0f,1.0f));
     printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
 
@@ -63,10 +63,10 @@ void Truck::update(double time){
         else if(this->angle_dr<-2*PI)this->angle_dr+=2*PI;
 
         //bycmoze potrzebna rozna predkosc kol po obu stronach, zeby to wygladalo estetyczniej, albo po prostu potrzebuje dopracowania
-        wheel_l->angle_rot += speed*(R+wheel_rozstaw/2)/R*float(time); //na razie r=1, wiec predkosc katowa=liniowej
+        wheel_l->angle_rot += speed*(R+wheel_rozstaw/2)/R*float(time)/wheel_rad;
         if(wheel_l->angle_rot>2*PI)
             wheel_l->angle_rot-=2*PI;
-        wheel_r->angle_rot += speed*(R-wheel_rozstaw/2)/R*float(time);
+        wheel_r->angle_rot += speed*(R-wheel_rozstaw/2)/R*float(time)/wheel_rad;
         if(wheel_r->angle_rot>2*PI)
             wheel_r->angle_rot-=2*PI;
         this->wheels_round(wheel_l->angle_rot, wheel_r->angle_rot);
@@ -77,7 +77,7 @@ void Truck::update(double time){
 
         translate += glm::rotateZ(glm::vec3(s,0.0f,0.0f),this->angle_dr);
 
-        wheel_l->angle_rot += speed*float(time); //na razie r=1, wiec predkosc katowa=liniowej
+        wheel_l->angle_rot += speed*float(time)/wheel_rad;
         if(wheel_l->angle_rot>2*PI)
             wheel_l->angle_rot-=2*PI;
         wheel_r->angle_rot = wheel_l->angle_rot;

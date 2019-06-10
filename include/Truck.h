@@ -27,7 +27,7 @@ class Truck : private Object
         void wheels_round(float angle);
         void wheels_round(float angle, float op_angle);
         void wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M);
-        float wheel_rozstaw=10, wheel_odlegl=10, ctga, px, py, R, omega, delt, s;
+        float wheel_rozstaw=2.2f, wheel_odlegl=5, wheel_rad=0.1f, ctga, px, py, R, omega, delt, s;
         float back_length = 10, back_odlegl=5, back_ang;
         float friction();
         int i;
