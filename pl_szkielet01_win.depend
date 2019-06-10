@@ -3510,7 +3510,7 @@
 	<iostream>
 	"lodepng.h"
 
-1560095176 source:c:\users\latitude e7440\documents\github\ciuchc\main_file.cpp
+1560101687 source:c:\users\latitude e7440\documents\github\ciuchc\main_file.cpp
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<glm/glm.hpp>
@@ -3807,7 +3807,7 @@
 	"cube.h"
 	"model.h"
 
-1560095742 c:\users\latitude e7440\documents\github\ciuchc\include\truck.h
+1560203043 c:\users\latitude e7440\documents\github\ciuchc\include\truck.h
 	<Object.h>
 	<cmath>
 
@@ -3847,13 +3847,13 @@
 1551121854 source:c:\users\latitude e7440\documents\github\ciuchc\sphere.cpp
 	"sphere.h"
 
-1560095417 source:c:\users\latitude e7440\documents\github\ciuchc\src\game.cpp
+1560099333 source:c:\users\latitude e7440\documents\github\ciuchc\src\game.cpp
 	"Game.h"
 
 1560095177 source:c:\users\latitude e7440\documents\github\ciuchc\src\object.cpp
 	"Object.h"
 
-1560096192 source:c:\users\latitude e7440\documents\github\ciuchc\src\truck.cpp
+1560202975 source:c:\users\latitude e7440\documents\github\ciuchc\src\truck.cpp
 	"Truck.h"
 
 1551121863 source:c:\users\latitude e7440\documents\github\ciuchc\teapot.cpp
