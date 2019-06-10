@@ -1,0 +1,14 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+
+# Executables
+*.exe
+*.out
+*.app
+
+# CodeBlocks files
+*.layout
+*.depend

@@ -15,7 +15,7 @@ uniform int pod = 1;
 //Atrybuty
 layout (location=0) in vec4 vertex; //wspolrzedne wierzcholka w przestrzeni modelu
 layout (location=1) in vec4 normal; //wektor normalny w wierzcholku
-
+layout (location=2) in vec2 aTexCoord; //wspolrzedne teksturowania
 
 //Zmienne interpolowane
 out vec4 i_color;
@@ -23,6 +23,7 @@ out vec4 ds;
 out vec4 nor;
 out vec4 dob;
 out vec4 ds1;
+out vec2 texCoord;
 
 void main(void) {
     vec4 pom = vertex;
@@ -39,9 +40,8 @@ void main(void) {
     /*float nl=clamp(dot(M*normal,(-(M*vertex)+lightPos)),0,1);
     nl+=clamp(dot(M*normal,(lightPos2-(M*vertex))),0,0.4);
     nl=clamp(nl,0,1);*/
-
+    texCoord = aTexCoord;
     i_color=color;
-
     ds = normalize(V*(lightPos2-M*vertex));
     nor = normalize(V*M*normal);
 

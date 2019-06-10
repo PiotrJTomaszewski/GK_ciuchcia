@@ -1,44 +1,28 @@
-/*
-Niniejszy program jest wolnym oprogramowaniem; możesz go
-rozprowadzać dalej i / lub modyfikować na warunkach Powszechnej
-Licencji Publicznej GNU, wydanej przez Fundację Wolnego
-Oprogramowania - według wersji 2 tej Licencji lub(według twojego
-wyboru) którejś z późniejszych wersji.
-
-Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
-użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
-gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
-ZASTOSOWAŃ.W celu uzyskania bliższych informacji sięgnij do
-Powszechnej Licencji Publicznej GNU.
-
-Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
-Powszechnej Licencji Publicznej GNU(GNU General Public License);
-jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
-Place, Fifth Floor, Boston, MA  02110 - 1301  USA
-*/
-
 #ifndef MODEL_H
 #define MODEL_H
 
 #include <GL/glew.h>
-#include <vector>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
-#include "constants.h"
+#include "LoadObject.h"
+#include "shaderprogram.h"
+#include "globals.h"
 
 namespace Models {
 
 	class Model {
 		public:
-			int vertexCount;
-			float *vertices;
-			float *normals;
-			float *vertexNormals;
-			float *texCoords;
-			float *colors;
-
-			virtual void drawSolid(bool smooth)=0;
-			virtual void drawWire(bool smooth=false);
+		    Model(const char* file_name, unsigned texture_id);
+		    ~Model();
+            unsigned vertexCount;
+			glm::vec4 *vertices;
+			glm::vec4 *normals;
+			glm::vec2 *texCoords;
+            unsigned tex_id; // Id tekstury
+			// Blender eksportuje do obj normalne wierzcholkow i scian razem, wiec zeby wylaczyc wygladzanie trzeba by sie dodatkowo napracowac, co nie ma sensu :)
+			void drawSolid();
+			void drawWire();
+			static ShaderProgram *sp;
 	};
 }
 

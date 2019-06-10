@@ -1,22 +1,3 @@
-/*
-Niniejszy program jest wolnym oprogramowaniem; możesz go
-rozprowadzać dalej i / lub modyfikować na warunkach Powszechnej
-Licencji Publicznej GNU, wydanej przez Fundację Wolnego
-Oprogramowania - według wersji 2 tej Licencji lub(według twojego
-wyboru) którejś z późniejszych wersji.
-
-Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on
-użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej
-gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
-ZASTOSOWAŃ.W celu uzyskania bliższych informacji sięgnij do
-Powszechnej Licencji Publicznej GNU.
-
-Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz
-Powszechnej Licencji Publicznej GNU(GNU General Public License);
-jeśli nie - napisz do Free Software Foundation, Inc., 59 Temple
-Place, Fifth Floor, Boston, MA  02110 - 1301  USA
-*/
-
 #define GLM_FORCE_RADIANS
 
 #include <GL/glew.h>
@@ -28,22 +9,53 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 #include <stdio.h>
 #include <cmath>
 #include "constants.h"
-#include "allmodels.h"
 #include "lodepng.h"
 #include "shaderprogram.h"
-#include <Body.h>
-#include <Game.h>
-#include <Object.h>
+#include "Body.h"
+#include "Game.h"
+#include "Object.h"
+#include "globals.h"
 
-Models::Cube *mcube;
+// Tekstury
+const unsigned number_of_textures=3; // Ile tekstur jest do zaladowania
+const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png"}; // Nazwy plikow tekstur
+GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
+
+
 glm::mat4 Body::P, Body::M, Body::V;
 float r_r=0, l_r=0, u_r=0, d_r=0;
-ShaderProgram *Body::sp, *Object::sp;
+ShaderProgram *sp_podloga, *Body::sp, *Object::sp, *Models::Model::sp;
 glm::vec3 Body::lukat, Body::nose, Body::ob_position;
 glm::vec4 Body::perspective;
 int action;
 Body *body;
 Game *game;
+// Konieczne do dzialania statycznych modeli
+Models::Model *WheelObject::model = NULL;
+Models::Model *MainObject::model  = NULL;
+Models::Model *FloorObject::model = NULL;
+
+void readTextures() {
+    glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
+    for (int i=0; i<number_of_textures; ++i) {
+        std::vector<unsigned char> image;
+        unsigned width, height;
+        // Wczytaj obrazek
+        unsigned error = lodepng::decode(image, width, height, texture_names[i]);
+        if (error != 0) { // Jesli obrazka nie uda sie wczytac
+        printf("Error while loading texture file %s\n", texture_names[i]);
+        exit(EXIT_FAILURE);
+        }
+        glActiveTexture(GL_TEXTURE0+i); // Zawsze GL_TEXTUREi = GL_TEXTURE0+i
+        glBindTexture(GL_TEXTURE_2D, Global::tex[i]); // Uaktywnij pojedynczy uchwyt
+        //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
+        glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
+        // Parametry tekstury
+        // TODO: Pomyslec jakie sa potrzebne, bo te po prostu skopiowalem z prezentacji i nie chce mi sie myslec co robia xd
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+}
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
     body->key_callback(key,scancode,action,mods);
@@ -62,6 +74,13 @@ void error_callback(int error, const char* description) {
 
 //Procedura inicjująca
 void initOpenGLProgram(GLFWwindow* window) {
+    // Wczytaj modele
+    WheelObject::initialize_model();
+    MainObject::initialize_model();
+    FloorObject::initialize_model();
+    // Wczytaj tekstury
+    readTextures();
+
     Body::lukat = glm::vec3(0.0f,0.0f,4.0f);
     Body::nose = glm::vec3(0.0f,0.0f,1.0f);
     Body::ob_position = glm::vec3(0.0f,-50.0f,4.0f);
@@ -78,28 +97,29 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     Body::P = glm::perspective(PI/3,128.0f/72.0f,0.5f,140.0f);
 
-    mcube = new Models::Cube();
-
     glfwSetKeyCallback(window, key_callback);
 
     Object::sp = spLambert;
     Body::sp = spLambert;
+    Models::Model::sp = spLambert;
     game = new Game();
     body = game;
-    //body->init(window);
-	//************Tutaj umieszczaj kod, który należy wykonać raz, na początku programu************
 }
 
 
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
+    // Zwolnij tekstury
+    glDeleteTextures(number_of_textures,Global::tex);
+    // Zwolnij modele
+    WheelObject::destroy_model();
+    MainObject::destroy_model();
+    FloorObject::destroy_model();
+
     freeShaders();
-    mcube->~Cube();
-    game->~Game();
-    delete mcube;
+    //game->~Game();
     delete body;
-    delete game;
-    //************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************
+    //delete game; // Usuniecie body juz usuwa game, ta linia powoduje naruszenie pamieci
 }
 
 //Procedura rysująca zawartość sceny
@@ -117,12 +137,9 @@ void drawScene(GLFWwindow* window) {
     glUniform4f(spLambert->u("lightPos"),-1.0f,-5.0f,25.0f,1.0f);
     glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
 
-    mcube->drawSolid();
-
     body->draw();
 
     glfwSwapBuffers(window);
-	//************Tutaj umieszczaj kod rysujący obraz******************l
 }
 
 

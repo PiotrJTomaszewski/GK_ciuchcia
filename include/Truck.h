@@ -1,7 +1,8 @@
 #ifndef TRUCK_H
 #define TRUCK_H
 
-#include <Object.h>
+#include "objects/TruckWheelObject.h"
+#include "objects/TruckMainObject.h"
 #include <cmath>
 
 
@@ -9,7 +10,7 @@ class Truck : private Object
 {
     public:
         Truck();
-        virtual ~Truck();
+        ~Truck();
         void draw_all(glm::mat4 P, glm::mat4 V);
         float speed, acceleration;
         bool b_acc;
@@ -30,6 +31,9 @@ class Truck : private Object
         float back_length = 10, back_odlegl=5, back_ang;
         float friction();
         int i;
+        // metoda draw w object jest wirtualna, wiec trzeba tu dac deklaracje, mimo ze funkcja nie jest potrzebna
+        void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f)){};
+
 };
 
 #endif // TRUCK_H

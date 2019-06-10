@@ -1,11 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <Body.h>
-#include <Truck.h>
+#include "Body.h"
+#include "Truck.h"
+#include "objects/Floor.h"
 #include "shaderprogram.h"
-#include "cube.h"
-#include "model.h"
 
 
 class Game : public Body
@@ -22,12 +21,12 @@ class Game : public Body
 
     private:
         float r_r=0, l_r=0, u_r=0, d_r=0;
-        Models::Cube *model;
         glm::vec3 plukat;
         glm::vec4 pl;
         glm::vec3 pom_sum;
         float angle_h = 0, angle_v = 0;
         Truck *truck;
+        FloorObject *floor;
 };
 
 #endif // GAME_H

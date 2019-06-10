@@ -1,18 +1,14 @@
 #include "Truck.h"
 
-Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
+Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
 {
-    wheel_l = new Object(glm::vec3(10.0f,-10.0f,-10.0f));
-    wheel_r = new Object(glm::vec3(10.0f,10.0f,-10.0f),1.0f,PI);
-    main_part = new Object(glm::vec3(0.0f,0.0f,0.0f), 10.0f);
-    back_part = new Object(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
-    wheels[0] = new Object(glm::vec3(-10.0f,-10.0f,-10.0f));
-    wheels[1] = new Object(glm::vec3(-20.0f,-10.0f,-10.0f));
-    wheels[2] = new Object(glm::vec3(-22.0f,-10.0f,-10.0f));
-    wheels[3] = new Object(glm::vec3(-10.0f,10.0f,-10.0f),1.0f,PI);
-    wheels[4] = new Object(glm::vec3(-20.0f,10.0f,-10.0f),1.0f,PI);
-    wheels[5] = new Object(glm::vec3(-22.0f,10.0f,-10.0f),1.0f,PI);
-
+    wheel_l = new WheelObject(glm::vec3(1.45f,1.1f,-1.1f),-1); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
+    wheel_r = new WheelObject(glm::vec3(1.45f,-1.1f,-1.1f));
+    wheels[0] = new WheelObject(glm::vec3(-3.55f,1.1f,-1.1f),-1);
+    wheels[3] = new WheelObject(glm::vec3(-3.55f,-1.1f,-1.1f));
+    main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f));
+    back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma, potem mozna dodac np. jakis model przyczepy
+//    back_part = new MainObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
     speed = 0.0f;
     acceleration = 0.0f;
     b_acc = false;
@@ -21,14 +17,10 @@ Truck::Truck() : Object(glm::vec3(0.0f,0.0f,11.0f))
 
 Truck::~Truck()
 {
-    wheel_l->~Object();
-    wheel_r->~Object();
-    main_part->~Object();
-    back_part->~Object();
-    wheels[0]->~Object();
-    wheels[1]->~Object();
-    wheels[2]->~Object();
-    wheels[3]->~Object();
+    //wheel_l->~Object();
+    //wheel_r->~Object();
+    //main_part->~Object();
+    //back_part->~Object();
     delete[] wheels;
     delete wheel_l;
     delete wheel_r;
@@ -50,7 +42,6 @@ void Truck::draw_all(glm::mat4 P, glm::mat4 V){
 }
 
 void Truck::update(double time){
-
     wheel_l->angle_dr+=(turn_l-turn_r)*time;
     if(wheel_l->angle_dr>angle_max) wheel_l->angle_dr=angle_max;
     else if(wheel_l->angle_dr<-angle_max) wheel_l->angle_dr = -angle_max;
@@ -64,7 +55,6 @@ void Truck::update(double time){
         px = R*sin(omega);
         py = R*(1-cos(omega));
         delt = omega; //albo omega, albo omega/2
-
 
         translate += glm::rotateZ(glm::vec3(px,-py,0.0f),this->angle_dr);
 
@@ -101,9 +91,9 @@ void Truck::update(double time){
 }
 
 void Truck::wheels_round(float angle, float op_angle){
-
     wheels[0]->angle_rot=angle;
-    wheels[3]->angle_rot=PI-op_angle;
+    //wheels[3]->angle_rot=PI-op_angle;
+    wheels[3]->angle_rot=op_angle;
 
 
     //wheels[1]->angle_rot=angle;
@@ -114,9 +104,9 @@ void Truck::wheels_round(float angle, float op_angle){
 }
 
 void Truck::wheels_round(float angle){
-
     wheels[0]->angle_rot=angle;
-    wheels[3]->angle_rot=PI-angle;
+    //wheels[3]->angle_rot=PI-angle;
+    wheels[3]->angle_rot=angle;
 
 
     //wheels[1]->angle_rot=angle;
@@ -127,7 +117,6 @@ void Truck::wheels_round(float angle){
 }
 
 void Truck::wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-
     wheels[0]->draw(P,V,M);
     wheels[3]->draw(P,V,M);
 
