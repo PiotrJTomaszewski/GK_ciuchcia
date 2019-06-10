@@ -1,5 +1,7 @@
 # ciuchc
 
+rozszerzenie .drawio prawdopodobnie mozna otwierac na stronie www.draw.io
+
 zrobilem taki szkielet projektu na ktorym zdaje mi sie, ze bedzie sie w miare dobrze pracowac
 
 zaraz jeszcze postaram sie zrobic jakis diagram klas, czy cos takiego, zeby latwiej bylo to ogarnac

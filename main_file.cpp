@@ -174,8 +174,6 @@ int main(void)
 	glfwSetTime(0);
 	while (!glfwWindowShouldClose(window)) //Tak długo jak okno nie powinno zostać zamknięte
 	{
-	    //keybord(window);
-	    //mouse(window);
 
 	    body->update(glfwGetTime());
 
