@@ -4,7 +4,7 @@ TestObstacle::TestObstacle(glm::vec3 trans, float scal)
     : Object(trans, scal) {
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::scale(M,glm::vec3(scal,scal,scal));
-    model->getHitbox(hitbox);
+    model->getHitbox(hitbox, 90);
 }
 
 TestObstacle::~TestObstacle() {

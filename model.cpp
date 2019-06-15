@@ -44,38 +44,35 @@ namespace Models {
         else return -a;
 	}
 
-	void Model::getHitbox(glm::vec4* &hitbox_arg) {
+	void Model::getHitbox(glm::vec4* &hitbox_arg, float max_height) {
         hitbox_arg = new glm::vec4[2];
-	    glm::vec2 hitbox[4];
-        for(int i=0; i<4; ++i) {
-            hitbox[i].x = 0;
-            hitbox[i].y = 0; // reprezentuje wspolrzedna z w swiecie
-        }
+	    float x1,x2;
+	    float z1,z2;
+	    x1=x2=0;
+	    z1=z2=0;
         // Przegladamy wierzcholki i szukamy wierzcholkow czworokata, ktory powstalby gdybysmy "sprasowali" obiekt od gory
-        int which_edge=0;
+        // Patrzymy symetrycznie wokol osi x oraz z
         for(int i=0; i<vertexCount; ++i) {
-            if(vertices[i].z>0)
-                which_edge = 2;
-            else
-                which_edge = 0;
-            if(vertices[i].x>0)
-                ++which_edge;
-            if(abs(vertices[i].x)>hitbox[which_edge].x)
-                hitbox[which_edge].x = abs(vertices[i].x);
-            if(abs(vertices[i].z)>hitbox[which_edge].y)
-                hitbox[which_edge].y = abs(vertices[i].z);
+            if(vertices[i].y <= max_height) { // Jak model ma wysoko polozone np. lusterka, ktorymi i tak nie zachaczy
+                if(vertices[i].x > x1)
+                    x1 = vertices[i].x;
+                if(vertices[i].x < x2)
+                    x2 = vertices[i].x;
+                if(vertices[i].z > z1)
+                    z1 = vertices[i].z;
+                if(vertices[i].z < z2)
+                    z2 = vertices[i].z;
+            }
         }
-        // Sprowadzenie do 2 punktow
-        hitbox_arg[0].x = hitbox[0].x>hitbox[2].x ? hitbox[0].x : hitbox[2].x;
-        hitbox_arg[0].y = hitbox[0].y>hitbox[1].y ? hitbox[0].y : hitbox[1].y;
-        hitbox_arg[1].x = hitbox[1].x>hitbox[3].x ? hitbox[1].x : hitbox[3].x;
-        hitbox_arg[1].y = hitbox[3].y>hitbox[2].y ? hitbox[3].y : hitbox[2].y;
-        // Przywrocenie znaku wspolrzednym
-        hitbox_arg[0].x = -hitbox_arg[0].x;
-        hitbox_arg[0].y = -hitbox_arg[0].z;
+        printf("%f,%f,%f,%f\n",x1,z1,x2,z2);
+        // Przywrocenie znaku wierzcholkom
+        hitbox_arg[0].x = x1;
+        hitbox_arg[0].z = z1;
+        hitbox_arg[1].x = x2;
+        hitbox_arg[1].z = z2;
         // Ustawienie y i w
-        hitbox_arg[0].z=0.0f;
-        hitbox_arg[1].z=0.0f;
+        hitbox_arg[0].y=0.0f;
+        hitbox_arg[1].y=0.0f;
         hitbox_arg[0].w=1.0f;
         hitbox_arg[1].w=1.0f;
 	}

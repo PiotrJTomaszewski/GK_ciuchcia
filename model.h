@@ -23,7 +23,7 @@ namespace Models {
 			void drawSolid();
 			void drawWire();
 			static ShaderProgram *sp;
-			void getHitbox(glm::vec4* &hitbox);
+			void getHitbox(glm::vec4* &hitbox, float max_height);
 	};
 }
 
