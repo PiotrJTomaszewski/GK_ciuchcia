@@ -32,7 +32,7 @@ void Truck::draw_all(glm::mat4 P, glm::mat4 V){
     M = glm::translate(glm::mat4(1.0f),translate
                        +glm::vec3(wheel_odlegl/2*(cos(angle_dr)-1),wheel_odlegl/2*sin(angle_dr),0.0f));
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,0.0f,1.0f));
-    printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
+    //printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
 
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
