@@ -44,7 +44,9 @@ namespace Models {
         else return -a;
 	}
 
-	void Model::getHitbox(glm::vec2* &hitbox) {
+	void Model::getHitbox(glm::vec4* &hitbox_arg) {
+        hitbox_arg = new glm::vec4[2];
+	    glm::vec2 hitbox[4];
         for(int i=0; i<4; ++i) {
             hitbox[i].x = 0;
             hitbox[i].y = 0; // reprezentuje wspolrzedna z w swiecie
@@ -63,10 +65,18 @@ namespace Models {
             if(abs(vertices[i].z)>hitbox[which_edge].y)
                 hitbox[which_edge].y = abs(vertices[i].z);
         }
+        // Sprowadzenie do 2 punktow
+        hitbox_arg[0].x = hitbox[0].x>hitbox[2].x ? hitbox[0].x : hitbox[2].x;
+        hitbox_arg[0].y = hitbox[0].y>hitbox[1].y ? hitbox[0].y : hitbox[1].y;
+        hitbox_arg[1].x = hitbox[1].x>hitbox[3].x ? hitbox[1].x : hitbox[3].x;
+        hitbox_arg[1].y = hitbox[3].y>hitbox[2].y ? hitbox[3].y : hitbox[2].y;
         // Przywrocenie znaku wspolrzednym
-        hitbox[0].x = -hitbox[0].x;
-        hitbox[0].y = -hitbox[0].y;
-        hitbox[1].y = -hitbox[1].y;
-        hitbox[2].x = -hitbox[2].x;
+        hitbox_arg[0].x = -hitbox_arg[0].x;
+        hitbox_arg[0].y = -hitbox_arg[0].z;
+        // Ustawienie y i w
+        hitbox_arg[0].z=0.0f;
+        hitbox_arg[1].z=0.0f;
+        hitbox_arg[0].w=1.0f;
+        hitbox_arg[1].w=1.0f;
 	}
 }

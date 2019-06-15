@@ -4,8 +4,8 @@
 #include "Body.h"
 #include "Truck.h"
 #include "objects/Floor.h"
+#include "objects/TestObstacle.h"
 #include "shaderprogram.h"
-
 
 class Game : public Body
 {
@@ -27,6 +27,7 @@ class Game : public Body
         float angle_h = 0, angle_v = 0;
         Truck *truck;
         FloorObject *floor;
+        TestObstacle *test_obstacle;
 };
 
 #endif // GAME_H

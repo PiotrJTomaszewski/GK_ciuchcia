@@ -7,7 +7,7 @@
 #include <cmath>
 
 
-class Truck : private Object
+class Truck : public Object
 {
     public:
         Truck();
@@ -22,7 +22,6 @@ class Truck : private Object
     private:
         //poszczegolne czesci ciezarowki
         Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[6];
-        glm::mat4 M;
         float angle_max = PI/4.0f;
         void wheels_round(float angle);
         void wheels_round(float angle, float op_angle);

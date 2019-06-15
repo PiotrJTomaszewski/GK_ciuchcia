@@ -4,6 +4,7 @@ Game::Game()
 {
     truck = new Truck();
     floor = new FloorObject(glm::vec3(0.0f,0.0,-2.0f));
+    test_obstacle = new TestObstacle(glm::vec3(-10.0f, 10.0f, 0.0f));
 }
 
 Game::~Game()
@@ -11,11 +12,13 @@ Game::~Game()
     //truck->~Truck();
     delete truck;
     delete floor;
+    delete test_obstacle;
 }
 
 void Game::draw(){
     truck->draw_all(P,V);
     floor->draw(P,V);
+    test_obstacle->draw(P,V);
 }
 
 void Game::init(GLFWwindow *window){
@@ -102,6 +105,10 @@ void Game::cursor_position_callback(double xpos, double ypos){
 
 void Game::update(double time){
     glfwSetTime(0);
+
+    // Check collisions
+    if(truck->is_collision(test_obstacle)) printf("Kolizja\n");
+    truck->is_collision(test_obstacle);
 
     angle_h=(r_r-l_r)*time;
     angle_v=(u_r-d_r)*time;

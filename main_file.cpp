@@ -34,6 +34,7 @@ Game *game;
 Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 Models::Model *FloorObject::model = NULL;
+Models::Model *TestObstacle::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
@@ -78,6 +79,7 @@ void initOpenGLProgram(GLFWwindow* window) {
     WheelObject::initialize_model();
     MainObject::initialize_model();
     FloorObject::initialize_model();
+    TestObstacle::initialize_model();
     // Wczytaj tekstury
     readTextures();
 
@@ -115,6 +117,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
     WheelObject::destroy_model();
     MainObject::destroy_model();
     FloorObject::destroy_model();
+    TestObstacle::destroy_model();
 
     freeShaders();
     //game->~Game();

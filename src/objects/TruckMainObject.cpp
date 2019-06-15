@@ -2,7 +2,6 @@
 
 MainObject::MainObject(glm::vec3 trans, float scal)
     : Object(trans, scal) {
-    hitbox = new glm::vec2[4];
     model->getHitbox(hitbox);
 }
 
