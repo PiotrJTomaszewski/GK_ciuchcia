@@ -106,10 +106,6 @@ void Game::cursor_position_callback(double xpos, double zpos){
 void Game::update(double time){
     glfwSetTime(0);
 
-    // Check collisions
-    if(truck->is_collision(test_obstacle)) printf("Kolizja\n");
-    truck->is_collision(test_obstacle);
-
     angle_h=(r_r-l_r)*time;
     angle_v=(u_r-d_r)*time;
 
