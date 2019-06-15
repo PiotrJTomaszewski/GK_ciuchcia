@@ -62,7 +62,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     body->key_callback(key,scancode,action,mods);
 }
 
-double Body::xcur, Body::ycur, Body::xpos, Body::ypos, Body::dx, Body::dy;
+double Body::xcur, Body::zcur, Body::xpos, Body::zpos, Body::dx, Body::dz;
 
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos){
     body->cursor_position_callback(xpos,ypos);
@@ -83,12 +83,12 @@ void initOpenGLProgram(GLFWwindow* window) {
     // Wczytaj tekstury
     readTextures();
 
-    Body::lukat = glm::vec3(0.0f,0.0f,4.0f);
-    Body::nose = glm::vec3(0.0f,0.0f,1.0f);
-    Body::ob_position = glm::vec3(0.0f,-50.0f,4.0f);
+    Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
+    Body::nose = glm::vec3(0.0f,1.0f,0.0f);
+    Body::ob_position = glm::vec3(0.0f,4.0f,-50.0f);
     Body::V = glm::lookAt(Body::ob_position,Body::lukat,Body::nose);
     glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_DISABLED);
-    glfwGetCursorPos(window,&Body::xcur,&Body::ycur);
+    glfwGetCursorPos(window,&Body::xcur,&Body::zcur);
     glfwSetCursorPosCallback(window,cursor_position_callback);
 
     initShaders();
@@ -129,7 +129,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
 void drawScene(GLFWwindow* window) {
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    Body::M=glm::scale(glm::mat4(1.0f),glm::vec3(140.0f,140.0f,0.1f));
+    Body::M=glm::scale(glm::mat4(1.0f),glm::vec3(140.0f,0.1f,140.0f));
 
     spLambert->use();
     glUniformMatrix4fv(spLambert->u("P"),1,false,glm::value_ptr(Body::P));
@@ -137,7 +137,7 @@ void drawScene(GLFWwindow* window) {
     glUniformMatrix4fv(spLambert->u("M"),1,false,glm::value_ptr(Body::M));
     glUniform4f(spLambert->u("color"),0.0f,1.0f,0.0f,1.0f);
     glUniform1i(spLambert->u("pod"),0);
-    glUniform4f(spLambert->u("lightPos"),-1.0f,-5.0f,25.0f,1.0f);
+    glUniform4f(spLambert->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
     glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
 
     body->draw();

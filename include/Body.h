@@ -20,7 +20,7 @@ class Body
         static glm::mat4 P, M, V;
         static glm::vec3 lukat, nose, ob_position;
         static glm::vec4 perspective;
-        static double xcur, xpos, ycur, ypos, dx, dy;
+        static double xcur, xpos, zcur, zpos, dx, dz;
 
     protected:
 

@@ -7,7 +7,7 @@ uniform mat4 M;
 
 
 uniform vec4 color=vec4(0,1,1,1);
-uniform vec4 lightPos=vec4(0,0,-5,1); //w przestrzeni swiata
+uniform vec4 lightPos=vec4(0,-5,0,1); //w przestrzeni swiata
 uniform vec4 lightPos2;
 
 uniform int pod = 1;
