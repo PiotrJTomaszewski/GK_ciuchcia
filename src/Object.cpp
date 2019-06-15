@@ -19,7 +19,7 @@ bool Object::is_collision(Object *object2) {
     m_hbox21 = M2 * m_hbox21;
     m_hbox22 = M2 * m_hbox22;
 
-    printf("truck:(%f,%f)(%f,%f)\tobstacle:(%f,%f)(%f,%f)\n",m_hbox11.x,m_hbox11.y,m_hbox12.x,m_hbox12.y,m_hbox21.x,m_hbox21.y,m_hbox22.x,m_hbox22.y);
+    //printf("truck:(%f,%f)(%f,%f)\tobstacle:(%f,%f)(%f,%f)\n",m_hbox11.x,m_hbox11.y,m_hbox12.x,m_hbox12.y,m_hbox21.x,m_hbox21.y,m_hbox22.x,m_hbox22.y);
 
     if(m_hbox11.x > m_hbox22.x || m_hbox21.x > m_hbox12.x)
         return false;

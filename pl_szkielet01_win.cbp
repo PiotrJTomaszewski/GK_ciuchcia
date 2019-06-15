@@ -57,9 +57,9 @@
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/LoadObject.h" />
 		<Unit filename="include/Object.h" />
-		<Unit filename="include/Obstacle.h" />
 		<Unit filename="include/Truck.h" />
 		<Unit filename="include/objects/Floor.h" />
+		<Unit filename="include/objects/TestObstacle.h" />
 		<Unit filename="include/objects/TestTruckHitboxObject.h" />
 		<Unit filename="include/objects/TruckMainObject.h" />
 		<Unit filename="include/objects/TruckWheelObject.h" />
@@ -75,9 +75,9 @@
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/LoadObject.cpp" />
 		<Unit filename="src/Object.cpp" />
-		<Unit filename="src/Obstacle.cpp" />
 		<Unit filename="src/Truck.cpp" />
 		<Unit filename="src/objects/Floor.cpp" />
+		<Unit filename="src/objects/TestObstacle.cpp" />
 		<Unit filename="src/objects/TestTruckHitboxObject.cpp" />
 		<Unit filename="src/objects/TruckMainObject.cpp" />
 		<Unit filename="src/objects/TruckWheelObject.cpp" />

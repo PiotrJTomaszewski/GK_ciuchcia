@@ -2,9 +2,9 @@
 
 Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
 {
-    wheel_l = new WheelObject(glm::vec3(1.45f,-1.1f,1.1f),-1); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
+    wheel_l = new WheelObject(glm::vec3(1.45f,-1.1f,1.1f),-1.0f); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
     wheel_r = new WheelObject(glm::vec3(1.45f,-1.1f,-1.1f));
-    wheels[0] = new WheelObject(glm::vec3(-3.55f,-1.1f,1.1f),-1);
+    wheels[0] = new WheelObject(glm::vec3(-3.55f,-1.1f,1.1f),-1.0f);
     wheels[3] = new WheelObject(glm::vec3(-3.55f,-1.1f,-1.1f));
     main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f));
     back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma, potem mozna dodac np. jakis model przyczepy
@@ -35,11 +35,10 @@ Truck::~Truck()
 }
 
 void Truck::draw_all(glm::mat4 P, glm::mat4 V){
-//    M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::translate(glm::mat4(1.0f),translate
                        +glm::vec3(wheel_odlegl/2*(cos(angle_dr)-1),0.0f,wheel_odlegl/2*sin(angle_dr)));
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,1.0f,0.0f));
-    //printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
+    printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
 
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
@@ -63,7 +62,7 @@ void Truck::update(double time){
         pz = R*(1-cos(omega));
         delt = omega; //albo omega, albo omega/2
 
-        translate += glm::rotateY(glm::vec3(px,0.0f,-pz),this->angle_dr);
+        translate += glm::rotateY(glm::vec3(px,-pz,0.0f),this->angle_dr);
 
         this->angle_dr += delt;
         if(this->angle_dr>2*PI)this->angle_dr-=2*PI;
@@ -82,7 +81,7 @@ void Truck::update(double time){
     else{
         s = speed*time + (acceleration-this->friction())*time*time/2;
 
-        translate += glm::rotateZ(glm::vec3(s,0.0f,0.0f),this->angle_dr);
+        translate += glm::rotateY(glm::vec3(s,0.0f,0.0f),this->angle_dr);
 
         wheel_l->angle_rot += speed*float(time)/wheel_rad;
         if(wheel_l->angle_rot>2*PI)
