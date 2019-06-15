@@ -1,6 +1,7 @@
 #ifndef FLOOROBJECT_H
 #define FLOOROBJECT_H
 #include "Object.h"
+#include "model.h"
 
 class FloorObject : public Object {
     public:

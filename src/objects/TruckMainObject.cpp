@@ -2,11 +2,12 @@
 
 MainObject::MainObject(glm::vec3 trans, float scal)
     : Object(trans, scal) {
-
+    hitbox = new glm::vec2[4];
+    model->getHitbox(hitbox);
 }
 
 MainObject::~MainObject() {
-
+    delete[] hitbox;
 }
 
 void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){

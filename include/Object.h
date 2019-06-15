@@ -7,7 +7,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-#include "model.h"
 #include "shaderprogram.h"
 #include "constants.h"
 
@@ -24,7 +23,7 @@ class Object
     protected:
         glm::vec3 translate;
         float scale;
-
+        glm::vec2 *hitbox;
     private:
 };
 

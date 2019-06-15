@@ -38,4 +38,35 @@ namespace Models {
 
 		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 	}
+
+	float abs(float a) {
+        if(a>0) return a;
+        else return -a;
+	}
+
+	void Model::getHitbox(glm::vec2* &hitbox) {
+        for(int i=0; i<4; ++i) {
+            hitbox[i].x = 0;
+            hitbox[i].y = 0; // reprezentuje wspolrzedna z w swiecie
+        }
+        // Przegladamy wierzcholki i szukamy wierzcholkow czworokata, ktory powstalby gdybysmy "sprasowali" obiekt od gory
+        int which_edge=0;
+        for(int i=0; i<vertexCount; ++i) {
+            if(vertices[i].z>0)
+                which_edge = 2;
+            else
+                which_edge = 0;
+            if(vertices[i].x>0)
+                ++which_edge;
+            if(abs(vertices[i].x)>hitbox[which_edge].x)
+                hitbox[which_edge].x = abs(vertices[i].x);
+            if(abs(vertices[i].z)>hitbox[which_edge].y)
+                hitbox[which_edge].y = abs(vertices[i].z);
+        }
+        // Przywrocenie znaku wspolrzednym
+        hitbox[0].x = -hitbox[0].x;
+        hitbox[0].y = -hitbox[0].y;
+        hitbox[1].y = -hitbox[1].y;
+        hitbox[2].x = -hitbox[2].x;
+	}
 }

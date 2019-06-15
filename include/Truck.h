@@ -1,6 +1,7 @@
 #ifndef TRUCK_H
 #define TRUCK_H
 
+#include "Object.h"
 #include "objects/TruckWheelObject.h"
 #include "objects/TruckMainObject.h"
 #include <cmath>
@@ -16,7 +17,6 @@ class Truck : private Object
         bool b_acc;
         void update(double time);
         float turn_l, turn_r;
-
     protected:
 
     private:

@@ -23,6 +23,7 @@ namespace Models {
 			void drawSolid();
 			void drawWire();
 			static ShaderProgram *sp;
+			void getHitbox(glm::vec2* &hitbox);
 	};
 }
 

@@ -1,6 +1,7 @@
 #ifndef TRUCKWHEELOBJECT_H
 #define TRUCKWHEELOBJECT_H
 #include "Object.h"
+#include "model.h"
 
 class WheelObject : public Object {
     public:
