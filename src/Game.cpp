@@ -4,7 +4,7 @@ Game::Game()
 {
     truck = new Truck();
     floor = new FloorObject(glm::vec3(0.0f,-2.0,0.0f));
-    test_obstacle = new TestObstacle(glm::vec3(-10.0f, 0.0f, 10.0f));
+    test_obstacle = new TestObstacle(glm::vec3(-10.0f, 0.0f, 0.0f));
 }
 
 Game::~Game()
@@ -105,6 +105,10 @@ void Game::cursor_position_callback(double xpos, double zpos){
 
 void Game::update(double time){
     glfwSetTime(0);
+
+    // Check collisions
+    static int i=0; // To i jest tylko do testów :)
+    if(truck->is_collision(test_obstacle)) printf("Kolizja %d\n",i++);
 
     angle_h=(r_r-l_r)*time;
     angle_v=(u_r-d_r)*time;

@@ -9,6 +9,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include "shaderprogram.h"
 #include "constants.h"
+#include "model.h"
 
 
 class Object
@@ -21,12 +22,12 @@ class Object
         static ShaderProgram *sp;
         bool is_collision(Object *Object2);
         glm::mat4 get_M();
-        glm::vec4 get_hitbox(int which);
+        virtual glm::vec4 get_hitbox(int which){};
+        virtual glm::vec4 get_hitbox_normal(int which){};
     protected:
         glm::mat4 M;
         glm::vec3 translate;
         float scale;
-        glm::vec4 *hitbox;
     private:
 };
 

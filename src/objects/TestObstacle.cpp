@@ -4,11 +4,10 @@ TestObstacle::TestObstacle(glm::vec3 trans, float scal)
     : Object(trans, scal) {
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::scale(M,glm::vec3(scal,scal,scal));
-    model->getHitbox(hitbox);
+    model->getHitbox(90);
 }
 
 TestObstacle::~TestObstacle() {
-    delete[] hitbox;
 }
 
 void TestObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
@@ -31,4 +30,14 @@ bool TestObstacle::initialize_model() { // Model trzeba zainicjowac w initOpenGL
 
 void TestObstacle::destroy_model() { // Model trzeba usunac w freeOpenGLProgram
     delete model;
+}
+
+// Zwraca wybrany wierzcholek hitboxa
+glm::vec4 TestObstacle::get_hitbox(int which) {
+    return model->hitbox[which];
+}
+
+// Zwraca wybrana normalna hitboxaa
+glm::vec4 TestObstacle::get_hitbox_normal(int which) {
+    return model->hitbox_normal[which];
 }

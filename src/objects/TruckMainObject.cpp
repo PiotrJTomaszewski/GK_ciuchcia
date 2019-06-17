@@ -2,11 +2,9 @@
 
 MainObject::MainObject(glm::vec3 trans, float scal)
     : Object(trans, scal) {
-    model->getHitbox(hitbox);
 }
 
 MainObject::~MainObject() {
-    delete[] hitbox;
 }
 
 void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
@@ -24,9 +22,20 @@ void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 bool MainObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
     model = new Models::Model("models/main.obj", 1); // Sciezka modelu, id_tekstury
+    model->getHitbox(3);
     return 0;
 }
 
 void MainObject::destroy_model() { // Model trzeba usunac w freeOpenGLProgram
     delete model;
+}
+
+// Zwraca wybrany wierzcholek hitboxa
+glm::vec4 MainObject::get_hitbox(int which) {
+    return model->hitbox[which];
+}
+
+// Zwraca wybrana normalna hitboxaa
+glm::vec4 MainObject::get_hitbox_normal(int which) {
+    return model->hitbox_normal[which];
 }
