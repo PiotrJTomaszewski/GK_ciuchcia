@@ -9,10 +9,6 @@ Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
     main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f));
     back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma, potem mozna dodac np. jakis model przyczepy
 //    back_part = new MainObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
-    // Skopiuj hitbox z main_part
-    hitbox = new glm::vec4[2];
-    hitbox[0] = main_part->get_hitbox(0);
-    hitbox[1] = main_part->get_hitbox(1);
 
     speed = 0.0f;
     acceleration = 0.0f;
@@ -31,7 +27,6 @@ Truck::~Truck()
     delete wheel_r;
     delete main_part;
     delete back_part;
-    delete hitbox;
 }
 
 void Truck::draw_all(glm::mat4 P, glm::mat4 V){
@@ -139,3 +134,12 @@ float Truck::friction(){
     return speed/7.0f;
 }
 
+// Zwraca wybrany wierzcholek hitboxa
+glm::vec4 Truck::get_hitbox(int which) {
+    return main_part->get_hitbox(which);
+}
+
+// Zwraca wybrana normalna hitboxaa
+glm::vec4 Truck::get_hitbox_normal(int which) {
+    return main_part->get_hitbox_normal(which);
+}

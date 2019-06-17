@@ -17,6 +17,8 @@ class Truck : public Object
         bool b_acc;
         void update(double time);
         float turn_l, turn_r;
+        glm::vec4 get_hitbox(int which);
+        glm::vec4 get_hitbox_normal(int which);
     protected:
 
     private:

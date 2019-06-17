@@ -18,12 +18,14 @@ namespace Models {
 			glm::vec4 *vertices;
 			glm::vec4 *normals;
 			glm::vec2 *texCoords;
+			glm::vec4 *hitbox;
+			glm::vec4 *hitbox_normal;
             unsigned tex_id; // Id tekstury
 			// Blender eksportuje do obj normalne wierzcholkow i scian razem, wiec zeby wylaczyc wygladzanie trzeba by sie dodatkowo napracowac, co nie ma sensu :)
 			void drawSolid();
 			void drawWire();
 			static ShaderProgram *sp;
-			void getHitbox(glm::vec4* &hitbox, float max_height);
+			void getHitbox(float max_height);
 	};
 }
 
