@@ -138,8 +138,7 @@ void drawScene(GLFWwindow* window) {
     glUniform4f(spPhong->u("color"),0.0f,1.0f,0.0f,1.0f);
     glUniform1i(spPhong->u("pod"),0);
     glUniform4f(spPhong->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
-    float light_y = Body::lukat.y>-25 ? Body::lukat.y : -25; // Zeby swiatlo nie uciekalo pod ziemie
-    glUniform4fv(spPhong->u("lightPos1"),1,glm::value_ptr(glm::vec4(Body::lukat.x,light_y,Body::lukat.z,1.0f)));
+    glUniform4fv(spPhong->u("lightPos1"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
 
     body->draw();
 

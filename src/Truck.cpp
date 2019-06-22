@@ -34,7 +34,10 @@ void Truck::draw_all(glm::mat4 P, glm::mat4 V){
                        +glm::vec3(wheel_odlegl/2*(cos(angle_dr)-1),0.0f,wheel_odlegl/2*sin(angle_dr)));
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,1.0f,0.0f));
 //    printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
-
+    glUniform1f(sp->u("material_ambient_strength"),0.950f);
+    glUniform1f(sp->u("material_diffuse_strength"),1.0f);
+    glUniform1f(sp->u("material_specular_strength"),0.025f);
+    glUniform1f(sp->u("material_shininess"),0.025f);
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
     main_part->draw(P,V,M);

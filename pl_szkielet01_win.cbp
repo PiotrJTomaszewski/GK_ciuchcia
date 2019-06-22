@@ -50,9 +50,7 @@
 			<Add directory="glew/lib" />
 		</Linker>
 		<Unit filename="constants.h" />
-		<Unit filename="f_constant.glsl" />
-		<Unit filename="f_custom.glsl" />
-		<Unit filename="f_lambert.glsl" />
+		<Unit filename="f_phong.glsl" />
 		<Unit filename="globals.h" />
 		<Unit filename="include/Body.h" />
 		<Unit filename="include/Game.h" />
@@ -69,8 +67,6 @@
 		<Unit filename="main_file.cpp" />
 		<Unit filename="model.cpp" />
 		<Unit filename="model.h" />
-		<Unit filename="podlo_f.glsl" />
-		<Unit filename="podlo_v.glsl" />
 		<Unit filename="shaderprogram.cpp" />
 		<Unit filename="shaderprogram.h" />
 		<Unit filename="src/Game.cpp" />
@@ -82,9 +78,7 @@
 		<Unit filename="src/objects/TestTruckHitboxObject.cpp" />
 		<Unit filename="src/objects/TruckMainObject.cpp" />
 		<Unit filename="src/objects/TruckWheelObject.cpp" />
-		<Unit filename="v_constant.glsl" />
-		<Unit filename="v_custom.glsl" />
-		<Unit filename="v_lambert.glsl" />
+		<Unit filename="v_phong.glsl" />
 		<Extensions>
 			<code_completion />
 			<envvars />

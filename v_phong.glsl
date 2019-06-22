@@ -6,7 +6,6 @@ uniform mat4 V;
 uniform mat4 M;
 
 
-uniform vec4 color=vec4(0.0f,1.0f,1.0f,1.0f);
 uniform vec4 lightPos; //w przestrzeni swiata
 uniform vec4 lightPos1;
 
