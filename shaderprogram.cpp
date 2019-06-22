@@ -23,17 +23,17 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 
 ShaderProgram *spLambert;
 ShaderProgram *spConstant;
-ShaderProgram *spCustom;
+ShaderProgram *spPhong;
 
 void initShaders(){
     spLambert=new ShaderProgram("v_lambert.glsl",NULL,"f_lambert.glsl");
     //spConstant=new ShaderProgram("v_constant.glsl",NULL,"f_constant.glsl");
-    spCustom=new ShaderProgram("v_custom.glsl",NULL,"f_custom.glsl");
+    spPhong=new ShaderProgram("v_phong.glsl",NULL,"f_phong.glsl");
 }
 
 void freeShaders(){
     delete spLambert;
-    delete spCustom;
+    delete spPhong;
 }
 
 

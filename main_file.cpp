@@ -101,9 +101,9 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     glfwSetKeyCallback(window, key_callback);
 
-    Object::sp = spCustom;
-    Body::sp = spCustom;
-    Models::Model::sp = spCustom;
+    Object::sp = spPhong;
+    Body::sp = spPhong;
+    Models::Model::sp = spPhong;
     game = new Game();
     body = game;
 }
@@ -131,15 +131,15 @@ void drawScene(GLFWwindow* window) {
 
     //Body::M=glm::scale(glm::mat4(1.0f),glm::vec3(140.0f,0.1f,140.0f));
 
-    spCustom->use();
-    glUniformMatrix4fv(spCustom->u("P"),1,false,glm::value_ptr(Body::P));
-    glUniformMatrix4fv(spCustom->u("V"),1,false,glm::value_ptr(Body::V));
-    glUniformMatrix4fv(spCustom->u("M"),1,false,glm::value_ptr(Body::M));
-    glUniform4f(spCustom->u("color"),0.0f,1.0f,0.0f,1.0f);
-    glUniform1i(spCustom->u("pod"),0);
-    glUniform4f(spCustom->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
+    spPhong->use();
+    glUniformMatrix4fv(spPhong->u("P"),1,false,glm::value_ptr(Body::P));
+    glUniformMatrix4fv(spPhong->u("V"),1,false,glm::value_ptr(Body::V));
+    glUniformMatrix4fv(spPhong->u("M"),1,false,glm::value_ptr(Body::M));
+    glUniform4f(spPhong->u("color"),0.0f,1.0f,0.0f,1.0f);
+    glUniform1i(spPhong->u("pod"),0);
+    glUniform4f(spPhong->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
     float light_y = Body::lukat.y>-25 ? Body::lukat.y : -25; // Zeby swiatlo nie uciekalo pod ziemie
-    glUniform4fv(spCustom->u("lightPos1"),1,glm::value_ptr(glm::vec4(Body::lukat.x,light_y,Body::lukat.z,1.0f)));
+    glUniform4fv(spPhong->u("lightPos1"),1,glm::value_ptr(glm::vec4(Body::lukat.x,light_y,Body::lukat.z,1.0f)));
 
     body->draw();
 

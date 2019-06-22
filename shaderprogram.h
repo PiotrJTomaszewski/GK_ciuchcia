@@ -25,7 +25,7 @@ public:
 
 extern ShaderProgram *spConstant;
 extern ShaderProgram *spLambert;
-extern ShaderProgram *spCustom;
+extern ShaderProgram *spPhong;
 
 void initShaders();
 void freeShaders();
