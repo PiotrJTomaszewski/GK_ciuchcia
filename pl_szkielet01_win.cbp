@@ -51,6 +51,7 @@
 		</Linker>
 		<Unit filename="constants.h" />
 		<Unit filename="f_constant.glsl" />
+		<Unit filename="f_custom.glsl" />
 		<Unit filename="f_lambert.glsl" />
 		<Unit filename="globals.h" />
 		<Unit filename="include/Body.h" />
@@ -82,6 +83,7 @@
 		<Unit filename="src/objects/TruckMainObject.cpp" />
 		<Unit filename="src/objects/TruckWheelObject.cpp" />
 		<Unit filename="v_constant.glsl" />
+		<Unit filename="v_custom.glsl" />
 		<Unit filename="v_lambert.glsl" />
 		<Extensions>
 			<code_completion />
