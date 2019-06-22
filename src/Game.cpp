@@ -108,7 +108,7 @@ void Game::update(double time){
 
     // Check collisions
     static int i=0; // To i jest tylko do testów :)
-    if(truck->is_collision(test_obstacle)) printf("Kolizja %d\n",i++);
+    //if(truck->is_collision(test_obstacle)) printf("Kolizja %d\n",i++);
 
     angle_h=(r_r-l_r)*time;
     angle_v=(u_r-d_r)*time;

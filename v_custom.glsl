@@ -34,12 +34,14 @@ void main(void) {
     fragPos = M*vertex;
     nor = normalize(normal);
     ds  = normalize(V*(lightPos-M*vertex));
-    ds1 = normalize(V*(-M*vertex));
+    ds1 = normalize(V*(lightPos1-M*vertex));
+    //ds1 = normalize(V*M*vertex);
 
     dob = normalize(vec4(0,0,0,1)-V*M*vertex);
 
     lpos0 = V*lightPos;
-    lpos1 = V*vec4(0.f,0.f,0.f,1.f);
+    //lpos1 = V*vec4(0.f,50.f,0.f,1.f);
+    lpos1 = V*lightPos1;
 
     texCoord = aTexCoord;
 }

@@ -30,7 +30,7 @@ struct Light {
     float specular_strength;
 };
 
-vec4 calculate_light(Light light, vec4 normal, vec4 fragPos, vec4 ds){
+vec4 calculate_point_light(Light light, vec4 normal, vec4 fragPos, vec4 ds){
     // Attenuation
     float dist = length(light.light_position - fragPos);
     float att = 1.0f / (light.constant + light.linear*dist + light.quadratic * (dist*dist));
@@ -44,13 +44,27 @@ vec4 calculate_light(Light light, vec4 normal, vec4 fragPos, vec4 ds){
 
     // Specular
     vec4 reflected = reflect(-ds,nor);
-    float spec = pow(clamp(dot(dob,reflected),0,1),32);
+    float spec = pow(clamp(dot(dob,reflected),0,1),30);
     vec4 specular = light.specular_strength * spec * light.light_color;
 
     ambient *= att;
     diffuse *= att;
     specular *= att;
 
+    return vec4(ambient.rgb+diffuse.rgb+specular.rgb,1.0f);
+}
+
+vec4 calculate_directed_light(Light light, vec4 normal, vec4 fragPos, vec4 ds) {
+    // Diffuse
+    float diff = clamp(dot(normal, -ds),0,1);
+
+    // Specular
+    vec4 reflect_dir = reflect(ds, normal);
+    float spec = pow(clamp(dot(dob,reflect_dir),0,1),24);
+
+    vec4 ambient = light.ambient_strength * texture(tex,texCoord);
+    vec4 diffuse = light.diffuse_strength * diff * texture(tex,texCoord);
+    vec4 specular = light.specular_strength * spec * light.light_color;
     return vec4(ambient.rgb+diffuse.rgb+specular.rgb,1.0f);
 }
 
@@ -68,17 +82,18 @@ void main(void) {
 
     Light light_two;
     light_two.light_position = lpos1;
-    light_two.light_color = vec4(0.0f,1.0f,1.0f,1.0f);
-    light_two.ambient_strength = 0.3f;
-    light_two.diffuse_strength = 0.6f;
-    light_two.specular_strength = 1.0f;
-    light_two.constant = 0.3f;
-    light_two.linear = 0.02f;
-    light_two.quadratic = 0.0001f;
+    light_two.light_color = vec4(1.0f,1.0f,1.0f,1.0f);
+    light_two.ambient_strength = 0.0000f;
+    light_two.diffuse_strength = 0.0f;
+    light_two.specular_strength = 5.0f;
+    light_two.constant = 0.000001f;
+    light_two.linear = 0.00f;
+    light_two.quadratic = 0.0000f;
 
 
-    vec4 color_one = calculate_light(light_one, nor, fragPos, ds);
-    vec4 color_two = calculate_light(light_two, nor, fragPos, ds1);
+    vec4 color_one = calculate_point_light(light_one, nor, fragPos, ds);
+    vec4 color_two = calculate_directed_light(light_two, nor, fragPos, ds1);
 
-    pixelColor = color_one + color_two;
+    pixelColor = color_two;
+    //pixelColor = color_one + color_two;
 }
