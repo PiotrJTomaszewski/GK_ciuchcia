@@ -24,8 +24,8 @@ out vec4 normal_V; // Wektor normalny w przestrzeni widoku
 out vec4 eye_dir_V; // Wektor do obserwatora w przestrzeni widoku
 out vec4 light_dir_one_V; // Wektor do swiatla 1 w przestrzeni widoku
 out vec4 light_dir_two_V; // Wektor do swiatla 1 w przestrzeni widoku
-out vec4 light_pos_one_M;
-out vec4 light_pos_two_M;
+out vec4 light_pos_one_M; // Polozenie zrodla swiatla w przestrzeni swiata
+out vec4 light_pos_two_M; // Polozenie zrodla swiatla w przestrzeni swiata
 out vec2 tex_coord; // Wspolrzedne teksturowania
 
 

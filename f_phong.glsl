@@ -8,8 +8,8 @@ in vec4 normal_V; // Wektor normalny w przestrzeni widoku
 in vec4 eye_dir_V; // Wektor do obserwatora w przestrzeni widoku
 in vec4 light_dir_one_V; // Wektor do swiatla 1 w przestrzeni widoku
 in vec4 light_dir_two_V; // Wektor do swiatla 1 w przestrzeni widoku
-in vec4 light_pos_one_M;
-in vec4 light_pos_two_M;
+in vec4 light_pos_one_M; // Polozenie zrodla swiatla w przestrzeni swiata
+in vec4 light_pos_two_M; // Polozenie zrodla swiatla w przestrzeni swiatla
 in vec2 tex_coord; // Wspolrzedne teksturowania
 
 uniform sampler2D tex;
@@ -30,10 +30,6 @@ struct Light {
 };
 
 vec4 calculate_light(Light light, vec4 normal, vec4 frag_pos, vec4 light_dir){
-    // Tlumienie
-    float dist = distance(light.light_position,frag_pos);
-    float att = 1.0f / (light.constant + light.linear*dist + light.quadratic * (dist*dist));
-
     // Ambient
     vec4 ambient = light.ambient_strength * texture(tex,tex_coord);
 
@@ -46,6 +42,9 @@ vec4 calculate_light(Light light, vec4 normal, vec4 frag_pos, vec4 light_dir){
     float spec = pow(clamp(dot(eye_dir_V,reflected),0,1),50);
     vec4 specular = light.specular_strength * spec * light.light_color;
 
+    // Tlumienie
+    float dist = distance(light.light_position,frag_pos);
+    float att = 1.0f / (light.constant + light.linear*dist + light.quadratic*(dist*dist));
     ambient *= att;
     diffuse *= att;
     specular *= att;
