@@ -121,6 +121,5 @@ void Game::update(double time){
     ob_position+=pom_sum;
     lukat+=pom_sum;
     V=glm::lookAt(ob_position,lukat,nose);
-
     truck->update(time);
 }

@@ -101,9 +101,9 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     glfwSetKeyCallback(window, key_callback);
 
-    Object::sp = spLambert;
-    Body::sp = spLambert;
-    Models::Model::sp = spLambert;
+    Object::sp = spCustom;
+    Body::sp = spCustom;
+    Models::Model::sp = spCustom;
     game = new Game();
     body = game;
 }
@@ -129,16 +129,16 @@ void freeOpenGLProgram(GLFWwindow* window) {
 void drawScene(GLFWwindow* window) {
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    Body::M=glm::scale(glm::mat4(1.0f),glm::vec3(140.0f,0.1f,140.0f));
+    //Body::M=glm::scale(glm::mat4(1.0f),glm::vec3(140.0f,0.1f,140.0f));
 
-    spLambert->use();
-    glUniformMatrix4fv(spLambert->u("P"),1,false,glm::value_ptr(Body::P));
-    glUniformMatrix4fv(spLambert->u("V"),1,false,glm::value_ptr(Body::V));
-    glUniformMatrix4fv(spLambert->u("M"),1,false,glm::value_ptr(Body::M));
-    glUniform4f(spLambert->u("color"),0.0f,1.0f,0.0f,1.0f);
-    glUniform1i(spLambert->u("pod"),0);
-    glUniform4f(spLambert->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
-    glUniform4fv(spLambert->u("lightPos2"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
+    spCustom->use();
+    glUniformMatrix4fv(spCustom->u("P"),1,false,glm::value_ptr(Body::P));
+    glUniformMatrix4fv(spCustom->u("V"),1,false,glm::value_ptr(Body::V));
+    glUniformMatrix4fv(spCustom->u("M"),1,false,glm::value_ptr(Body::M));
+    glUniform4f(spCustom->u("color"),0.0f,1.0f,0.0f,1.0f);
+    glUniform1i(spCustom->u("pod"),0);
+    glUniform4f(spCustom->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
+    glUniform4fv(spCustom->u("lightPos1"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
 
     body->draw();
 
