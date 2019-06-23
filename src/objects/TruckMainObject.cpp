@@ -21,7 +21,7 @@ void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 bool MainObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
     model = new Models::Model("models/mainB.obj", 1); // Sciezka modelu, id_tekstury
-    model->getHitbox(2);
+    model->getHitbox(1.2f);
     return 0;
 }
 
