@@ -140,8 +140,6 @@ void drawScene(GLFWwindow* window) {
     glUniformMatrix4fv(spPhong->u("P"),1,false,glm::value_ptr(Body::P));
     glUniformMatrix4fv(spPhong->u("V"),1,false,glm::value_ptr(Body::V));
     glUniformMatrix4fv(spPhong->u("M"),1,false,glm::value_ptr(Body::M));
-    glUniform4f(spPhong->u("color"),0.0f,1.0f,0.0f,1.0f);
-    glUniform1i(spPhong->u("pod"),0);
     glUniform4f(spPhong->u("lightPos"),-1.0f,25.0f,-5.0f,1.0f);
     glUniform4fv(spPhong->u("lightPos1"),1,glm::value_ptr(glm::vec4(Body::ob_position,1.0f)));
 
