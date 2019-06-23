@@ -24,7 +24,7 @@ class Truck : public Object
     private:
         //poszczegolne czesci ciezarowki
         Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[6];
-        float angle_max = PI/4.0f;
+        float angle_max = PI/6.0f; // Maksymalny skret kola
         void wheels_round(float angle);
         void wheels_round(float angle, float op_angle);
         void wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M);

@@ -60,7 +60,7 @@ void Truck::update(double time){
         pz = R*(1-cos(omega));
         delt = omega; //albo omega, albo omega/2
 
-        translate += glm::rotateY(glm::vec3(px,-pz,0.0f),this->angle_dr);
+        translate += glm::rotateY(glm::vec3(px,0.0f,-pz),this->angle_dr);
 
         this->angle_dr += delt;
         if(this->angle_dr>2*PI)this->angle_dr-=2*PI;
