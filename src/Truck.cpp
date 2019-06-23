@@ -88,7 +88,8 @@ void Truck::update(double time){
 
     }
     speed += (acceleration-this->friction())*float(time);
-
+    if(speed == vmax)
+        speed = vmax;
     //printf("%f, %f\n", speed,time);
 
 }
