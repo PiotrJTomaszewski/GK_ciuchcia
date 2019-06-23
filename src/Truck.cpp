@@ -53,7 +53,7 @@ void Truck::update(double time){
 
     if(wheel_l->angle_dr!=0){
         ctga = 1/tan(wheel_l->angle_dr);
-        R = 2*wheel_odlegl * ctga;
+        R = wheel_odlegl * ctga;
         s = speed*time + (acceleration-this->friction())*time*time/2;
         omega = s/R;
         px = R*sin(omega);
@@ -66,7 +66,6 @@ void Truck::update(double time){
         if(this->angle_dr>2*PI)this->angle_dr-=2*PI;
         else if(this->angle_dr<-2*PI)this->angle_dr+=2*PI;
 
-        //bycmoze potrzebna rozna predkosc kol po obu stronach, zeby to wygladalo estetyczniej, albo po prostu potrzebuje dopracowania
         wheel_l->angle_rot += speed*(R+wheel_rozstaw/2)/R*float(time)/wheel_rad;
         if(wheel_l->angle_rot>2*PI)
             wheel_l->angle_rot-=2*PI;

@@ -65,8 +65,8 @@ void main(void) {
     light_one.diffuse_strength = 0.5f;
     light_one.specular_strength = 0.15f;
     light_one.constant = 0.25f;
-    light_one.linear = 0.005f;
-    light_one.quadratic = 0.0006f;
+    light_one.linear = 0.3f;
+    light_one.quadratic = 0.06f;
 
     Light light_two;
     light_two.light_position = light_pos_two_M;
