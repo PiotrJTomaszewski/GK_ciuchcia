@@ -33,12 +33,14 @@ struct Light {
 };
 
 vec4 calculate_light(Light light, vec4 normal, vec4 frag_pos, vec4 light_dir, vec4 eye_dir){
+    vec4 color = texture(tex,tex_coord);
+
     // Ambient
-    vec4 ambient = light.ambient_strength * material_ambient_strength * texture(tex,tex_coord);
+    vec4 ambient = light.ambient_strength * material_ambient_strength * color;
 
     // Diffuse
     float nor_ld  = clamp(dot(normal,light_dir),0,1); // Wektor normalny dot wektor do swiatla
-    vec4 diffuse = light.diffuse_strength * material_diffuse_strength * nor_ld * texture(tex,tex_coord);
+    vec4 diffuse = light.diffuse_strength * material_diffuse_strength * nor_ld * color;
 
     // Specular
     vec4 reflected = reflect(-light_dir,normal);
