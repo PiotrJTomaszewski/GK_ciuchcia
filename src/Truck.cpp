@@ -146,3 +146,10 @@ glm::vec4 Truck::get_hitbox(int which) {
 glm::vec4 Truck::get_hitbox_normal(int which) {
     return main_part->get_hitbox_normal(which);
 }
+
+void Truck::reset_pos() {
+    speed = 0.0f;
+    acceleration = 0.0f;
+    translate = glm::vec3(0.0f,0.0f,0.0f);
+    angle_dr = 0.0f;
+}

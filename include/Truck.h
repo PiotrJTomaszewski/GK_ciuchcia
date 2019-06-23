@@ -19,17 +19,18 @@ class Truck : public Object
         float turn_l, turn_r;
         glm::vec4 get_hitbox(int which);
         glm::vec4 get_hitbox_normal(int which);
+        void reset_pos();
     protected:
 
     private:
         //poszczegolne czesci ciezarowki
         Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[6];
-        float angle_max = PI/6.0f; // Maksymalny skret kola
+        const float angle_max = PI/6.0f; // Maksymalny skret kola
         void wheels_round(float angle);
         void wheels_round(float angle, float op_angle);
         void wheels_draw(glm::mat4 P, glm::mat4 V, glm::mat4 M);
         float wheel_rozstaw=2.2f, wheel_odlegl=5, wheel_rad=0.3f, ctga, px, pz, R, omega, delt, s;
-        float vmax = 1.0f;
+        const float vmax = 1.0f;
         float back_length = 10, back_odlegl=5, back_ang;
         float friction();
         int i;
