@@ -5,6 +5,7 @@ Game::Game()
     truck = new Truck();
     floor = new FloorObject(glm::vec3(0.0f,-2.0,0.0f));
     test_obstacle = new TestObstacle(glm::vec3(-10.0f, 0.0f, 0.0f));
+    sky = new Sky(ob_position);
 }
 
 Game::~Game()
@@ -19,6 +20,7 @@ void Game::draw(){
     truck->draw_all(P,V);
     floor->draw(P,V);
     test_obstacle->draw(P,V);
+    sky->draw(P,V);
 }
 
 void Game::init(GLFWwindow *window){
@@ -122,4 +124,6 @@ void Game::update(double time){
     lukat+=pom_sum;
     V=glm::lookAt(ob_position,lukat,nose);
     truck->update(time);
+
+    sky->update(ob_position);
 }

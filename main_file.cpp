@@ -17,8 +17,9 @@
 #include "globals.h"
 
 // Tekstury
-const unsigned number_of_textures=4; // Ile tekstur jest do zaladowania
-const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png", "textures/test2.png"}; // Nazwy plikow tekstur
+const unsigned number_of_textures=5; // Ile tekstur jest do zaladowania
+const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png", "textures/test2.png",
+    "textures/sky.png"}; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
@@ -35,6 +36,7 @@ Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 Models::Model *FloorObject::model = NULL;
 Models::Model *TestObstacle::model = NULL;
+Models::Model *Sky::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
@@ -80,6 +82,7 @@ void initOpenGLProgram(GLFWwindow* window) {
     MainObject::initialize_model();
     FloorObject::initialize_model();
     TestObstacle::initialize_model();
+    Sky::initialize_model();
     // Wczytaj tekstury
     readTextures();
 
@@ -118,6 +121,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
     MainObject::destroy_model();
     FloorObject::destroy_model();
     TestObstacle::destroy_model();
+    Sky::destroy_model();
 
     freeShaders();
     //game->~Game();

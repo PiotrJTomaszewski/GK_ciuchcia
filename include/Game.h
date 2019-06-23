@@ -5,6 +5,7 @@
 #include "Truck.h"
 #include "objects/Floor.h"
 #include "objects/TestObstacle.h"
+#include "objects/Sky.h"
 #include "shaderprogram.h"
 
 class Game : public Body
@@ -28,6 +29,7 @@ class Game : public Body
         Truck *truck;
         FloorObject *floor;
         TestObstacle *test_obstacle;
+        Sky *sky;
 };
 
 #endif // GAME_H
