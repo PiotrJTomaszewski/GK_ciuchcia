@@ -3,7 +3,7 @@
 Game::Game()
 {
     truck = new Truck();
-    floor = new FloorObject(glm::vec3(0.0f,-2.0,0.0f));
+    floor = new FloorObject(glm::vec3(0.0f,-1.65f,0.0f));
     test_obstacle = new TestObstacle(glm::vec3(-10.0f, 0.0f, 0.0f));
     sky = new Sky(ob_position);
 }
