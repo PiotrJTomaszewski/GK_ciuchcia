@@ -17,9 +17,9 @@
 #include "globals.h"
 
 // Tekstury
-const unsigned number_of_textures=5; // Ile tekstur jest do zaladowania
+const unsigned number_of_textures=6; // Ile tekstur jest do zaladowania
 const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png", "textures/test2.png",
-    "textures/sky.png"}; // Nazwy plikow tekstur
+    "textures/sky.png", "textures/road.png"}; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
@@ -54,9 +54,10 @@ void readTextures() {
         //Wczytaj obrazek do pamięci KG skojarzonej z uchwytem
         glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*) image.data());
         // Parametry tekstury
-        // TODO: Pomyslec jakie sa potrzebne, bo te po prostu skopiowalem z prezentacji i nie chce mi sie myslec co robia xd
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     }
 }
 
