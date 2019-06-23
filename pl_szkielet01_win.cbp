@@ -57,6 +57,7 @@
 		<Unit filename="include/LoadObject.h" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/Truck.h" />
+		<Unit filename="include/objects/BarrierObstacle.h" />
 		<Unit filename="include/objects/Floor.h" />
 		<Unit filename="include/objects/Sky.h" />
 		<Unit filename="include/objects/TestObstacle.h" />
@@ -74,6 +75,7 @@
 		<Unit filename="src/LoadObject.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/Truck.cpp" />
+		<Unit filename="src/objects/BarrierObstacle.cpp" />
 		<Unit filename="src/objects/Floor.cpp" />
 		<Unit filename="src/objects/Sky.cpp" />
 		<Unit filename="src/objects/TestObstacle.cpp" />
