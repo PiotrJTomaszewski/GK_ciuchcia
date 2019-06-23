@@ -17,9 +17,9 @@
 #include "globals.h"
 
 // Tekstury
-const unsigned number_of_textures=6; // Ile tekstur jest do zaladowania
+const unsigned number_of_textures=7; // Ile tekstur jest do zaladowania
 const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png", "textures/test2.png",
-    "textures/sky.png", "textures/road.png"}; // Nazwy plikow tekstur
+    "textures/sky.png", "textures/road.png", "textures/barrier_tex.png"}; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
@@ -36,6 +36,7 @@ Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 Models::Model *FloorObject::model = NULL;
 Models::Model *TestObstacle::model = NULL;
+Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
 
 void readTextures() {
@@ -83,13 +84,14 @@ void initOpenGLProgram(GLFWwindow* window) {
     MainObject::initialize_model();
     FloorObject::initialize_model();
     TestObstacle::initialize_model();
+    BarrierObstacle::initialize_model();
     Sky::initialize_model();
     // Wczytaj tekstury
     readTextures();
 
     Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
     Body::nose = glm::vec3(0.0f,1.0f,0.0f);
-    Body::ob_position = glm::vec3(0.0f,4.0f,-50.0f);
+    Body::ob_position = glm::vec3(0.0f,5.0f,-50.0f);
     Body::V = glm::lookAt(Body::ob_position,Body::lukat,Body::nose);
     glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_DISABLED);
     glfwGetCursorPos(window,&Body::xcur,&Body::zcur);
@@ -122,6 +124,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
     MainObject::destroy_model();
     FloorObject::destroy_model();
     TestObstacle::destroy_model();
+    BarrierObstacle::destroy_model();
     Sky::destroy_model();
 
     freeShaders();

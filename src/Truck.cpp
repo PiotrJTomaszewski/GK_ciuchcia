@@ -2,12 +2,12 @@
 
 Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
 {
-    wheel_l = new WheelObject(glm::vec3(1.45f,-1.1f,1.1f),-1.0f); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
-    wheel_r = new WheelObject(glm::vec3(1.45f,-1.1f,-1.1f));
-    wheels[0] = new WheelObject(glm::vec3(-3.55f,-1.1f,1.1f),-1.0f);
-    wheels[3] = new WheelObject(glm::vec3(-3.55f,-1.1f,-1.1f));
-    main_part = new MainObject(glm::vec3(0.0f,0.0f,0.0f));
-    back_part = new WheelObject(glm::vec3(0.f,0.f,0.f),0.f); // Chwilowo tego nie ma, potem mozna dodac np. jakis model przyczepy
+    wheel_l = new WheelObject(glm::vec3(1.45f,0.55f,1.1f),-1.0f); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
+    wheel_r = new WheelObject(glm::vec3(1.45f,0.55f,-1.1f));
+    wheels[0] = new WheelObject(glm::vec3(-3.55f,0.55f,1.1f),-1.0f);
+    wheels[3] = new WheelObject(glm::vec3(-3.55f,0.55f,-1.1f));
+    main_part = new MainObject(glm::vec3(0.0f,1.65f,0.0f));
+    back_part = new WheelObject(glm::vec3(0.f,1.65f,0.f),0.f); // Chwilowo tego nie ma, potem mozna dodac np. jakis model przyczepy
 //    back_part = new MainObject(glm::vec3(-21.0f,0.0f,0.0f), 10.0f);
 
     speed = 0.0f;

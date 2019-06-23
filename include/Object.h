@@ -22,8 +22,8 @@ class Object
         static ShaderProgram *sp;
         bool is_collision(Object *Object2);
         glm::mat4 get_M();
-        virtual glm::vec4 get_hitbox(int which){};
-        virtual glm::vec4 get_hitbox_normal(int which){};
+        virtual glm::vec4 get_hitbox(int which){return glm::vec4(1.0f);};
+        virtual glm::vec4 get_hitbox_normal(int which){return glm::vec4(1.0f);};
     protected:
         glm::mat4 M;
         glm::vec3 translate;

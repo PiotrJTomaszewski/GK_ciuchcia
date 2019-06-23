@@ -3,8 +3,10 @@
 Game::Game()
 {
     truck = new Truck();
-    floor = new FloorObject(glm::vec3(0.0f,-1.65f,0.0f));
+    floor = new FloorObject(glm::vec3(0.0f,0.0f,0.0f));
     test_obstacle = new TestObstacle(glm::vec3(-10.0f, 0.0f, 0.0f));
+    barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 0.0f)));
+    barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 20.0f)));
     sky = new Sky(ob_position);
 }
 
@@ -20,6 +22,9 @@ void Game::draw(){
     truck->draw_all(P,V);
     floor->draw(P,V);
     test_obstacle->draw(P,V);
+    for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
+        barrier_obstacles[i].draw(P,V);
+    }
     sky->draw(P,V);
 }
 
@@ -108,13 +113,6 @@ void Game::cursor_position_callback(double xpos, double zpos){
 void Game::update(double time){
     glfwSetTime(0);
 
-    // Check collisions
-    static int i=0; // To i jest tylko do testów :)
-    if(truck->is_collision(test_obstacle)) {
-        printf("Kolizja %d\n",i++);
-        truck->reset_pos();
-    }
-
     angle_h=(r_r-l_r)*time;
     angle_v=(u_r-d_r)*time;
 
@@ -129,4 +127,16 @@ void Game::update(double time){
     truck->update(time);
 
     sky->update(ob_position);
+
+    // Check collisions
+    static int i=0; // To i jest tylko do testów :)
+    bool collision_detected = false;
+    collision_detected |= truck->is_collision(test_obstacle);
+    for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
+        collision_detected |= truck->is_collision(&barrier_obstacles[i]);
+    }
+    if(collision_detected) {
+        printf("Kolizja %d\n",i++);
+        truck->reset_pos();
+    }
 }
