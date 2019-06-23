@@ -1,4 +1,4 @@
-#include "Sky.h"
+#include "objects/Sky.h"
 
 Sky::Sky(glm::vec3 trans, float scal) :
     Object(trans,scal){
