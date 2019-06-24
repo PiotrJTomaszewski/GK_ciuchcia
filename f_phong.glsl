@@ -43,7 +43,7 @@ vec4 calculate_light(Light light, vec4 normal, vec4 frag_pos, vec4 light_dir, ve
     vec4 diffuse = light.diffuse_strength * material_diffuse_strength * nor_ld * color;
 
     // Specular
-    vec4 reflected = reflect(-light_dir,normal);
+    vec4 reflected = normalize(reflect(-light_dir,normal));
     float spec = pow(clamp(dot(eye_dir,reflected),0,1),material_shininess);
     vec4 specular = light.specular_strength * material_specular_strength * spec * light.light_color;
 
