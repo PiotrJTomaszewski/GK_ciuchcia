@@ -37,6 +37,7 @@ Models::Model *MainObject::model  = NULL;
 Models::Model *FloorObject::model = NULL;
 Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
+Models::Model *WinningPlatform::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
@@ -86,6 +87,7 @@ void initOpenGLProgram(GLFWwindow* window) {
     FloorObject::initialize_model();
     BarrierObstacle::initialize_model();
     Sky::initialize_model();
+    WinningPlatform::initialize_model();
 
     Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
     Body::nose = glm::vec3(0.0f,1.0f,0.0f);
@@ -123,6 +125,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
     FloorObject::destroy_model();
     BarrierObstacle::destroy_model();
     Sky::destroy_model();
+    WinningPlatform::destroy_model();
 
     freeShaders();
     //game->~Game();

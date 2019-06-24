@@ -7,6 +7,7 @@ Game::Game()
     barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 0.0f)));
     barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 20.0f)));
     sky = new Sky(ob_position);
+    winning_platform = new WinningPlatform(glm::vec3(40.0f,0.1f,00.0f));
 }
 
 Game::~Game()
@@ -14,6 +15,7 @@ Game::~Game()
     //truck->~Truck();
     delete truck;
     delete floor;
+    delete winning_platform;
 }
 
 void Game::draw(){
@@ -23,6 +25,7 @@ void Game::draw(){
         barrier_obstacles[i].draw(P,V);
     }
     sky->draw(P,V);
+    winning_platform->draw(P,V);
 }
 
 void Game::init(GLFWwindow *window){
@@ -126,7 +129,7 @@ void Game::update(double time){
     sky->update(ob_position);
 
     // Check collisions
-    static int i=0; // To i jest tylko do testów :)
+    /*static int i=0; // To i jest tylko do testów :)
     bool collision_detected = false;
     for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
         collision_detected |= truck->is_collision(&barrier_obstacles[i]);
@@ -134,5 +137,9 @@ void Game::update(double time){
     if(collision_detected) {
         printf("Kolizja %d\n",i++);
         truck->reset_pos();
+    }*/
+    static int j=1;
+    if(winning_platform->is_inside(truck)) {
+        printf("Gratulacje po raz %d xd\n",j++);
     }
 }

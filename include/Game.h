@@ -7,6 +7,7 @@
 #include "objects/Floor.h"
 #include "objects/BarrierObstacle.h"
 #include "objects/Sky.h"
+#include "objects/WinningPlatform.h"
 #include "shaderprogram.h"
 
 class Game : public Body
@@ -31,6 +32,7 @@ class Game : public Body
         FloorObject *floor;
         std::vector<BarrierObstacle> barrier_obstacles;
         Sky *sky;
+        WinningPlatform *winning_platform;
 };
 
 #endif // GAME_H
