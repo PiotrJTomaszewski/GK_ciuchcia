@@ -31,7 +31,7 @@ void Sky::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 }
 
 bool Sky::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
-    model = new Models::Model("models/test2.obj", 4); // Sciezka modelu, id_tekstury
+    model = new Models::Model("models/test2.obj", 2); // Sciezka modelu, id_tekstury
     return 0;
 }
 

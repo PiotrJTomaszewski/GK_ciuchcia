@@ -27,7 +27,7 @@ void BarrierObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 }
 
 bool BarrierObstacle::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
-    model = new Models::Model("models/barrier.obj", 6); // Sciezka modelu, id_tekstury
+    model = new Models::Model("models/barrier.obj", 4); // Sciezka modelu, id_tekstury
     return 0;
 }
 
