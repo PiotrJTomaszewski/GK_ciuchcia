@@ -61,7 +61,6 @@
 		<Unit filename="include/objects/BarrierObstacle.h" />
 		<Unit filename="include/objects/Floor.h" />
 		<Unit filename="include/objects/Sky.h" />
-		<Unit filename="include/objects/TestObstacle.h" />
 		<Unit filename="include/objects/TruckMainObject.h" />
 		<Unit filename="include/objects/TruckWheelObject.h" />
 		<Unit filename="lodepng.cpp" />
@@ -79,7 +78,6 @@
 		<Unit filename="src/objects/BarrierObstacle.cpp" />
 		<Unit filename="src/objects/Floor.cpp" />
 		<Unit filename="src/objects/Sky.cpp" />
-		<Unit filename="src/objects/TestObstacle.cpp" />
 		<Unit filename="src/objects/TruckMainObject.cpp" />
 		<Unit filename="src/objects/TruckWheelObject.cpp" />
 		<Unit filename="v_phong.glsl" />

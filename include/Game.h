@@ -5,7 +5,6 @@
 #include "Body.h"
 #include "Truck.h"
 #include "objects/Floor.h"
-#include "objects/TestObstacle.h"
 #include "objects/BarrierObstacle.h"
 #include "objects/Sky.h"
 #include "shaderprogram.h"
@@ -30,7 +29,6 @@ class Game : public Body
         float angle_h = 0, angle_v = 0;
         Truck *truck;
         FloorObject *floor;
-        TestObstacle *test_obstacle;
         std::vector<BarrierObstacle> barrier_obstacles;
         Sky *sky;
 };

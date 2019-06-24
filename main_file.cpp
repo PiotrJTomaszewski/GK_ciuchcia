@@ -35,7 +35,6 @@ Game *game;
 Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 Models::Model *FloorObject::model = NULL;
-Models::Model *TestObstacle::model = NULL;
 Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
 
@@ -85,7 +84,6 @@ void initOpenGLProgram(GLFWwindow* window) {
     WheelObject::initialize_model();
     MainObject::initialize_model();
     FloorObject::initialize_model();
-    TestObstacle::initialize_model();
     BarrierObstacle::initialize_model();
     Sky::initialize_model();
 
@@ -123,7 +121,6 @@ void freeOpenGLProgram(GLFWwindow* window) {
     WheelObject::destroy_model();
     MainObject::destroy_model();
     FloorObject::destroy_model();
-    TestObstacle::destroy_model();
     BarrierObstacle::destroy_model();
     Sky::destroy_model();
 
