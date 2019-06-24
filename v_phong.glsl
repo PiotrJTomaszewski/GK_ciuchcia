@@ -34,6 +34,12 @@ void main(void) {
     eye_dir_V = vec4(0.0f,0.0f,0.0f,1.0f)-V*M*vertex; // Obserwator jest w pkt. 0,0,0
     light_dir_one_V = V*vec4(0,-1,0,0);//V*lightPos+ eye_dir_V;
     light_dir_two_V = V*lightPos1+ eye_dir_V;
+    // Normalizacja wektorow
+    normal_V = normalize(normal_V);
+    eye_dir_V = normalize(eye_dir_V);
+    light_dir_one_V = normalize(light_dir_one_V);
+    light_dir_two_V = normalize(light_dir_two_V);
+
     light_pos_one_M = position_M+vec4(0,0,1,0); //lightPos;
     light_pos_two_M = lightPos1;
     tex_coord = aTexCoord;
