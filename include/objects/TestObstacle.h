@@ -1,9 +1,9 @@
 #ifndef TESTOBSTACLE_H
 #define TESTOBSTACLE_H
-#include "Object.h"
+#include "PhysicalObject.h"
 #include "model.h"
 
-class TestObstacle: public Object {
+class TestObstacle: public PhysicalObject {
     public:
         TestObstacle(glm::vec3 trans, float scal=1.f);
         ~TestObstacle();

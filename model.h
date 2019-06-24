@@ -14,7 +14,7 @@ namespace Models {
 		public:
 		    Model(const char* file_name, unsigned texture_id);
 		    ~Model();
-            unsigned vertexCount;
+            unsigned long vertexCount;
 			glm::vec4 *vertices;
 			glm::vec4 *normals;
 			glm::vec2 *texCoords;

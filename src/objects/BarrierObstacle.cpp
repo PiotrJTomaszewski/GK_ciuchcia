@@ -1,7 +1,7 @@
 #include "objects/BarrierObstacle.h"
 
 BarrierObstacle::BarrierObstacle(glm::vec3 trans, float scal)
-    : Object(trans, scal) {
+    : PhysicalObject(trans, scal) {
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::scale(M,glm::vec3(scal,scal,scal));
     model->getHitbox(90);

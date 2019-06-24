@@ -1,7 +1,7 @@
 #include "objects/TruckMainObject.h"
 
 MainObject::MainObject(glm::vec3 trans, float scal)
-    : Object(trans, scal) {
+    : PhysicalObject(trans, scal) {
 }
 
 MainObject::~MainObject() {

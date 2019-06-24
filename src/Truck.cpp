@@ -1,6 +1,6 @@
 #include "Truck.h"
 
-Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
+Truck::Truck() : PhysicalObject(glm::vec3(0.0f,0.0f,0.0f))
 {
     wheel_l = new WheelObject(glm::vec3(1.45f,0.55f,1.1f),-1.0f); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
     wheel_r = new WheelObject(glm::vec3(1.45f,0.55f,-1.1f));
@@ -22,7 +22,8 @@ Truck::~Truck()
     //wheel_r->~Object();
     //main_part->~Object();
     //back_part->~Object();
-    delete[] wheels;
+    delete wheels[0];
+    delete wheels[3];
     delete wheel_l;
     delete wheel_r;
     delete main_part;

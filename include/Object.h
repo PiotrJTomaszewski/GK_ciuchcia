@@ -20,10 +20,7 @@ class Object
         virtual void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f))=0;
         float angle_dr, angle_rot;
         static ShaderProgram *sp;
-        bool is_collision(Object *Object2);
         glm::mat4 get_M();
-        virtual glm::vec4 get_hitbox(int which){return glm::vec4(1.0f);};
-        virtual glm::vec4 get_hitbox_normal(int which){return glm::vec4(1.0f);};
     protected:
         glm::mat4 M;
         glm::vec3 translate;

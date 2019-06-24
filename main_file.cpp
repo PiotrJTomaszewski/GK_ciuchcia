@@ -41,7 +41,7 @@ Models::Model *Sky::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
-    for (int i=0; i<number_of_textures; ++i) {
+    for (unsigned i=0; i<number_of_textures; ++i) {
         std::vector<unsigned char> image;
         unsigned width, height;
         // Wczytaj obrazek
@@ -129,8 +129,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
 
     freeShaders();
     //game->~Game();
-    delete body;
-    //delete game; // Usuniecie body juz usuwa game, ta linia powoduje naruszenie pamieci
+    delete game;
 }
 
 //Procedura rysująca zawartość sceny
