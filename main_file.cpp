@@ -79,6 +79,8 @@ void error_callback(int error, const char* description) {
 
 //Procedura inicjująca
 void initOpenGLProgram(GLFWwindow* window) {
+    // Wczytaj tekstury
+    readTextures();
     // Wczytaj modele
     WheelObject::initialize_model();
     MainObject::initialize_model();
@@ -86,8 +88,6 @@ void initOpenGLProgram(GLFWwindow* window) {
     TestObstacle::initialize_model();
     BarrierObstacle::initialize_model();
     Sky::initialize_model();
-    // Wczytaj tekstury
-    readTextures();
 
     Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
     Body::nose = glm::vec3(0.0f,1.0f,0.0f);

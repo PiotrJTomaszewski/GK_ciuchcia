@@ -2,6 +2,9 @@
 
 MainObject::MainObject(glm::vec3 trans, float scal)
     : PhysicalObject(trans, scal) {
+    M = glm::translate(glm::mat4(1.0f),translate);
+    M = glm::scale(M,glm::vec3(scal,scal,scal));
+    model->getHitbox(1.2f);
 }
 
 MainObject::~MainObject() {
@@ -21,7 +24,6 @@ void MainObject::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 bool MainObject::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
     model = new Models::Model("models/mainB.obj", 1); // Sciezka modelu, id_tekstury
-    model->getHitbox(1.2f);
     return 0;
 }
 
