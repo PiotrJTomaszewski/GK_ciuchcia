@@ -40,3 +40,7 @@ glm::vec4 MainObject::get_hitbox(int which) {
 glm::vec4 MainObject::get_hitbox_normal(int which) {
     return model->hitbox_normal[which];
 }
+
+glm::mat4 MainObject::get_M() {
+    return M;
+}

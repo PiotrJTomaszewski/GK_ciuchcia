@@ -1,9 +1,10 @@
 #include "objects/BarrierObstacle.h"
 
-BarrierObstacle::BarrierObstacle(glm::vec3 trans, float scal)
-    : PhysicalObject(trans, scal) {
+BarrierObstacle::BarrierObstacle(glm::vec3 trans, float scal, float direction)
+    : PhysicalObject(trans, scal, direction) {
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::scale(M,glm::vec3(scal,scal,scal));
+    M = glm::rotate(M,direction,glm::vec3(0.0f,1.0f,0.0f));
     model->getHitbox(90);
 }
 
@@ -43,4 +44,8 @@ glm::vec4 BarrierObstacle::get_hitbox(int which) {
 // Zwraca wybrana normalna hitboxaa
 glm::vec4 BarrierObstacle::get_hitbox_normal(int which) {
     return model->hitbox_normal[which];
+}
+
+glm::mat4 BarrierObstacle::get_M() {
+    return M;
 }

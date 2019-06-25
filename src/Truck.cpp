@@ -155,3 +155,7 @@ void Truck::reset_pos() {
     angle_dr = PI/2;
     wheel_l->angle_dr=wheel_r->angle_dr = 0.0f;
 }
+
+glm::mat4 Truck::get_M() {
+    return M;
+}

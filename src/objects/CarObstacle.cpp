@@ -60,3 +60,6 @@ glm::vec4 CarObstacle::get_hitbox_normal(int which) {
     return model->hitbox_normal[which];
 }
 
+glm::mat4 CarObstacle::get_M() {
+    return M;
+}

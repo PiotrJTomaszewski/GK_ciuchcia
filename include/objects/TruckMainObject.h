@@ -12,8 +12,10 @@ class MainObject : public PhysicalObject {
         static void destroy_model();
         glm::vec4 get_hitbox(int which);
         glm::vec4 get_hitbox_normal(int which);
+        glm::mat4 get_M();
     private:
         static Models::Model *model;
+        glm::mat4 M;
 };
 
 #endif //TRUCKMAINOBJECT_H
