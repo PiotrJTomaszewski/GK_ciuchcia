@@ -3,10 +3,6 @@
 CarObstacle::CarObstacle(glm::vec3 trans, float scal, float direction)
     : PhysicalObject(trans, scal, direction) {
     nr_mod = rand()%3;
-    if(nr_mod==1){
-        scale=0.058f;
-        translate.y-=1.0f;
-    }
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::scale(M,glm::vec3(scal,scal,scal));
     model->getHitbox(80);
@@ -20,9 +16,6 @@ void CarObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,1.0f,0.0f));
     if(angle_rot!=0)
         M = glm::rotate(M,angle_rot,glm::vec3(0.0f,0.0f,1.0f));
-    if(nr_mod==1){
-        M = glm::rotate(M,-PI/2,glm::vec3(1.0f,0.0f,0.0f));
-    }
     M = glm::scale(M,glm::vec3(scale,scale,scale));
 
     glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
