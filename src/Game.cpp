@@ -74,6 +74,14 @@ void Game::key_callback(int key, int scancode, int action, int mods){
         if(key==GLFW_KEY_D){
             truck->turn_r = 1;
         }
+        if(key==GLFW_KEY_U){
+            ob_position.y+=1.0f;
+            lukat.y+=1.0f;
+        }
+        if(key==GLFW_KEY_Y){
+            ob_position.y-=1.0f;
+            lukat.y-=1.0f;
+        }
     }
     if(action == GLFW_RELEASE){
         if(key==GLFW_KEY_UP)
