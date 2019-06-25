@@ -64,6 +64,7 @@
 		<Unit filename="include/objects/Sky.h" />
 		<Unit filename="include/objects/TruckMainObject.h" />
 		<Unit filename="include/objects/TruckWheelObject.h" />
+		<Unit filename="include/objects/WinningPlatform.h" />
 		<Unit filename="lodepng.cpp" />
 		<Unit filename="lodepng.h" />
 		<Unit filename="main_file.cpp" />
@@ -82,6 +83,7 @@
 		<Unit filename="src/objects/Sky.cpp" />
 		<Unit filename="src/objects/TruckMainObject.cpp" />
 		<Unit filename="src/objects/TruckWheelObject.cpp" />
+		<Unit filename="src/objects/WinningPlatform.cpp" />
 		<Unit filename="v_phong.glsl" />
 		<Extensions>
 			<code_completion />

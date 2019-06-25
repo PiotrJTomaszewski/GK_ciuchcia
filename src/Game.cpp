@@ -17,13 +17,20 @@ Game::Game()
 
 void Game::genarate_cars(glm::vec3 origin){
     for(k = 0; k< 5; ++k){
-        if(rand()%6==0){
-            obstacles.push_back(CarObstacle(origin,1.3f,-PI/2));
+        if(!platform_generated && rand()%5) {
+            // Jesli jeszcze nie ma, to umiesc platforme koncowa
+            winning_platform = new WinningPlatform(glm::vec4(origin.x,0.01f,origin.z,1.0f),1.0f);
+            platform_generated = true;
         }
-        if(rand()%6==0){
-            obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
+        else {
+            if(rand()%6==0){
+                obstacles.push_back(CarObstacle(origin,1.3f,-PI/2));
+            }
+            if(rand()%6==0){
+                obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
+            }
+            origin+=glm::vec3(0.0f,0.0f,4.76f);
         }
-        origin+=glm::vec3(0.0f,0.0f,4.76f);
     }
 }
 
@@ -32,6 +39,7 @@ Game::~Game()
     //truck->~Truck();
     delete truck;
     delete floor;
+    delete winning_platform;
 }
 
 void Game::draw(){
@@ -44,6 +52,7 @@ void Game::draw(){
     for(std::vector<Object>::size_type i = 0; i != obstacles.size(); ++i){
         obstacles[i].draw(P,V);
     }
+    winning_platform->draw(P,V);
 }
 
 void Game::init(GLFWwindow *window){
@@ -147,7 +156,7 @@ void Game::update(double time){
     sky->update(ob_position);
 
     // Check collisions
-    static int i=0; // To i jest tylko do testów :)
+    static int i=1;
     bool collision_detected = false;
     for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
         collision_detected |= truck->is_collision(&barrier_obstacles[i]);
@@ -157,6 +166,11 @@ void Game::update(double time){
     }
     if(collision_detected) {
         printf("Kolizja %d\n",i++);
+        truck->reset_pos();
+    }
+    static int j=1;
+    if(winning_platform->is_inside(truck)) {
+        printf("Gratulacje po raz %d!\n",j++);
         truck->reset_pos();
     }
 }

@@ -15,9 +15,11 @@ class CarObstacle : public PhysicalObject
         static void destroy_model();
         glm::vec4 get_hitbox(int which);
         glm::vec4 get_hitbox_normal(int which);
+        glm::mat4 get_M();
     private:
         static Models::Model *model, *model2, *model3;
         int nr_mod;
+        glm::mat4 M;
 };
 
 #endif // CAROBSTACLE_H

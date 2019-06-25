@@ -7,7 +7,3 @@ Object::Object(glm::vec3 trans, float scal, float direction)
     scale = scal;
     angle_dr = direction;
 }
-
-glm::mat4 Object::get_M() {
-    return this->M;
-}

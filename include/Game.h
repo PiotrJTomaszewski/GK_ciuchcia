@@ -8,6 +8,7 @@
 #include "objects/BarrierObstacle.h"
 #include "objects/CarObstacle.h"
 #include "objects/Sky.h"
+#include "objects/WinningPlatform.h"
 #include "shaderprogram.h"
 #include <cstdlib>
 #include <ctime>
@@ -37,6 +38,8 @@ class Game : public Body
         Sky *sky;
         void genarate_cars(glm::vec3 origin);
         int k, j, l;
+        WinningPlatform *winning_platform;
+        bool platform_generated = false;
 };
 
 #endif // GAME_H
