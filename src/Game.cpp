@@ -189,7 +189,7 @@ void Game::update(double time){
     for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
         collision_detected |= truck->is_collision(&barrier_obstacles[i]);
     }
-    for(std::vector<Object>::size_type i = 0; i != obstacles.size(); ++i){
+    for(std::vector<CarObstacle>::size_type i = 0; i != obstacles.size(); ++i){
         collision_detected |= truck->is_collision(&obstacles[i]);
     }
     if(collision_detected) {

@@ -10,8 +10,8 @@ WinningPlatform::WinningPlatform(glm::vec3 trans, float scal)
 WinningPlatform::~WinningPlatform() {
 }
 
-void WinningPlatform::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-    M = glm::translate(M,translate);
+void WinningPlatform::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M_arg){
+    M = glm::translate(M_arg,translate);
     M = glm::rotate(M,angle_dr,glm::vec3(0.0f,1.0f,0.0f));
     if(angle_rot!=0)
         M = glm::rotate(M,angle_rot,glm::vec3(0.0f,0.0f,1.0f));

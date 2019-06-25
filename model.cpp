@@ -93,7 +93,7 @@ namespace Models {
             hitbox[i].w = 1.0f;
         }
 
-        // Wyznaczenie wektorów normalnych krawêdzi hitboxa
+        // Wyznaczenie wektorów normalnych krawedzi hitboxa
         for (int i=0; i<4; ++i) {
             hitbox_normal[i] = hitbox[i<3 ? i+1 : 0] - hitbox[i];
             // hitbox[i<3 ? i+1 : 0] - Nastepny wierzcholek
@@ -102,6 +102,9 @@ namespace Models {
             tmp = hitbox_normal[i].x;
             hitbox_normal[i].x = hitbox_normal[i].z;
             hitbox_normal[i].z = -tmp;
+            hitbox_normal[i].y = 0.0f;
+            hitbox_normal[i].w = 1.0f;
+            hitbox_normal[i] = glm::normalize(hitbox_normal[i]);
         }
         //for (int i=0; i<4; ++i) printf("%f,%f\n",hitbox_normal[i].x,hitbox_normal[i].z);
 	}
