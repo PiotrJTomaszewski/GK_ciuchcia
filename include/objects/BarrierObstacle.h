@@ -5,7 +5,7 @@
 
 class BarrierObstacle: public PhysicalObject {
     public:
-        BarrierObstacle(glm::vec3 trans, float scal=1.f);
+        BarrierObstacle(glm::vec3 trans, float scal=1.f, float direction=1.0f);
         ~BarrierObstacle();
         void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f));
         static bool initialize_model();

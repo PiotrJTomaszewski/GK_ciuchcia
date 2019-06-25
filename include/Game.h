@@ -37,6 +37,7 @@ class Game : public Body
         std::vector<CarObstacle> obstacles;
         Sky *sky;
         void genarate_cars(glm::vec3 origin);
+        void genarate_barriers();
         int k, j, l;
         WinningPlatform *winning_platform;
         bool platform_generated = false;
