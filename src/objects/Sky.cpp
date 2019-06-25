@@ -24,8 +24,8 @@ void Sky::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
     glUniform1f(sp->u("material_ambient_strength"),1.0f);
     glUniform1f(sp->u("material_diffuse_strength"),0.0f);
-    glUniform1f(sp->u("material_specular_strength"),0.0f);
-    glUniform1f(sp->u("material_shininess"),1.0f);
+    glUniform1f(sp->u("material_specular_strength"),0.00001f);
+    glUniform1f(sp->u("material_shininess"),0.000001);
     model->drawSolid();
 
 }

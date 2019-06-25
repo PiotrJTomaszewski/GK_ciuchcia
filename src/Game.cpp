@@ -18,7 +18,7 @@ void Game::genarate_cars(glm::vec3 origin){
     for(k = 0; k< 5; ++k){
         if(!platform_generated && rand()%5) {
             // Jesli jeszcze nie ma, to umiesc platforme koncowa
-            winning_platform = new WinningPlatform(glm::vec4(origin.x,0.01f,origin.z,1.0f),1.0f);
+            winning_platform = new WinningPlatform(glm::vec4(origin.x+11.0f,0.01f,origin.z,1.0f),1.0f);
             platform_generated = true;
         }
         else {

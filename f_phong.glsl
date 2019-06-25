@@ -63,7 +63,7 @@ void main(void) {
     light_one.light_color = vec4(1.0f,1.0f,1.0f,1.0f);
     light_one.ambient_strength = 0.5f;
     light_one.diffuse_strength = 0.5f;
-    light_one.specular_strength = 0.15f;
+    light_one.specular_strength = 3.15f;
     light_one.constant = 0.25f;
     light_one.linear = 0.3f;
     light_one.quadratic = 0.06f;
@@ -72,8 +72,8 @@ void main(void) {
     light_two.light_position = light_pos_two_M;
     light_two.light_color = vec4(1.0f,1.0f,1.0f,1.0f);
     light_two.ambient_strength = 0.4f;
-    light_two.diffuse_strength = 0.80f;
-    light_two.specular_strength = 5.15f;
+    light_two.diffuse_strength = 0.40f;
+    light_two.specular_strength = 2.00f;
     light_two.constant = 0.3f;
     light_two.linear = 0.025f;
     light_two.quadratic = 0.0050f;

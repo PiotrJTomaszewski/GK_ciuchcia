@@ -22,7 +22,7 @@ void CarObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M_arg){
     glUniform1f(sp->u("material_ambient_strength"),0.6f);
     glUniform1f(sp->u("material_diffuse_strength"),0.6f);
     glUniform1f(sp->u("material_specular_strength"),0.15f);
-    glUniform1f(sp->u("material_shininess"),0.20f);
+    glUniform1f(sp->u("material_shininess"),25.0f);
     switch(nr_mod) {
     case 0: model->drawSolid(); break;
     case 1: model2->drawSolid(); break;

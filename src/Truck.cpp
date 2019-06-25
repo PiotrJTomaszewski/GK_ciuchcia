@@ -37,8 +37,8 @@ void Truck::draw_all(glm::mat4 P, glm::mat4 V){
 //    printf("%f, %f, %f, %f\n", translate.x,translate.y, translate.z,angle_dr);
     glUniform1f(sp->u("material_ambient_strength"),0.950f);
     glUniform1f(sp->u("material_diffuse_strength"),1.0f);
-    glUniform1f(sp->u("material_specular_strength"),0.025f);
-    glUniform1f(sp->u("material_shininess"),0.025f);
+    glUniform1f(sp->u("material_specular_strength"),0.25f);
+    glUniform1f(sp->u("material_shininess"),25.0f);
     wheel_l->draw(P,V,M);
     wheel_r->draw(P,V,M);
     main_part->draw(P,V,M);
