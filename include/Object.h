@@ -20,8 +20,8 @@ class Object
         virtual void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f))=0;
         float angle_dr, angle_rot;
         static ShaderProgram *sp;
-    protected:
         glm::vec3 translate;
+    protected:
         float scale;
     private:
 };

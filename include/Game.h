@@ -26,6 +26,7 @@ class Game : public Body
     protected:
 
     private:
+        bool camera_static = false;
         float r_r=0, l_r=0, u_r=0, d_r=0;
         glm::vec3 plukat;
         glm::vec4 pl;

@@ -71,14 +71,16 @@ void Game::init(GLFWwindow *window){
 
 void Game::key_callback(int key, int scancode, int action, int mods){
     if(action == GLFW_PRESS){
-        if(key==GLFW_KEY_UP)
-            u_r=1;
-        if(key==GLFW_KEY_DOWN)
-            d_r=1;
-        if(key==GLFW_KEY_LEFT)
-            l_r=1;
-        if(key==GLFW_KEY_RIGHT)
-            r_r=1;
+        if(!camera_static){
+            if(key==GLFW_KEY_UP)
+                u_r=1;
+            if(key==GLFW_KEY_DOWN)
+                d_r=1;
+            if(key==GLFW_KEY_LEFT)
+                l_r=1;
+            if(key==GLFW_KEY_RIGHT)
+                r_r=1;
+        }
         if(key==GLFW_KEY_W){
             truck->acceleration = 1.0f;
             truck->b_acc = true;
@@ -101,6 +103,8 @@ void Game::key_callback(int key, int scancode, int action, int mods){
             ob_position.y-=1.0f;
             lukat.y-=1.0f;
         }
+        if(key==GLFW_KEY_P)
+            camera_static = !camera_static;
     }
     if(action == GLFW_RELEASE){
         if(key==GLFW_KEY_UP)
@@ -158,16 +162,22 @@ void Game::cursor_position_callback(double xpos, double zpos){
 void Game::update(double time){
     glfwSetTime(0);
 
-    angle_h=(r_r-l_r)*time;
-    angle_v=(u_r-d_r)*time;
+    if(!camera_static){
+        angle_h=(r_r-l_r)*time;
+        angle_v=(u_r-d_r)*time;
 
-    pom_sum=glm::vec3(angle_v*(lukat.x - ob_position.x),0.0f,angle_v*(lukat.z - ob_position.z));
-    ob_position+=pom_sum;
-    lukat+=pom_sum;
-    pom_sum=glm::vec3(angle_h*glm::cross(lukat - ob_position,nose).x,0.0f,
-                           angle_h*glm::cross(lukat - ob_position,nose).z);
-    ob_position+=pom_sum;
-    lukat+=pom_sum;
+        pom_sum=glm::vec3(angle_v*(lukat.x - ob_position.x),0.0f,angle_v*(lukat.z - ob_position.z));
+        ob_position+=pom_sum;
+        lukat+=pom_sum;
+        pom_sum=glm::vec3(angle_h*glm::cross(lukat - ob_position,nose).x,0.0f,
+                               angle_h*glm::cross(lukat - ob_position,nose).z);
+        ob_position+=pom_sum;
+        lukat+=pom_sum;
+    }
+    else{
+        ob_position = truck->translate + glm::vec3(0.0f,5.0f,0.0f);
+        lukat = ob_position + glm::rotateY(glm::vec3(5.0f,0.0f,0.0f),truck->angle_dr);
+    }
     V=glm::lookAt(ob_position,lukat,nose);
     truck->update(time);
 
