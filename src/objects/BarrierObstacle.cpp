@@ -20,7 +20,7 @@ void BarrierObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M_arg){
 
     glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
     glUniform1f(sp->u("material_ambient_strength"),0.750f);
-    glUniform1f(sp->u("material_diffuse_strength"),0.7f);
+    glUniform1f(sp->u("material_diffuse_strength"),0.4f);
     glUniform1f(sp->u("material_specular_strength"),0.025f);
     glUniform1f(sp->u("material_shininess"),25.0f);
     model->drawSolid();
