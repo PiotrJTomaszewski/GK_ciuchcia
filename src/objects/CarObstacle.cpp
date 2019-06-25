@@ -19,14 +19,28 @@ void CarObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M_arg){
     M = glm::scale(M,glm::vec3(scale,scale,scale));
 
     glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
-    glUniform1f(sp->u("material_ambient_strength"),0.6f);
-    glUniform1f(sp->u("material_diffuse_strength"),0.6f);
-    glUniform1f(sp->u("material_specular_strength"),0.15f);
-    glUniform1f(sp->u("material_shininess"),25.0f);
     switch(nr_mod) {
-    case 0: model->drawSolid(); break;
-    case 1: model2->drawSolid(); break;
-    case 2: model3->drawSolid(); break;
+    case 0:
+        glUniform1f(sp->u("material_ambient_strength"),0.6f);
+        glUniform1f(sp->u("material_diffuse_strength"),0.6f);
+        glUniform1f(sp->u("material_specular_strength"),0.15f);
+        glUniform1f(sp->u("material_shininess"),25.0f);
+        model->drawSolid();
+        break;
+    case 1:
+        glUniform1f(sp->u("material_ambient_strength"),0.5f);
+        glUniform1f(sp->u("material_diffuse_strength"),0.3f);
+        glUniform1f(sp->u("material_specular_strength"),0.15f);
+        glUniform1f(sp->u("material_shininess"),25.0f);
+        model2->drawSolid();
+        break;
+    case 2:
+        glUniform1f(sp->u("material_ambient_strength"),0.6f);
+        glUniform1f(sp->u("material_diffuse_strength"),0.6f);
+        glUniform1f(sp->u("material_specular_strength"),0.15f);
+        glUniform1f(sp->u("material_shininess"),25.0f);
+        model3->drawSolid();
+        break;
     }
 }
 
