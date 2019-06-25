@@ -18,10 +18,10 @@ void CarObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     M = glm::scale(M,glm::vec3(scale,scale,scale));
 
     glUniformMatrix4fv(sp->u("M"),1,false,glm::value_ptr(M));
-    glUniform1f(sp->u("material_ambient_strength"),1.0f);
-    glUniform1f(sp->u("material_diffuse_strength"),1.0f);
+    glUniform1f(sp->u("material_ambient_strength"),0.6f);
+    glUniform1f(sp->u("material_diffuse_strength"),0.6f);
     glUniform1f(sp->u("material_specular_strength"),0.15f);
-    glUniform1f(sp->u("material_shininess"),0.20f);
+    glUniform1f(sp->u("material_shininess"),20.0f);
     model->drawSolid();
 
 }
