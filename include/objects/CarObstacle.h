@@ -3,6 +3,7 @@
 
 #include "model.h"
 #include "PhysicalObject.h"
+#include <cstdlib>
 
 class CarObstacle : public PhysicalObject
 {
@@ -15,7 +16,8 @@ class CarObstacle : public PhysicalObject
         glm::vec4 get_hitbox(int which);
         glm::vec4 get_hitbox_normal(int which);
     private:
-        static Models::Model *model;
+        static Models::Model *model, *model2, *model3;
+        int nr_mod;
 };
 
 #endif // CAROBSTACLE_H
