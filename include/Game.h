@@ -7,8 +7,11 @@
 #include "objects/Floor.h"
 #include "objects/TestObstacle.h"
 #include "objects/BarrierObstacle.h"
+#include "objects/CarObstacle.h"
 #include "objects/Sky.h"
 #include "shaderprogram.h"
+#include <cstdlib>
+#include <ctime>
 
 class Game : public Body
 {
@@ -32,7 +35,10 @@ class Game : public Body
         FloorObject *floor;
         TestObstacle *test_obstacle;
         std::vector<BarrierObstacle> barrier_obstacles;
+        std::vector<CarObstacle> obstacles;
         Sky *sky;
+        void genarate_cars(glm::vec3 origin);
+        int k, j, l;
 };
 
 #endif // GAME_H

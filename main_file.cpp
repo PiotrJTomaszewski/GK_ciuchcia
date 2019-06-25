@@ -17,9 +17,9 @@
 #include "globals.h"
 
 // Tekstury
-const unsigned number_of_textures=7; // Ile tekstur jest do zaladowania
+const unsigned number_of_textures=8; // Ile tekstur jest do zaladowania
 const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png", "textures/test2.png",
-    "textures/sky.png", "textures/road.png", "textures/barrier_tex.png"}; // Nazwy plikow tekstur
+    "textures/sky.png", "textures/road.png", "textures/barrier_tex.png", "textures/porshe.png"}; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
@@ -38,6 +38,7 @@ Models::Model *FloorObject::model = NULL;
 Models::Model *TestObstacle::model = NULL;
 Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
+Models::Model *CarObstacle::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
@@ -85,6 +86,7 @@ void initOpenGLProgram(GLFWwindow* window) {
     FloorObject::initialize_model();
     TestObstacle::initialize_model();
     BarrierObstacle::initialize_model();
+    CarObstacle::initialize_model();
     Sky::initialize_model();
     // Wczytaj tekstury
     readTextures();
@@ -125,6 +127,7 @@ void freeOpenGLProgram(GLFWwindow* window) {
     FloorObject::destroy_model();
     TestObstacle::destroy_model();
     BarrierObstacle::destroy_model();
+    CarObstacle::destroy_model();
     Sky::destroy_model();
 
     freeShaders();

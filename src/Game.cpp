@@ -2,12 +2,30 @@
 
 Game::Game()
 {
+    srand(time(0));
     truck = new Truck();
     floor = new FloorObject(glm::vec3(0.0f,0.0f,0.0f));
     test_obstacle = new TestObstacle(glm::vec3(-10.0f, 0.0f, 0.0f));
     barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 0.0f)));
     barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 20.0f)));
     sky = new Sky(ob_position);
+    for(j = 0; j<6; ++j){
+        for(l = 0; l < 6; ++l){
+            genarate_cars(glm::vec3(-3.5f,1.0f,22.8f)+glm::vec3((j-3)*31.9f,0.0f,(l-3)*31.9f));
+        }
+    }
+}
+
+void Game::genarate_cars(glm::vec3 origin){
+    for(k = 0; k< 5; ++k){
+        if(rand()%4==0){
+            obstacles.push_back(CarObstacle(origin,1.3f,-PI/2));
+        }
+        if(rand()%4==0){
+            obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
+        }
+        origin+=glm::vec3(0.0f,0.0f,4.76f);
+    }
 }
 
 Game::~Game()
@@ -26,6 +44,9 @@ void Game::draw(){
         barrier_obstacles[i].draw(P,V);
     }
     sky->draw(P,V);
+    for(std::vector<Object>::size_type i = 0; i != obstacles.size(); ++i){
+        obstacles[i].draw(P,V);
+    }
 }
 
 void Game::init(GLFWwindow *window){
@@ -134,6 +155,9 @@ void Game::update(double time){
     collision_detected |= truck->is_collision(test_obstacle);
     for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
         collision_detected |= truck->is_collision(&barrier_obstacles[i]);
+    }
+    for(std::vector<Object>::size_type i = 0; i != obstacles.size(); ++i){
+        collision_detected |= truck->is_collision(&obstacles[i]);
     }
     if(collision_detected) {
         printf("Kolizja %d\n",i++);

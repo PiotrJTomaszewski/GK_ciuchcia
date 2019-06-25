@@ -1,6 +1,6 @@
 #include "Truck.h"
 
-Truck::Truck() : Object(glm::vec3(0.0f,0.0f,0.0f))
+Truck::Truck() : Object(glm::vec3(-10.5f,0.0f,0.0f),1.0f,PI/2)
 {
     wheel_l = new WheelObject(glm::vec3(1.45f,0.55f,1.1f),-1.0f); // Lewe kola maja ten sam model co prawe, wiec trzeba zrobic odbicie lustrzane
     wheel_r = new WheelObject(glm::vec3(1.45f,0.55f,-1.1f));
@@ -150,6 +150,7 @@ glm::vec4 Truck::get_hitbox_normal(int which) {
 void Truck::reset_pos() {
     speed = 0.0f;
     acceleration = 0.0f;
-    translate = glm::vec3(0.0f,0.0f,0.0f);
-    angle_dr = 0.0f;
+    translate = glm::vec3(-10.5f,0.0f,0.0f);
+    angle_dr = PI/2;
+    wheel_l->angle_dr=wheel_r->angle_dr = 0.0f;
 }
