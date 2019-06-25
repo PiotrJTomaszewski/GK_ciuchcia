@@ -53,7 +53,7 @@ namespace Models {
         for (int i=0; i<4; ++i)
             hitbox[0].x=hitbox[0].z=0;
         // Przegladamy wierzcholki i szukamy wierzcholkow czworokata, ktory powstalby gdybysmy "sprasowali" obiekt od gory
-        for(int i=0; i<vertexCount; ++i) {
+        for(unsigned long i=0; i<vertexCount; ++i) {
             if(vertices[i].y <= max_height) { // Jak model ma wysoko polozone np. lusterka, ktorymi i tak nie zachaczy
                 // +x +z
                 if(vertices[i].x > 0 && vertices[i].z > 0) {

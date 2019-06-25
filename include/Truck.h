@@ -1,13 +1,13 @@
 #ifndef TRUCK_H
 #define TRUCK_H
 
-#include "Object.h"
+#include "PhysicalObject.h"
 #include "objects/TruckWheelObject.h"
 #include "objects/TruckMainObject.h"
 #include <cmath>
 
 
-class Truck : public Object
+class Truck : public PhysicalObject
 {
     public:
         Truck();
@@ -24,7 +24,8 @@ class Truck : public Object
 
     private:
         //poszczegolne czesci ciezarowki
-        Object *wheel_l, *wheel_r, *main_part, *back_part, *wheels[6];
+        Object *wheel_l, *wheel_r, *back_part, *wheels[6];
+        PhysicalObject *main_part;
         const float angle_max = PI/6.0f; // Maksymalny skret kola
         void wheels_round(float angle);
         void wheels_round(float angle, float op_angle);

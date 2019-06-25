@@ -17,9 +17,10 @@
 #include "globals.h"
 
 // Tekstury
-const unsigned number_of_textures=8; // Ile tekstur jest do zaladowania
-const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/test.png", "textures/test2.png",
-    "textures/sky.png", "textures/road.png", "textures/barrier_tex.png", "textures/porshe.png"}; // Nazwy plikow tekstur
+
+const unsigned number_of_textures=6; // Ile tekstur jest do zaladowania
+const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/sky.png",
+    "textures/road.png", "textures/barrier_tex.png","textures/porshe.png" }; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
@@ -35,14 +36,13 @@ Game *game;
 Models::Model *WheelObject::model = NULL;
 Models::Model *MainObject::model  = NULL;
 Models::Model *FloorObject::model = NULL;
-Models::Model *TestObstacle::model = NULL;
 Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
 Models::Model *CarObstacle::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
-    for (int i=0; i<number_of_textures; ++i) {
+    for (unsigned i=0; i<number_of_textures; ++i) {
         std::vector<unsigned char> image;
         unsigned width, height;
         // Wczytaj obrazek
@@ -80,16 +80,15 @@ void error_callback(int error, const char* description) {
 
 //Procedura inicjująca
 void initOpenGLProgram(GLFWwindow* window) {
+    // Wczytaj tekstury
+    readTextures();
     // Wczytaj modele
     WheelObject::initialize_model();
     MainObject::initialize_model();
     FloorObject::initialize_model();
-    TestObstacle::initialize_model();
     BarrierObstacle::initialize_model();
     CarObstacle::initialize_model();
     Sky::initialize_model();
-    // Wczytaj tekstury
-    readTextures();
 
     Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
     Body::nose = glm::vec3(0.0f,1.0f,0.0f);
@@ -125,15 +124,13 @@ void freeOpenGLProgram(GLFWwindow* window) {
     WheelObject::destroy_model();
     MainObject::destroy_model();
     FloorObject::destroy_model();
-    TestObstacle::destroy_model();
     BarrierObstacle::destroy_model();
     CarObstacle::destroy_model();
     Sky::destroy_model();
 
     freeShaders();
     //game->~Game();
-    delete body;
-    //delete game; // Usuniecie body juz usuwa game, ta linia powoduje naruszenie pamieci
+    delete game;
 }
 
 //Procedura rysująca zawartość sceny

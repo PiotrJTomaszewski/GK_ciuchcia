@@ -1,9 +1,9 @@
 #ifndef BARRIEROBSTACLE_H
 #define BARRIEROBSTACLE_H
-#include "Object.h"
+#include "PhysicalObject.h"
 #include "model.h"
 
-class BarrierObstacle: public Object {
+class BarrierObstacle: public PhysicalObject {
     public:
         BarrierObstacle(glm::vec3 trans, float scal=1.f);
         ~BarrierObstacle();

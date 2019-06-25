@@ -1,9 +1,9 @@
 #ifndef TRUCKMAINOBJECT_H
 #define TRUCKMAINOBJECT_H
-#include "Object.h"
+#include "PhysicalObject.h"
 #include "model.h"
 
-class MainObject : public Object {
+class MainObject : public PhysicalObject {
     public:
         MainObject(glm::vec3 trans, float scal=1.f);
         ~MainObject();
