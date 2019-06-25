@@ -100,7 +100,8 @@ void Game::key_callback(int key, int scancode, int action, int mods){
             lukat.y+=1.0f;
         }
         if(key==GLFW_KEY_Y){
-            ob_position.y-=1.0f;
+            if(ob_position.y>1.0f)
+                ob_position.y-=1.0f;
             lukat.y-=1.0f;
         }
         if(key==GLFW_KEY_P)
