@@ -1,10 +1,10 @@
 #ifndef CAROBSTACLE_H
 #define CAROBSTACLE_H
 
-#include <Object.h>
 #include "model.h"
+#include "PhysicalObject.h"
 
-class CarObstacle : public Object
+class CarObstacle : public PhysicalObject
 {
     public:
         CarObstacle(glm::vec3 trans, float scal=1.f, float direction = 0.0f);

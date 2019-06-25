@@ -1,10 +1,10 @@
-#include "CarObstacle.h"
+#include "objects/CarObstacle.h"
 
 CarObstacle::CarObstacle(glm::vec3 trans, float scal, float direction)
-    : Object(trans, scal, direction) {
+    : PhysicalObject(trans, scal, direction) {
     M = glm::translate(glm::mat4(1.0f),translate);
     M = glm::scale(M,glm::vec3(scal,scal,scal));
-    model->getHitbox(90);
+    model->getHitbox(80);
 }
 
 CarObstacle::~CarObstacle() {
@@ -27,7 +27,7 @@ void CarObstacle::draw(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 }
 
 bool CarObstacle::initialize_model() { // Model trzeba zainicjowac w initOpenGLProgram
-    model = new Models::Model("models/911_GT2.obj", 7); // Sciezka modelu, id_tekstury
+    model = new Models::Model("models/911_GT2.obj", 5); // Sciezka modelu, id_tekstury
     return 0;
 }
 
