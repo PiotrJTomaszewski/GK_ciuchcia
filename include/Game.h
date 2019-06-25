@@ -7,6 +7,8 @@
 #include "objects/Floor.h"
 #include "objects/BarrierObstacle.h"
 #include "objects/CarObstacle.h"
+#include "objects/CarMustangObstacle.h"
+#include "objects/AttackHelicopterObstacle.h"
 #include "objects/Sky.h"
 #include "shaderprogram.h"
 #include <cstdlib>
@@ -33,7 +35,7 @@ class Game : public Body
         Truck *truck;
         FloorObject *floor;
         std::vector<BarrierObstacle> barrier_obstacles;
-        std::vector<CarObstacle> obstacles;
+        std::vector<PhysicalObject*> obstacles;
         Sky *sky;
         void genarate_cars(glm::vec3 origin);
         int k, j, l;

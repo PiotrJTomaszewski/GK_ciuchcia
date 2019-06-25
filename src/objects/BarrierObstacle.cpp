@@ -35,7 +35,7 @@ void BarrierObstacle::destroy_model() { // Model trzeba usunac w freeOpenGLProgr
     delete model;
 }
 
-// Zwraca wybrany wierzcholek hitboxa
+ // Zwraca wybrany wierzcholek hitboxa
 glm::vec4 BarrierObstacle::get_hitbox(int which) {
     return model->hitbox[which];
 }

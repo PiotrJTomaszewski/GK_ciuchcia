@@ -18,9 +18,10 @@
 
 // Tekstury
 
-const unsigned number_of_textures=6; // Ile tekstur jest do zaladowania
+const unsigned number_of_textures=8; // Ile tekstur jest do zaladowania
 const char *texture_names[] = {"textures/wheel_tex.png", "textures/main_tex.png", "textures/sky.png",
-    "textures/road.png", "textures/barrier_tex.png","textures/porshe.png" }; // Nazwy plikow tekstur
+    "textures/road.png", "textures/barrier_tex.png", "textures/porshe.png",
+    "textures/mustang.png", "textures/attack_helicopter.png" }; // Nazwy plikow tekstur
 GLuint Global::tex[number_of_textures]; // Uchwyty na tekstury
 
 
@@ -39,6 +40,8 @@ Models::Model *FloorObject::model = NULL;
 Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
 Models::Model *CarObstacle::model = NULL;
+Models::Model *CarMustangObstacle::model = NULL;
+Models::Model *AttackHelicopterObstacle::model = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
@@ -88,6 +91,8 @@ void initOpenGLProgram(GLFWwindow* window) {
     FloorObject::initialize_model();
     BarrierObstacle::initialize_model();
     CarObstacle::initialize_model();
+    CarMustangObstacle::initialize_model();
+    AttackHelicopterObstacle::initialize_model();
     Sky::initialize_model();
 
     Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
@@ -126,6 +131,8 @@ void freeOpenGLProgram(GLFWwindow* window) {
     FloorObject::destroy_model();
     BarrierObstacle::destroy_model();
     CarObstacle::destroy_model();
+    CarMustangObstacle::destroy_model();
+    AttackHelicopterObstacle::destroy_model();
     Sky::destroy_model();
 
     freeShaders();

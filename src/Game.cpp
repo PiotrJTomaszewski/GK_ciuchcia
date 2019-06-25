@@ -17,11 +17,19 @@ Game::Game()
 
 void Game::genarate_cars(glm::vec3 origin){
     for(k = 0; k< 5; ++k){
-        if(rand()%4==0){
-            obstacles.push_back(CarObstacle(origin,1.3f,-PI/2));
+        if(rand()%5==0){
+            switch(rand()%3) {
+                case 0:    obstacles.push_back(new CarObstacle(origin,1.3f,-PI/2)); break;
+                case 1:    obstacles.push_back(new CarMustangObstacle(origin,1.3f,-PI/2)); break;
+                case 2:    obstacles.push_back(new AttackHelicopterObstacle(origin,1.3f,-PI/2)); break;
+            }
         }
-        if(rand()%4==0){
-            obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
+        if(rand()%5==0){
+            switch(rand()%3) {
+                case 0: obstacles.push_back(new CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2)); break;
+                case 1: obstacles.push_back(new CarMustangObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2)); break;
+                case 2: obstacles.push_back(new AttackHelicopterObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2)); break;
+            }
         }
         origin+=glm::vec3(0.0f,0.0f,4.76f);
     }
@@ -32,6 +40,7 @@ Game::~Game()
     //truck->~Truck();
     delete truck;
     delete floor;
+    //TODO: Usuwanie przeszkod
 }
 
 void Game::draw(){
@@ -42,7 +51,7 @@ void Game::draw(){
     }
     sky->draw(P,V);
     for(std::vector<Object>::size_type i = 0; i != obstacles.size(); ++i){
-        obstacles[i].draw(P,V);
+        obstacles[i]->draw(P,V);
     }
 }
 
@@ -153,7 +162,7 @@ void Game::update(double time){
         collision_detected |= truck->is_collision(&barrier_obstacles[i]);
     }
     for(std::vector<Object>::size_type i = 0; i != obstacles.size(); ++i){
-        collision_detected |= truck->is_collision(&obstacles[i]);
+        collision_detected |= truck->is_collision(obstacles[i]);
     }
     if(collision_detected) {
         printf("Kolizja %d\n",i++);
