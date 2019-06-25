@@ -39,6 +39,7 @@ Models::Model *FloorObject::model = NULL;
 Models::Model *BarrierObstacle::model = NULL;
 Models::Model *Sky::model = NULL;
 Models::Model *CarObstacle::model = NULL;
+Models::Model *CarObstacle::model2 = NULL;
 
 void readTextures() {
     glGenTextures(number_of_textures, Global::tex); // Zainicjuj uchwyty dla tekstur
@@ -92,7 +93,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 
     Body::lukat = glm::vec3(0.0f,4.0f,0.0f);
     Body::nose = glm::vec3(0.0f,1.0f,0.0f);
-    Body::ob_position = glm::vec3(0.0f,5.0f,-50.0f);
+    Body::ob_position = glm::vec3(0.0f,3.0f,-50.0f);
     Body::V = glm::lookAt(Body::ob_position,Body::lukat,Body::nose);
     glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_DISABLED);
     glfwGetCursorPos(window,&Body::xcur,&Body::zcur);

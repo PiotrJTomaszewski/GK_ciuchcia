@@ -8,19 +8,19 @@ Game::Game()
     barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 0.0f)));
     barrier_obstacles.push_back(BarrierObstacle(glm::vec3(20.0f, 0.0f, 20.0f)));
     sky = new Sky(ob_position);
-    for(j = 0; j<6; ++j){
-        for(l = 0; l < 6; ++l){
-            genarate_cars(glm::vec3(-3.5f,1.0f,22.8f)+glm::vec3((j-3)*31.9f,0.0f,(l-3)*31.9f));
+    for(j = -2; j<3; ++j){
+        for(l = -3; l < 2; ++l){
+            genarate_cars(glm::vec3(-3.5f,1.0f,22.8f)+glm::vec3(j*31.9f,0.0f,l*31.9f));
         }
     }
 }
 
 void Game::genarate_cars(glm::vec3 origin){
     for(k = 0; k< 5; ++k){
-        if(rand()%4==0){
+        if(rand()%6==0){
             obstacles.push_back(CarObstacle(origin,1.3f,-PI/2));
         }
-        if(rand()%4==0){
+        if(rand()%6==0){
             obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
         }
         origin+=glm::vec3(0.0f,0.0f,4.76f);
