@@ -159,7 +159,7 @@ void Game::cursor_position_callback(double xpos, double zpos){
     V = glm::lookAt(ob_position,lukat,nose);
 }
 
-void Game::update(double time){
+void Game::update(double time, bool *nan_detected){
     glfwSetTime(0);
 
     if(!camera_static){
@@ -187,11 +187,12 @@ void Game::update(double time){
     static int i=1;
     bool collision_detected = false;
     for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
-        collision_detected |= truck->is_collision(&barrier_obstacles[i]);
+        collision_detected |= truck->is_collision(&barrier_obstacles[i], nan_detected);
     }
     for(std::vector<CarObstacle>::size_type i = 0; i != obstacles.size(); ++i){
-        collision_detected |= truck->is_collision(&obstacles[i]);
+        collision_detected |= truck->is_collision(&obstacles[i], nan_detected);
     }
+
     if(collision_detected) {
         printf("Kolizja %d\n",i++);
         truck->reset_pos();

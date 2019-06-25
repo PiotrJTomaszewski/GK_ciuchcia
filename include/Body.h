@@ -13,7 +13,7 @@ class Body
     public:
         virtual void draw() = 0;
         virtual void init(GLFWwindow *window) = 0;
-        virtual void update(double time) = 0;
+        virtual void update(double time, bool *nan_detected) = 0;
         virtual void key_callback(int key, int scancode, int action, int mods) = 0;
         virtual void cursor_position_callback(double xpos, double ypos) = 0;
         static ShaderProgram *sp;

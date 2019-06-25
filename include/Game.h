@@ -20,7 +20,7 @@ class Game : public Body
         virtual ~Game();
         void draw();
         void init(GLFWwindow *window);
-        void update(double time);
+        void update(double time, bool *nan_detected);
         void key_callback(int key, int scancode, int action, int mods);
         void cursor_position_callback(double xpos, double ypos);
     protected:

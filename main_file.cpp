@@ -160,6 +160,7 @@ void drawScene(GLFWwindow* window) {
 
 int main(void)
 {
+    bool nan_detected=false;
 	GLFWwindow* window; //Wskaźnik na obiekt reprezentujący okno
 
 	glfwSetErrorCallback(error_callback);//Zarejestruj procedurę obsługi błędów
@@ -195,7 +196,12 @@ int main(void)
 	while (!glfwWindowShouldClose(window)) //Tak długo jak okno nie powinno zostać zamknięte
 	{
 
-	    body->update(glfwGetTime());
+	    body->update(glfwGetTime(), &nan_detected);
+	    if(nan_detected) {
+            freeOpenGLProgram(window);
+            glfwTerminate();
+            main();
+	    }
 
 		drawScene(window); //Wykonaj procedurę rysującą
 		glfwPollEvents(); //Wykonaj procedury callback w zalezności od zdarzeń jakie zaszły.

@@ -9,7 +9,7 @@ class PhysicalObject : public Object
     public:
         PhysicalObject(glm::vec3 trans, float scal = 1.0f, float direction = 0);
         virtual ~PhysicalObject(){};
-        bool is_collision(PhysicalObject *Object2);
+        bool is_collision(PhysicalObject *Object2, bool *nan_detected);
         virtual glm::mat4 get_M()=0;
         virtual glm::vec4 get_hitbox(int which)=0;
         virtual glm::vec4 get_hitbox_normal(int which)=0;

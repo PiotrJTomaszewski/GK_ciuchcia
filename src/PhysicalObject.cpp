@@ -23,7 +23,8 @@ void getMinMax(glm::vec4* verts, glm::vec4 axis, float* minimum, float* maximum)
 }
 
 // Returns true if two hitbox rectangles overlap SAT
-bool PhysicalObject::is_collision(PhysicalObject *object2) {
+bool PhysicalObject::is_collision(PhysicalObject *object2, bool *nan_detected) {
+    *nan_detected = false;
     glm::vec4 hitbox_vert[2][4];
     glm::vec4 hitbox_norm[2][4];
     // Wyliczenie aktualnych wspó³rzêdnych hitboxa
@@ -32,6 +33,10 @@ bool PhysicalObject::is_collision(PhysicalObject *object2) {
         hitbox_vert[1][i] = object2->get_M() * object2->get_hitbox(i);
         hitbox_norm[1][i] = glm::normalize(this->get_M() * this->get_hitbox_normal(i));
         hitbox_norm[1][i] = glm::normalize(object2->get_M() * object2->get_hitbox_normal(i));
+        if (glm::isnan(hitbox_norm[0][i].x) || glm::isnan(hitbox_norm[1][i].x) || glm::isnan(hitbox_vert[0][i].x) || glm::isnan(hitbox_vert[1][i].x)) {
+            *nan_detected = true;
+            return false;
+        }
     }
 
     // Wyliczenie rzutowania na osie
