@@ -13,8 +13,10 @@ class WinningPlatform: public PhysicalObject {
         glm::vec4 get_hitbox(int which);
         glm::vec4 get_hitbox_normal(int which);
         bool is_inside(PhysicalObject *object2); // Sprawdza czy podany obiekt jest wewnatrz tego
+        glm::mat4 get_M();
     private:
         static Models::Model *model;
+        glm::mat4 M;
 };
 
 #endif // WINNINGPLATFORM_H

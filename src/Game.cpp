@@ -129,7 +129,7 @@ void Game::update(double time){
     sky->update(ob_position);
 
     // Check collisions
-    /*static int i=0; // To i jest tylko do testów :)
+    static int i=1;
     bool collision_detected = false;
     for (std::vector<BarrierObstacle>::size_type i = 0; i != barrier_obstacles.size(); ++i) {
         collision_detected |= truck->is_collision(&barrier_obstacles[i]);
@@ -137,9 +137,10 @@ void Game::update(double time){
     if(collision_detected) {
         printf("Kolizja %d\n",i++);
         truck->reset_pos();
-    }*/
+    }
     static int j=1;
     if(winning_platform->is_inside(truck)) {
-        printf("Gratulacje po raz %d xd\n",j++);
+        printf("Gratulacje po raz %d!\n",j++);
+        truck->reset_pos();
     }
 }

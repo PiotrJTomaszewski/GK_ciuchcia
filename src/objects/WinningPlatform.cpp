@@ -45,6 +45,10 @@ glm::vec4 WinningPlatform::get_hitbox_normal(int which) {
     return model->hitbox_normal[which];
 }
 
+glm::mat4 WinningPlatform::get_M() {
+    return M;
+}
+
 // Zwraca prawde jesli a jest miedzy b i c
 bool is_between(float a, float b, float c) {
     if (a>b && a<c)
@@ -62,10 +66,10 @@ bool WinningPlatform::is_inside(PhysicalObject *object2) {
         hitbox_vert[0][i] = get_M() * get_hitbox(i);
         hitbox_vert[1][i] = object2->get_M() * object2->get_hitbox(i);
     }
-    if     (is_between(hitbox_vert[1][0].x,hitbox_vert[0][0].x,hitbox_vert[0][3].x)
-        && is_between(hitbox_vert[1][3].x,hitbox_vert[0][0].x,hitbox_vert[0][3].x)
-        && is_between(hitbox_vert[1][0].z,hitbox_vert[0][0].z,hitbox_vert[0][3].z)
-        && is_between(hitbox_vert[1][3].z,hitbox_vert[0][0].z,hitbox_vert[0][3].z)) {
+    if     (is_between(hitbox_vert[1][0].x,hitbox_vert[0][0].x,hitbox_vert[0][2].x)
+        && is_between(hitbox_vert[1][2].x,hitbox_vert[0][0].x,hitbox_vert[0][2].x)
+        && is_between(hitbox_vert[1][0].z,hitbox_vert[0][0].z,hitbox_vert[0][2].z)
+        && is_between(hitbox_vert[1][2].z,hitbox_vert[0][0].z,hitbox_vert[0][2].z)) {
         return true;
     }
     return false;

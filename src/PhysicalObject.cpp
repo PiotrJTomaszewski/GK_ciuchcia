@@ -49,7 +49,3 @@ bool PhysicalObject::is_collision(PhysicalObject *object2) {
     }
     return true;
 }
-
-glm::mat4 PhysicalObject::get_M() {
-    return this->M;
-}

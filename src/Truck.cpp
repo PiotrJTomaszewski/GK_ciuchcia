@@ -154,3 +154,7 @@ void Truck::reset_pos() {
     translate = glm::vec3(0.0f,0.0f,0.0f);
     angle_dr = 0.0f;
 }
+
+glm::mat4 Truck::get_M() {
+    return M;
+}

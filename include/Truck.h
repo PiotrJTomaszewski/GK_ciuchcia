@@ -20,6 +20,7 @@ class Truck : public PhysicalObject
         glm::vec4 get_hitbox(int which);
         glm::vec4 get_hitbox_normal(int which);
         void reset_pos();
+        glm::mat4 get_M();
     protected:
 
     private:
@@ -37,6 +38,7 @@ class Truck : public PhysicalObject
         int i;
         // metoda draw w object jest wirtualna, wiec trzeba tu dac deklaracje, mimo ze funkcja nie jest potrzebna
         void draw(glm::mat4 P, glm::mat4 V, glm::mat4 M = glm::mat4(1.0f)){};
+        glm::mat4 M;
 
 };
 
