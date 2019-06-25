@@ -34,14 +34,14 @@ void Game::genarate_cars(glm::vec3 origin){
 }
 
 void Game::genarate_barriers() { // Umieszcza na skrzyzowaniach barierki
-        for (int row=-3; row<3; ++row) {
-            for (int col=-3; col<3; ++col) {
-                if(rand()%3==0 || 1==1) {
-                    float direction = 1.0f/(rand()%20)*2.0f*PI; // Jakis losowy obrot
-                    barrier_obstacles.push_back(BarrierObstacle(glm::vec3(row*32.0f+16.0f, 0.0f, col*32.0f+16.0f), 1.0f, direction));
-                }
+    for (int row=-3; row<3; ++row) {
+        for (int col=-3; col<3; ++col) {
+            if(rand()%3==0) {
+                float direction = 1.0f/(rand()%20)*2.0f*PI; // Jakis losowy obrot
+                barrier_obstacles.push_back(BarrierObstacle(glm::vec3(row*32.0f+16.0f, 0.0f, col*32.0f+16.0f), 1.0f, direction));
             }
         }
+    }
 }
 
 Game::~Game()
