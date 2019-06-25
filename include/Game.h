@@ -37,11 +37,10 @@ class Game : public Body
         std::vector<BarrierObstacle> barrier_obstacles;
         std::vector<CarObstacle> obstacles;
         Sky *sky;
-        void genarate_cars(glm::vec3 origin);
+        void genarate_cars(glm::vec3 origin, glm::vec3 platform_position); // Pozycja platformy, zeby autko na niej nie zaparkowalo
         void genarate_barriers();
         int k, j, l;
         WinningPlatform *winning_platform;
-        bool platform_generated = false;
 };
 
 #endif // GAME_H

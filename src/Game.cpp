@@ -7,29 +7,35 @@ Game::Game()
     floor = new FloorObject(glm::vec3(0.0f,0.0f,0.0f));
     genarate_barriers();
     sky = new Sky(ob_position);
+    glm::vec3 platform_position = glm::vec3(-3.5f,0.0f,22.8f)+glm::vec3((rand()%3-1)*31.9f,0.0f,(rand()%3-1)*31.9f);
+    winning_platform = new WinningPlatform(glm::vec4(platform_position.x,0.01f,platform_position.z,1.0f),1.0f);
     for(j = -2; j<3; ++j){
         for(l = -3; l < 2; ++l){
-            genarate_cars(glm::vec3(-3.5f,1.0f,22.8f)+glm::vec3(j*31.9f,0.0f,l*31.9f));
+            genarate_cars(glm::vec3(-3.5f,1.0f,22.8f)+glm::vec3(j*31.9f,0.0f,l*31.9f), platform_position);
         }
     }
 }
 
-void Game::genarate_cars(glm::vec3 origin){
+bool is_equal(float a, float b) {
+    if(a>b)
+        if(a-b < 0.01)
+            return true;
+    else
+        if(b-a < 0.01)
+            return true;
+    return false;
+}
+
+void Game::genarate_cars(glm::vec3 origin, glm::vec3 platform_position){ // Pozycja platformy, zeby autko na niej nie zaparkowalo
     for(k = 0; k< 5; ++k){
-        if(!platform_generated && rand()%5) {
-            // Jesli jeszcze nie ma, to umiesc platforme koncowa
-            winning_platform = new WinningPlatform(glm::vec4(origin.x+11.0f,0.01f,origin.z,1.0f),1.0f);
-            platform_generated = true;
-        }
-        else {
+        if(!is_equal(origin.x, platform_position.x) && !is_equal(origin.z, platform_position.z))
             if(rand()%6==0){
                 obstacles.push_back(CarObstacle(origin,1.3f,-PI/2));
             }
-            if(rand()%6==0){
-                obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
-            }
-            origin+=glm::vec3(0.0f,0.0f,4.76f);
+        if(rand()%6==0){
+            obstacles.push_back(CarObstacle(origin+glm::vec3(7.5f,0.0f,0.0f),1.3f,PI/2));
         }
+        origin+=glm::vec3(0.0f,0.0f,4.76f);
     }
 }
 
