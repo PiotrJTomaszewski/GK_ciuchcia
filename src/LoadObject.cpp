@@ -85,6 +85,7 @@ bool ObjectLoader::load_object(const char* file_name, glm::vec4* &vertices, glm:
             normals[j].y = tmp_normals[index].y;
             normals[j].z = tmp_normals[index].z;
             normals[j].w = 0.f;
+            ++j;
         }
     }
     else {
