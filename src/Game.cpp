@@ -183,7 +183,7 @@ void Game::update(double time){
         lukat+=pom_sum;
     }
     else{
-        ob_position = truck->translate + glm::vec3(0.0f,5.0f,0.0f);
+        ob_position = truck->translate + glm::rotateY(glm::vec3(-10.0f,5.0f,0.0f),truck->angle_dr);
         lukat = ob_position + glm::rotateY(glm::vec3(5.0f,0.0f,0.0f),truck->angle_dr);
     }
     V=glm::lookAt(ob_position,lukat,nose);
